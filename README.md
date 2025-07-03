@@ -5,3 +5,5 @@
 - **CPT** : Fichier des comptes et liens (`C` pour comptes, `L` pour les liaisons client-compte)
 - **IPS** : Fichier des incidents de paiement (déclarations I, régularisations R, annulations A, infractions N…)
 - Recevoir un compte-rendu (fichier **CTR**) indiquant les **erreurs** ou l'**acceptation**
+
+test
