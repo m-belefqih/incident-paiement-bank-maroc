@@ -10,4 +10,15 @@ public class LoginController {
     public String login() {
         return "login";
     }
+    @GetMapping("/hello")
+    public String hello() {
+        return "hello";
+    }
+    @GetMapping("/test")
+    public String test() {
+        return "ctr_admin";
+    }
+
+
+
 }
