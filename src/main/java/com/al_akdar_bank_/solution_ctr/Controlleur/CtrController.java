@@ -115,25 +115,6 @@ public class CtrController {
         return "redirect:/ctr_submit";
     }
 
-    @PostMapping("/test-file")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file, Model model, RedirectAttributes redirectAttributes) {
-        if (file.isEmpty()) {
-            redirectAttributes.addFlashAttribute("errorMessage","Utlisateur modifier");
-            return "redirect:/ctr_submit"; // ou autre page
-        }
-
-        try {
-            // Exemple : lecture du contenu en tant que lignes
-            List<CodeErreur> lignes = codeErreurService.ListerErreur(file);
-            model.addAttribute("lignes", lignes);
-
-        } catch (IOException e) {
-            model.addAttribute("errorMessage", "Erreur lors de la lecture du fichier");
-        }
-
-        return "redirect:/ctr_submit"; // ou autre page d'affichage
-    }
-
 
 
 }
