@@ -84,7 +84,7 @@
             <div class="flex items-center space-x-4">
                 <span class="text-(--darkgreen) font-medium" th:text="${username}"></span>
                 <div class="relative">
-                    <button th:text="${#strings.substring(username, 0, 2).toUpperCase()}" id="user-menu-button" class="h-10 w-10 rounded-full bg-(--darkgreen) flex items-center justify-center text-white cursor-pointer">
+                    <button th:text="${username != null ? #strings.substring(username, 0, 2).toUpperCase() : '??'}" id="user-menu-button" class="h-10 w-10 rounded-full bg-(--darkgreen) flex items-center justify-center text-white cursor-pointer">
 
                     </button>
                     <div id="user-menu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
@@ -139,8 +139,7 @@
             </div>
 
             <!-- Import Form -->
-            <form th:action="@{/test-file}" method="post" enctype="multipart/form-data">
-                <!-- Import Form -->
+            <form method="POST" action="/uploads" enctype="multipart/form-data" th:action="@{/uploads}" th:object="${fichier}">
                 <div class="mb-8">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-lg font-semibold text-(--darkgreen)">Envoyer un fichier</h3>
@@ -148,26 +147,33 @@
 
                     <div class="border-2 border-dashed border-(--darkgreen) rounded-lg p-8 text-center mb-4">
                         <svg class="w-12 h-12 mx-auto text-(--darkgreen) mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                         </svg>
                         <p class="text-gray-600 mb-2">Glissez-déposez votre fichier ici ou cliquez pour sélectionner</p>
                         <p class="text-sm text-gray-500 mb-4">Formats supportés: .csv, .xlsx, .txt</p>
 
-                        <!-- File input -->
-                        <input type="file" class="hidden" id="file-upload" name="file" required>
+                        <!-- input file caché -->
+                        <input type="file" name="fichier" id="file-upload" required class="hidden" />
+                        <!-- label pour déclencher input file -->
                         <label for="file-upload" class="cursor-pointer px-4 py-2 bg-(--darkgreen) text-white rounded-lg hover:bg-(--darkgreen)/90 inline-block">
                             Sélectionner un fichier
                         </label>
                     </div>
                 </div>
 
-                <!-- Submit button -->
-                <div class="text-right">
-                    <button type="submit" class="px-4 py-2 bg-(--darkgreen) text-white rounded-lg hover:bg-(--darkgreen)/90">
+                <!-- token CSRF -->
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                <!-- bouton submit -->
+                <div class="mt-4 flex justify-center">
+                    <button type="submit" class="px-4 py-2 bg-(--darkgreen) text-white rounded-lg hover:bg-(--darkgreen)/90 mb-4">
                         Envoyer
                     </button>
                 </div>
+
             </form>
+
 
 
 
@@ -216,46 +222,28 @@
                             <th scope="col" class="px-6 py-3">Gravité de l'erreur</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr class="bg-white border-b hover:bg-gray-50 error-row" data-severity="A">
-                            <td class="px-6 py-4">ERR001</td>
-                            <td class="px-6 py-4">FR7630001007941234567890185</td>
-                            <td class="px-6 py-4">Format de compte invalide</td>
+                        <tbody >
+                        <tr class="bg-white hover:bg-gray-50 error-row" data-severity="A" th:each="ligne : ${lignes}">
+                            <td class="px-6 py-4" th:text="${ligne != null ? ligne.getCode() : 'N/A'}">ERR005</td>
+                            <td class="px-6 py-4" th:text="${ligne != null ? ligne.getId() : 'N/A'}">FR7630001007946666666660185</td>
+                            <td class="px-6 py-4" th:text="${ligne != null ? ligne.getDescription() : 'N/A'}">Format de date invalide</td>
                             <td class="px-6 py-4">
-                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded">Avertissement (A)</span>
+                                  <span
+                                          th:with="gravite=${ligne?.getGravite()}"
+                                          th:class="${'px-2 py-1 rounded whitespace-nowrap '} +
+                                              ${gravite == 'A' ? 'bg-blue-100 text-blue-800' :
+                                               gravite == 'E' ? 'bg-orange-100 text-orange-800' :
+                                               gravite == 'L' ? 'bg-red-100 text-red-800' :
+                                               gravite == 'Z' ? 'bg-yellow-100 text-yellow-800' : ''}"
+                                          th:text="${gravite == 'A' ? 'Avertissement (A)' :
+                                             gravite == 'E' ? 'Enregistrement rejeté (E)' :
+                                             gravite == 'L' ? 'Lot rejeté (L)' :
+                                             gravite == 'Z' ? 'Zone ignorée (Z)' : 'N/A'}">
+                                    Gravité
+                                  </span>
                             </td>
-                        </tr>
-                        <tr class="bg-white border-b hover:bg-gray-50 error-row" data-severity="Z">
-                            <td class="px-6 py-4">ERR002</td>
-                            <td class="px-6 py-4">FR7630001007949876543210185</td>
-                            <td class="px-6 py-4">Données manquantes</td>
-                            <td class="px-6 py-4">
-                                <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded">Zone ignorée (Z)</span>
-                            </td>
-                        </tr>
-                        <tr class="bg-white hover:bg-gray-50 error-row" data-severity="E">
-                            <td class="px-6 py-4">ERR003</td>
-                            <td class="px-6 py-4">FR7630001007941234567890185</td>
-                            <td class="px-6 py-4">Doublon détecté</td>
-                            <td class="px-6 py-4">
-                                <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs font-medium rounded">Enregistrement rejeté (E)</span>
-                            </td>
-                        </tr>
-                        <tr class="bg-white border-b hover:bg-gray-50 error-row" data-severity="L">
-                            <td class="px-6 py-4">ERR004</td>
-                            <td class="px-6 py-4">FR7630001007945555555550185</td>
-                            <td class="px-6 py-4">Compte inexistant</td>
-                            <td class="px-6 py-4">
-                                <span class="px-2 py-1 bg-red-100 text-red-800 text-xs font-medium rounded">Lot rejeté (L)</span>
-                            </td>
-                        </tr>
-                        <tr class="bg-white hover:bg-gray-50 error-row" data-severity="A">
-                            <td class="px-6 py-4">ERR005</td>
-                            <td class="px-6 py-4">FR7630001007946666666660185</td>
-                            <td class="px-6 py-4">Format de date invalide</td>
-                            <td class="px-6 py-4">
-                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded">Avertissement (A)</span>
-                            </td>
+
+
                         </tr>
                         </tbody>
                     </table>

@@ -4,14 +4,16 @@ import com.al_akdar_bank_.solution_ctr.Model.Utilisateur;
 import com.al_akdar_bank_.solution_ctr.Repository.UtilisateurRepository;
 import com.al_akdar_bank_.solution_ctr.Security.PasswordHashGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class UtilisateurService {
-
+    @Autowired
     private UtilisateurRepository utilisateurRepository;
+
 
     @Autowired
     public UtilisateurService(UtilisateurRepository utilisateurRepository) {
@@ -60,6 +62,9 @@ public class UtilisateurService {
         }
         if (user.getStatue() != null) {
             user_db.setStatue(user.getStatue());
+
+
+
         }
         if (user.getEmail() != null) {
             user_db.setEmail(user.getEmail());

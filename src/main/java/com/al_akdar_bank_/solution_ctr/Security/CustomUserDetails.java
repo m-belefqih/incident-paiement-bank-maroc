@@ -1,5 +1,6 @@
 package com.al_akdar_bank_.solution_ctr.Security;
 
+import com.al_akdar_bank_.solution_ctr.Enum.Statue;
 import com.al_akdar_bank_.solution_ctr.Model.Utilisateur;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -47,6 +48,8 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return utilisateur.getStatue() == Statue.Activer;
     }
+
+
 }
