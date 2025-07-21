@@ -1,7 +1,7 @@
-package com.al_akdar_bank_.solution_ctr.Security;
+package com.alakdarbank.incident_paiement.security;
 
-import com.al_akdar_bank_.solution_ctr.Enum.Statue;
-import com.al_akdar_bank_.solution_ctr.Model.Utilisateur;
+import com.alakdarbank.incident_paiement.Enum.Statue;
+import com.alakdarbank.incident_paiement.model.Utilisateur;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

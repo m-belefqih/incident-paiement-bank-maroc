@@ -1,6 +1,6 @@
-package com.al_akdar_bank_.solution_ctr.Repository;
+package com.alakdarbank.incident_paiement.repository;
 
-import com.al_akdar_bank_.solution_ctr.Model.CodeErreur;
+import com.alakdarbank.incident_paiement.model.CodeErreur;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

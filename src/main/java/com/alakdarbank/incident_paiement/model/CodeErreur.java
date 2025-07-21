@@ -1,4 +1,4 @@
-package com.al_akdar_bank_.solution_ctr.Model;
+package com.alakdarbank.incident_paiement.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

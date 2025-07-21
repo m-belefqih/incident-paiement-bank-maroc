@@ -1,4 +1,4 @@
-package com.al_akdar_bank_.solution_ctr.Security;
+package com.alakdarbank.incident_paiement.security;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

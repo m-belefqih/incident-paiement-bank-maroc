@@ -1,4 +1,4 @@
-package com.al_akdar_bank_.solution_ctr.Enum;
+package com.alakdarbank.incident_paiement.Enum;
 
 public enum Statue {
     Activer,

@@ -9,11 +9,11 @@
 		<version>3.5.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.al_akdar_bank_</groupId>
-	<artifactId>solution_ctr</artifactId>
+	<groupId>com.alakhdarbank</groupId>
+	<artifactId>incident_paiement</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>solution_ctr</name>
-	<description>Demo project for Spring Boot</description>
+	<name>incident_paiement</name>
+	<description>Payment Incident Management System for Bank Al-Maghrib - A web application for managing and validating payment incident files (CLI, CPT, IPS) for the CIP system</description>
 	<url/>
 	<licenses>
 		<license/>

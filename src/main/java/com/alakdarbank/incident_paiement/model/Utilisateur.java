@@ -1,7 +1,7 @@
-package com.al_akdar_bank_.solution_ctr.Model;
+package com.alakdarbank.incident_paiement.model;
 
-import com.al_akdar_bank_.solution_ctr.Enum.Role;
-import com.al_akdar_bank_.solution_ctr.Enum.Statue;
+import com.alakdarbank.incident_paiement.Enum.Role;
+import com.alakdarbank.incident_paiement.Enum.Statue;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

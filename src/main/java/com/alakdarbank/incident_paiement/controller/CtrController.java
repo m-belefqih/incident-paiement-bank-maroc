@@ -1,9 +1,9 @@
-package com.al_akdar_bank_.solution_ctr.Controlleur;
+package com.alakdarbank.incident_paiement.controller;
 
-import com.al_akdar_bank_.solution_ctr.Model.CodeErreur;
-import com.al_akdar_bank_.solution_ctr.Model.Utilisateur;
-import com.al_akdar_bank_.solution_ctr.Service.CodeErreurService;
-import com.al_akdar_bank_.solution_ctr.Service.UtilisateurService;
+import com.alakdarbank.incident_paiement.model.CodeErreur;
+import com.alakdarbank.incident_paiement.model.Utilisateur;
+import com.alakdarbank.incident_paiement.service.CodeErreurService;
+import com.alakdarbank.incident_paiement.service.UtilisateurService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.IOException;
 import java.util.List;
 
 @Controller

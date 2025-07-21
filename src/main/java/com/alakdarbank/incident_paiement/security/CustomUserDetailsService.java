@@ -1,8 +1,8 @@
-package com.al_akdar_bank_.solution_ctr.Security;
+package com.alakdarbank.incident_paiement.security;
 
-import com.al_akdar_bank_.solution_ctr.Enum.Statue;
-import com.al_akdar_bank_.solution_ctr.Model.Utilisateur;
-import com.al_akdar_bank_.solution_ctr.Repository.UtilisateurRepository;
+import com.alakdarbank.incident_paiement.Enum.Statue;
+import com.alakdarbank.incident_paiement.model.Utilisateur;
+import com.alakdarbank.incident_paiement.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.userdetails.*;

@@ -1,4 +1,4 @@
-package com.al_akdar_bank_.solution_ctr.config;
+package com.alakdarbank.incident_paiement.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

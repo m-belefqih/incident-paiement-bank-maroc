@@ -1,9 +1,7 @@
-package com.al_akdar_bank_.solution_ctr.Repository;
+package com.alakdarbank.incident_paiement.repository;
 
-import com.al_akdar_bank_.solution_ctr.Model.Utilisateur;
+import com.alakdarbank.incident_paiement.model.Utilisateur;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.Optional;
 
 public interface UtilisateurRepository extends JpaRepository<Utilisateur,Long>{
 

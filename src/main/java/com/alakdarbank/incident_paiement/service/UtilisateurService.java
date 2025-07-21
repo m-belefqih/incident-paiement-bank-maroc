@@ -1,10 +1,9 @@
-package com.al_akdar_bank_.solution_ctr.Service;
+package com.alakdarbank.incident_paiement.service;
 
-import com.al_akdar_bank_.solution_ctr.Model.Utilisateur;
-import com.al_akdar_bank_.solution_ctr.Repository.UtilisateurRepository;
-import com.al_akdar_bank_.solution_ctr.Security.PasswordHashGenerator;
+import com.alakdarbank.incident_paiement.model.Utilisateur;
+import com.alakdarbank.incident_paiement.repository.UtilisateurRepository;
+import com.alakdarbank.incident_paiement.security.PasswordHashGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

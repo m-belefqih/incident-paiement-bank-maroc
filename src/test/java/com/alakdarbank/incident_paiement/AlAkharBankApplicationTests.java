@@ -1,10 +1,10 @@
-package com.al_akdar_bank_.solution_ctr;
+package com.alakdarbank.incident_paiement;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SolutionCtrApplicationTests {
+class AlAkharBankApplicationTests {
 
 	@Test
 	void contextLoads() {

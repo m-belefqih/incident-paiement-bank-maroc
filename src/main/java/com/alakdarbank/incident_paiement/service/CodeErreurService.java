@@ -1,7 +1,7 @@
-package com.al_akdar_bank_.solution_ctr.Service;
+package com.alakdarbank.incident_paiement.service;
 
-import com.al_akdar_bank_.solution_ctr.Model.CodeErreur;
-import com.al_akdar_bank_.solution_ctr.Repository.CodeErreurRepository;
+import com.alakdarbank.incident_paiement.model.CodeErreur;
+import com.alakdarbank.incident_paiement.repository.CodeErreurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
