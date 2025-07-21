@@ -97,3 +97,6 @@ Le tout dans une **architecture sécurisée**, avec un **déploiement automatis�
 - **CPT** : Fichier des comptes et liens (`C` pour comptes, `L` pour les liaisons client-compte)
 - **IPS** : Fichier des incidents de paiement (déclarations I, régularisations R, annulations A, infractions N…)
 - Recevoir un compte-rendu (fichier **CTR**) indiquant les **erreurs** ou l'**acceptation**
+
+## à noter que 
+- Le fichier `database.csv` doit être importé après la création de la base de données **alakhdarbank**
