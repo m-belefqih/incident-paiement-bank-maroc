@@ -13,6 +13,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    // Configuration de la sécurité HTTP pour login et logout
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -22,6 +23,7 @@ public class SecurityConfig {
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .usernameParameter("email")  // Add this line to use email parameter
                         .defaultSuccessUrl("/ctr_submit", true)
                         .permitAll()
                 )

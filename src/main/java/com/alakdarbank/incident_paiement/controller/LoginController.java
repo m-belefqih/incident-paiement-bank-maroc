@@ -1,5 +1,6 @@
-package com.al_akdar_bank_.solution_ctr.Controlleur;
+package com.alakdarbank.incident_paiement.controller;
 
+import com.alakdarbank.incident_paiement.security.PasswordHashGenerator;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -8,17 +9,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login() {
+        System.out.println(PasswordHashGenerator.generateHash("admin"));
         return "login";
     }
-    @GetMapping("/hello")
-    public String hello() {
-        return "hello";
-    }
-    @GetMapping("/test")
-    public String test() {
-        return "ctr_admin";
-    }
-
-
-
 }

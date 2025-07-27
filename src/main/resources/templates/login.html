@@ -11,7 +11,7 @@
     <link rel="stylesheet" th:href="@{/css/style_login.css}" />
 
 </head>
-<body class="flex h-screen w-full font-[Poppins]">
+<body class="flex h-screen w-full font-[Poppins] bg-(--lightgreen)">
 
 <!-- Formulaire centré -->
 <div class="w-full flex items-center justify-center">
@@ -64,9 +64,9 @@
                 <input
                         id="email"
                         aria-describedby="helper-text-explanation"
-                        name="username"
+                        name="email"
                         class="block w-full p-2.5 pl-10 mb-6 bg-gray-100 border border-green-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
-                        placeholder="username"
+                        placeholder="name@jhon.com"
                         required
                 />
             </div>
@@ -112,8 +112,8 @@
             <div>
                 <button
                         type="submit"
-                        class="flex w-full justify-center rounded-lg bg-[var(--darkgreen)] p-2 font-semibold text-white shadow-xs hover:bg-[var(--darkgreen)/90]"
-                >
+                        class="flex w-full justify-center rounded-lg bg-(--darkgreen) p-2
+                    font-semibold text-white shadow-xs hover:bg-(--darkgreen)/90">
                     Se connecter
                 </button>
             </div>
