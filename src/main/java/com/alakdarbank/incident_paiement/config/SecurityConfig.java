@@ -25,6 +25,7 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .usernameParameter("email")  // Add this line to use email parameter
                         .defaultSuccessUrl("/ctr_submit", true)
+                        .failureUrl("/login?error") // Add this line
                         .permitAll()
                 )
                 .logout(logout -> logout
