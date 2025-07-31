@@ -6,16 +6,10 @@
     <title>Administration</title>
     <!-- Tailwind CSS v4.1 -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+
     <style>
-        :root {
-            --orange: #F68712;
-            --lightblue: #3C93D6;
-            --darkblue: #0075C3;
-            --green: #00A63E;
-            --lightgreen: #DEFCE9;
-            --darkgreen: #006132;
-            --red: #F44336;
-        }
         .sidebar-collapsed {
             width: 64px;
             overflow: hidden;
@@ -44,7 +38,7 @@
 <div id="sidebar" class="w-64 bg-white shadow-lg transition-all duration-300">
     <!-- Logo -->
     <div class="p-4 border-b border-gray-200 flex justify-between items-center">
-        <img src="/images/al-akhdar-logo1.png" alt="Al Akhdar Bank Logo" class="h-16 w-auto logo-full">
+        <img th:src="@{/images/alakhdarbank-logo-H.png}" alt="Al Akhdar Bank Logo" class="h-16 w-auto logo-full">
         <button id="toggle-sidebar" class="p-1 rounded-lg hover:bg-gray-100">
             <svg class="w-6 h-6 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
@@ -157,7 +151,7 @@
                         <input type="file" name="fichier" id="file-upload" required />
                         <!-- label pour déclencher input file -->
                         <label for="file-upload" class="cursor-pointer px-4 py-2 bg-(--darkgreen) text-white rounded-lg hover:bg-(--darkgreen)/90 inline-block">
-                            Sélectionner un fichier
+                            Sélectionner un pointeur
                         </label>
                     </div>
                 </div>
@@ -173,8 +167,6 @@
                 </div>
 
             </form>
-
-
 
 
             <!-- Error Table Section -->
@@ -498,14 +490,7 @@
 
     // Profile modal
 
-    // Logout from user menu
-    const logoutLink = document.querySelector('#user-menu a[href="login"]');
-    if (logoutLink) {
-        logoutLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            window.location.href = 'login';
-        });
-    }
+
 
     // Filter dropdown error filtering
     const filterDropdownButton = document.getElementById('filter-dropdown-button');
