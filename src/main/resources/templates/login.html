@@ -8,66 +8,80 @@
     <!-- Tailwind CSS v4.1 -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    <link rel="stylesheet" th:href="@{/css/style_login.css}" />
+    <!-- Flowbite CSS (for Flowbite components) -->
+    <link href="https://unpkg.com/flowbite@latest/dist/flowbite.min.css" rel="stylesheet" />
+
+    <!-- Flowbite JS (for interactive components) -->
+    <script src="https://unpkg.com/flowbite@latest/dist/flowbite.min.js"></script>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 
 </head>
 <body class="flex h-screen w-full font-[Poppins] bg-(--lightgreen)">
 
-<!-- Formulaire centré -->
+<!-- Centered Login Form -->
 <div class="w-full flex items-center justify-center">
     <div class="max-w-md w-full flex flex-col items-center justify-center space-y-6 p-8 rounded-lg shadow-xl bg-white">
 
-        <!-- Logo -->
-        <img th:src="@{/images/al-akhdar-logo1.png}" alt="Al Akhdar Bank Logo" class="h-40 w-auto" />
-
-
-        <!-- Titre de connexion -->
-        <div class="flex items-center space-x-4 w-full">
-            <svg
-                    class="w-7 h-7 text-[var(--darkgreen)]"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-            >
-                <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-                />
-            </svg>
-            <h2 class="text-2xl font-bold text-[var(--darkgreen)]">Connexion</h2>
+        <!-- Logo Section -->
+        <div class="flex items-center justify-center w-full mb-4">
+            <img th:src="@{/images/alakhdarbank-logo-H.png}" alt="Al Akhdar Bank Logo" class="h-40 w-auto">
         </div>
 
-        <!-- Formulaire de login -->
+        <!-- Logo and Title Section -->
+        <div class="flex items-center space-x-4 w-full">
+            <svg class="w-7 h-7" style="color: var(--darkgreen);" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+            </svg>
+            <h2 class="text-2xl font-bold" style="color: var(--darkgreen);">Connexion</h2>
+        </div>
+
+        <!-- Alert Section -->
+        <div th:if="${param.error}" id="alert-danger" class="w-full flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50" role="alert">
+            <svg class="shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div class="ms-3 text-sm font-medium">
+                <b>Email</b> ou <b>mot de passe</b> incorrect.
+            </div>
+            <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8" data-dismiss-target="#alert-danger" aria-label="Close">
+                <span class="sr-only">Close</span>
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Form of Login -->
         <form class="w-full" th:action="@{/login}" method="POST">
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
             <label for="email" class="font-medium block mb-2 text-sm text-gray-900">E-mail</label>
 
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                     <svg
-                            class="w-4 h-4 text-gray-500 dark:text-gray-400"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            viewBox="0 0 20 16"
+                        class="w-4 h-4 text-gray-500"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        viewBox="0 0 20 16"
                     >
-                        <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
-                        <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
+                        <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
+                        <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
                     </svg>
                 </div>
 
                 <input
-                        id="email"
-                        aria-describedby="helper-text-explanation"
-                        name="email"
-                        class="block w-full p-2.5 pl-10 mb-6 bg-gray-100 border border-green-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
-                        placeholder="name@jhon.com"
-                        required
+                    id="email"
+                    aria-describedby="helper-text-explanation"
+                    name="email"
+                    class="block w-full p-2.5 pl-10 mb-6 bg-gray-100 border border-green-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+                    placeholder="name@alakhdarbank.ma"
+                    required
                 />
             </div>
 
@@ -75,50 +89,51 @@
                 <label for="password" class="block text-sm font-medium text-gray-900">Mot de passe</label>
                 <div class="text-sm">
                     <a
-                            href="forgot-password.html"
-                            class="font-semibold text-[var(--darkgreen)] hover:text-[var(--darkgreen)/80]"
-                    >Mot de passe oublié ?</a>
+                        href="#"
+                        class="font-semibold hover:opacity-80 transition-opacity duration-200"
+                        style="color: var(--darkgreen);">
+                        Mot de passe oublié ?
+                    </a>
                 </div>
             </div>
 
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                     <svg
-                            class="w-4 h-4 text-gray-500 dark:text-gray-400"
-                            viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            aria-hidden="true"
+                        class="w-4 h-4 text-gray-500"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        aria-hidden="true"
                     >
                         <path
-                                fill-rule="evenodd"
-                                d="M5 8V6a5 5 0 0110 0v2h1a1 1 0 011 1v9a1 1 0 01-1 1H4a1 1 0 01-1-1V9a1 1 0 011-1h1zm2-2a3 3 0 116 0v2H7V6zm3 4a1 1 0 00-1 1v3a1 1 0 102 0v-3a1 1 0 00-1-1z"
-                                clip-rule="evenodd"
+                            fill-rule="evenodd"
+                            d="M5 8V6a5 5 0 0110 0v2h1a1 1 0 011 1v9a1 1 0 01-1 1H4a1 1 0 01-1-1V9a1 1 0 011-1h1zm2-2a3 3 0 116 0v2H7V6zm3 4a1 1 0 00-1 1v3a1 1 0 102 0v-3a1 1 0 00-1-1z"
+                            clip-rule="evenodd"
                         />
                     </svg>
                 </div>
 
                 <input
-                        type="password"
-                        id="password"
-                        aria-describedby="helper-text-explanation"
-                        name="password"
-                        class="block w-full p-2.5 pl-10 mb-8 bg-gray-100 border border-green-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
-                        placeholder="votre mot de passe"
-                        required
+                    type="password"
+                    id="password"
+                    aria-describedby="helper-text-explanation"
+                    name="password"
+                    class="block w-full p-2.5 pl-10 mb-8 bg-gray-100 border border-green-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+                    placeholder="votre mot de passe"
+                    required
                 />
             </div>
 
             <div>
                 <button
-                        type="submit"
-                        class="flex w-full justify-center rounded-lg bg-(--darkgreen) p-2
-                    font-semibold text-white shadow-xs hover:bg-(--darkgreen)/90">
+                    type="submit"
+                    class="flex w-full justify-center rounded-lg bg-(--darkgreen) p-2
+                    font-semibold text-white shadow-xs hover:bg-(--darkgreen)/90 cursor-pointer transition-colors duration-200">
                     Se connecter
                 </button>
             </div>
         </form>
-
 
     </div>
 </div>
