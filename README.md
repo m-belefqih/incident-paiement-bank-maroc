@@ -48,16 +48,18 @@ Le tout dans une **architecture sécurisée**, avec un **déploiement automatis�
 
 ## **🛠️ Technologies et Outils**
 
-| Catégorie | Technologies / Outils |
-|-----------------|-----------------------------|
-| **Backend** | Spring Boot (Java) |
-| **Frontend** | Thymeleaf, Tailwind CSS |
-| **Base de données** | PostgreSQL |
+| Catégorie                       | Technologies / Outils     |
+|---------------------------------|---------------------------|
+| **Backend**                     | Spring Boot (Java)        |
+| **Frontend**                    | Thymeleaf, Tailwind CSS   |
+| **Base de données**             | PostgreSQL                |
 | **Sécurité / Authentification** | Spring Security, Keycloak |
-| **Gestion de versions** | Git, GitHub |
-| **CI/CD** | GitHub Actions |
-| **Conteneurisation** | Docker |
-| **Modélisation** | UML |
+| **Gestion de versions**         | Git, GitHub               |
+| **CI/CD**                       | GitHub Actions            |
+| **Conteneurisation**            | Docker                    |
+| **Modélisation**                | UML                       |
+| **Autres**                      | Postman API, Flowbite     |
+| **IDE**                         | VS Code, Intellij IDEA    |
 
 ### ✅ Architecture Backend
 
