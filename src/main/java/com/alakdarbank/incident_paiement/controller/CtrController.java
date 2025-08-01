@@ -13,7 +13,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class CtrController {
@@ -28,19 +30,65 @@ public class CtrController {
         this.usrservice = usrservice;
     }
 
+    /**
+     * This method adds common attributes to the model for all views.
+     * It retrieves the user's email, username, admin status, and initials,
+     * and adds them to the model.
+     *
+     * @param model The model to which attributes are added.
+     * @param authentication The authentication object containing user details.
+     */
     private void addCommonAttributes(Model model, Authentication authentication) {
+        // Get email from authentication
+        String email = authentication.getName();
+
+        // Default value
+        String username = "";
+
+        // To test username, you can uncomment the line below
+        // String username = "Admin User";
+
+        // Find user by email (since that's what authentication.getName() returns)
+        Utilisateur user = usrservice.chercherparEmail(email);
+        if (user != null) {
+            username = user.getUsername();
+        }
+
+        // Check if the user has an admin role
         boolean isAdmin = authentication.getAuthorities().stream()
                 .anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"));
-        model.addAttribute("username", authentication.getName());
+
+        // Generate initials from username
+        String initials = Arrays.stream(username.split(" "))
+                .filter(s -> !s.isEmpty())
+                .map(s -> s.substring(0, 1).toUpperCase())
+                .collect(Collectors.joining());
+
+        model.addAttribute("username", username);
+        model.addAttribute("email", email);
         model.addAttribute("isAdmin", isAdmin);
-        model.addAttribute("users", usrservice.afficher_user());
+        model.addAttribute("initials", initials);
+        model.addAttribute("users", usrservice.getAllUsers());
         model.addAttribute("user", new Utilisateur());
     }
 
-    @GetMapping("/ctr_submit")
+    @GetMapping("/import")
     public String ctr(Model model, Authentication authentication) {
         addCommonAttributes(model, authentication);
-        return "ctr_admin";
+//        return "ctr_admin";
+        return "import"; // This assumes you have a import.html template
+    }
+
+    @GetMapping("/history")
+    public String history(Model model, Authentication authentication) {
+        addCommonAttributes(model, authentication);
+        return "history";  // This assumes you have a history.html template
+    }
+
+    @GetMapping("/users")
+    public String users(Model model, Authentication authentication) {
+        addCommonAttributes(model, authentication);
+        return "users";  // This assumes you have a users.html template
     }
 
     @PostMapping("/delete_user/{id}")
@@ -49,8 +97,9 @@ public class CtrController {
                               HttpServletRequest request,
                               RedirectAttributes redirectAttributes) {
         try {
-            String currentUsername = authentication.getName();
-            Long currentUserId = usrservice.chercherparnom(currentUsername).getId();
+            String currentUsername = authentication.getName(); // it returns the email of the authenticated user
+
+            Long currentUserId = usrservice.chercherparEmail(currentUsername).getId();
 
             usrservice.supprimer_user(id);
             redirectAttributes.addFlashAttribute("successMessage", "Utilisateur supprimé avec succès");
@@ -63,7 +112,7 @@ public class CtrController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors de la suppression: " + e.getMessage());
         }
-        return "redirect:/ctr_submit";
+        return "redirect:/users";
     }
 
     @PostMapping("/ajouter_user")
@@ -76,7 +125,7 @@ public class CtrController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors de la création: " + e.getMessage());
         }
-        return "redirect:/ctr_submit";
+        return "redirect:/users";
     }
 
     @PostMapping("/edit/{id}")
@@ -100,7 +149,7 @@ public class CtrController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors de la modification: " + e.getMessage());
         }
-        return "redirect:/ctr_submit";
+        return "redirect:/users";
     }
 
     @PostMapping("/uploads")
@@ -109,7 +158,7 @@ public class CtrController {
                           RedirectAttributes redirectAttributes) {
         if (fichier.isEmpty()) {
             redirectAttributes.addFlashAttribute("errorMessage", "Veuillez sélectionner un fichier");
-            return "redirect:/ctr_submit";
+            return "redirect:/import";
         }
 
         try {
@@ -119,6 +168,6 @@ public class CtrController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors du traitement du fichier: " + e.getMessage());
         }
-        return "redirect:/ctr_submit";
+        return "redirect:/import";
     }
 }
