@@ -24,7 +24,7 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/login")
                         .usernameParameter("email")  // Add this line to use email parameter
-                        .defaultSuccessUrl("/ctr_submit", true)
+                        .defaultSuccessUrl("/import", true)
                         .failureUrl("/login?error") // Add this line
                         .permitAll()
                 )
