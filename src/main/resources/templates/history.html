@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Al Akhdar Bank</title>
+    <link rel="icon" th:href="@{/images/alakhdarbank-logo-V.png}" type="image/png">
+
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS (CDN for dev only) -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- TailwindPlus Elements -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
+
+    <!-- Flowbite CSS (for Flowbite components) -->
+    <link href="https://unpkg.com/flowbite@latest/dist/flowbite.min.css" rel="stylesheet" />
+
+    <!-- Flowbite JS (for interactive components) -->
+    <script src="https://unpkg.com/flowbite@latest/dist/flowbite.min.js"></script>
+
+    <!-- Simple Datatables -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
+
+    <!-- Your custom styles -->
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+
+    <style>
+        .font-poppins {
+            font-family: 'Poppins', system-ui, Inter, sans-serif;
+        }
+
+        .datatable-wrapper .datatable-input {
+            border: 1px solid #00A63E;
+            border-radius: 0.5rem;
+            transition: box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .datatable-wrapper .datatable-selector {
+            border: 1px solid #00A63E;
+            border-radius: 0.5rem;
+        }
+
+        .datatable-wrapper .datatable-input:focus , .datatable-wrapper .datatable-selector:focus {
+            border: 1px solid #00A63E;
+            box-shadow: 0 0 0 3px rgba(0, 166, 62, 0.4);
+            outline: none;
+        }
+    </style>
+
+</head>
+<body class="font-poppins flex h-screen w-full font-[Poppins] bg-(--lightgreen)">
+
+<!-- Sidebar -->
+<div id="sidebar" class="w-64 bg-white shadow-lg transition-all duration-300">
+    <!-- Logo -->
+    <div class="p-1 border-b border-gray-200 flex justify-center items-center">
+        <img th:src="@{/images/alakhdarbank-logo-H.png}" alt="Al Akhdar Bank Logo" class="h-16 w-auto">
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <nav class="p-4">
+        <ul class="space-y-2">
+            <li th:if="${isAdmin}">
+                <a th:href="@{/users}"
+                   class="flex items-center p-3 rounded-lg hover:bg-(--lightgreen) hover:text-(--darkgreen) text-gray-600">
+                    <svg class="w-5 h-5 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                    <span>Utilisateurs</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/import}"
+                   class="flex items-center p-3 rounded-lg hover:bg-(--lightgreen) hover:text-(--darkgreen) text-gray-600">
+                    <svg class="w-5 h-5 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                    </svg>
+                    <span>Importer</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/history}"
+                   class="flex items-center p-3 rounded-lg bg-(--lightgreen) text-(--darkgreen) font-semibold">
+                    <svg class="w-5 h-5 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span>Historique</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<!-- Main Content -->
+<div class="flex-1 flex flex-col overflow-hidden">
+    <!-- Top Bar -->
+    <header class="bg-white shadow-sm">
+        <div class="flex items-center justify-end p-4">
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <button id="user-menu-button"
+                            class="h-10 w-10 rounded-full bg-gray-600 flex items-center justify-center text-white cursor-pointer"
+                            th:text="${initials}">
+                        <!-- AU -->
+                    </button>
+                    <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white rounded-full"></span>
+                    <div id="user-menu"
+                         class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                        <div class="px-4 py-3 border-b border-gray-100">
+                            <p class="text-sm font-semibold text-(--darkgreen)" th:text="${username}">
+                                <!-- Admin User -->
+                            </p>
+                            <p class="text-sm text-gray-600 truncate" th:text="${email}">
+                                <!-- admin@gmail.com -->
+                            </p>
+                        </div>
+                        <button command="show-modal" commandfor="dialog"
+                                class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                            Profil
+                        </button>
+
+                        <form th:action="@{/logout}" method="post" class="w-full">
+                            <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 cursor-pointer">
+                                Déconnexion
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="flex-1 overflow-y-auto p-8">
+
+        <!-- History Section -->
+        <div id="history-page" class="w-full bg-white rounded-lg shadow-xl p-8">
+            <!-- Page Title -->
+            <div class="flex items-center space-x-4 mb-8">
+                <svg class="w-7 h-7 text-(--darkgreen)" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M9 8h6m-6 4h6m-6 4h6M7 8v10a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V8M7 8V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/>
+                </svg>
+                <h2 class="text-2xl font-bold text-(--darkgreen)">Historique des fichiers</h2>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <div class="border-b border-gray-200 mb-8">
+                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center">
+                    <li class="me-2">
+                        <a th:href="@{/import}"
+                           class="inline-block p-4 text-gray-600 border-b-2 border-text-gray-600 hover:text-(--darkgreen) hover:border-(--darkgreen) rounded-t-lg">Importer</a>
+                    </li>
+                    <li class="me-2">
+                        <a th:href="@{/history}"
+                           class="inline-block p-4 border-b-2 border-(--darkgreen) text-(--darkgreen) rounded-t-lg active font-bold">Historique</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Data Table Section -->
+            <table id="export-table">
+                <thead>
+                <tr>
+                    <th>
+                        <span class="flex items-center text-(--darkgreen)/80 hover:text-(--darkgreen)">
+                            CODE ERREUR
+                            <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                 width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
+                            </svg>
+                        </span>
+                    </th>
+                    <th>
+                        <span class="flex items-center text-(--darkgreen)/80 hover:text-(--darkgreen)">
+                            Numéro de compte
+                            <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                 width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
+                            </svg>
+                        </span>
+                    </th>
+                    <th>
+                        <span class="flex items-center text-(--darkgreen)/80 hover:text-(--darkgreen)">
+                            Description
+                            <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                 width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
+                            </svg>
+                        </span>
+                    </th>
+                    <th>
+                        <span class="flex items-center text-(--darkgreen)/80 hover:text-(--darkgreen)">
+                            Gravité de l'erreur
+                            <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                 width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
+                            </svg>
+                        </span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="hover:bg-gray-50 cursor-pointer">
+                    <td>ERR001</td>
+                    <td>FR7630001007941234567890185</td>
+                    <td>Format de compte invalide</td>
+                    <td>
+                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded">Avertissement (A)</span>
+                    </td>
+                </tr>
+                <tr class="hover:bg-gray-50 cursor-pointer">
+                    <td>ERR002</td>
+                    <td>FR7630001007949876543210185</td>
+                    <td>Données manquantes</td>
+                    <td>
+                        <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded">Zone ignorée (Z)</span>
+                    </td>
+                </tr>
+                <tr class="hover:bg-gray-50 cursor-pointer">
+                    <td>ERR003</td>
+                    <td>FR7630001007941234567890185</td>
+                    <td>Doublon détecté</td>
+                    <td>
+                        <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs font-medium rounded">Enregistrement rejeté (E)</span>
+                    </td>
+                </tr>
+                <tr class="hover:bg-gray-50 cursor-pointer">
+                    <td>ERR004</td>
+                    <td>FR7630001007945555555550185</td>
+                    <td>Compte inexistant</td>
+                    <td>
+                        <span class="px-2 py-1 bg-red-100 text-red-800 text-xs font-medium rounded">Lot rejeté (L)</span>
+                    </td>
+                </tr>
+                <tr class="hover:bg-gray-50 cursor-pointer">
+                    <td>ERR005</td>
+                    <td>FR7630001007946666666660185</td>
+                    <td>Format de date invalide</td>
+                    <td>
+                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded">Avertissement (A)</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <!-- Profile Modal Dialog -->
+        <el-dialog>
+            <dialog id="dialog" aria-labelledby="dialog-title"
+                    class="fixed inset-0 size-auto max-h-none max-w-none overflow-y-auto bg-transparent backdrop:bg-transparent">
+                <el-dialog-backdrop
+                        class="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-700 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"></el-dialog-backdrop>
+                <div tabindex="0"
+                     class="flex min-h-full items-end justify-center p-4 text-center focus:outline-none sm:items-center sm:p-0">
+                    <el-dialog-panel
+                            class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-md data-closed:sm:translate-y-0 data-closed:sm:scale-95">
+                        <!-- Close button -->
+                        <button type="button" command="close" commandfor="dialog"
+                                class="cursor-pointer absolute top-4 right-4 text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 rounded-full p-1">
+                            <span class="sr-only">Close</span>
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                 stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+
+                        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-xl font-bold text-(--darkgreen)">Profil</h3>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="flex flex-col items-center relative">
+                                    <div class="h-20 w-20 rounded-full bg-gray-600 flex items-center justify-center text-white text-2xl mb-4"
+                                         th:text="${initials}">
+                                        <!-- AU -->
+                                    </div>
+                                    <h4 class="text-lg font-semibold" th:text="${username}">
+                                        <!-- Admin User -->
+                                    </h4>
+                                    <p class="text-gray-600" th:text="${email}">
+                                        <!-- admin@example.com -->
+                                    </p>
+                                    <span class="mt-2 px-3 py-1 bg-green-100 text-(--darkgreen) text-xs font-medium rounded-full flex items-center">
+                                        <span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
+                                        En ligne
+                                    </span>
+                                </div>
+
+                                <div class="border-t border-gray-200 pt-4">
+                                    <div class="mb-3">
+                                        <p class="text-sm text-gray-500">Rôle</p>
+                                        <p class="font-medium" th:text="${isAdmin} ? 'Administrateur' : 'Utilisateur'">
+                                            <!-- Administrateur -->
+                                        </p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <p class="text-sm text-gray-500">Date de création</p>
+                                        <p class="font-medium">15/07/2023</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">Dernière connexion</p>
+                                        <p class="font-medium">Aujourd'hui, 14:32</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <form th:action="@{/logout}" method="post" class="bg-gray-100 px-4 py-3 sm:flex sm:justify-center sm:px-6">
+                            <button type="submit"
+                                    class="cursor-pointer inline-flex justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 w-auto">
+                                Se déconnecter
+                            </button>
+                        </form>
+                    </el-dialog-panel>
+                </div>
+            </dialog>
+        </el-dialog>
+    </main>
+</div>
+
+<script>
+    if (document.getElementById("export-table") && typeof simpleDatatables.DataTable !== 'undefined') {
+
+        const exportCustomCSV = function(dataTable, userOptions = {}) {
+            // A modified CSV export that includes a row of minuses at the start and end.
+            const clonedUserOptions = {
+                ...userOptions
+            }
+            clonedUserOptions.download = false
+            const csv = simpleDatatables.exportCSV(dataTable, clonedUserOptions)
+            // If CSV didn't work, exit.
+            if (!csv) {
+                return false
+            }
+            const defaults = {
+                download: true,
+                lineDelimiter: "\n",
+                columnDelimiter: ";"
+            }
+            const options = {
+                ...defaults,
+                ...clonedUserOptions
+            }
+            const separatorRow = Array(dataTable.data.headings.filter((_heading, index) => !dataTable.columns.settings[index]?.hidden).length)
+                .fill("+")
+                .join("+"); // Use "+" as the delimiter
+
+            const str = separatorRow + options.lineDelimiter + csv + options.lineDelimiter + separatorRow;
+
+            if (userOptions.download) {
+                // Create a link to trigger the download
+                const link = document.createElement("a");
+                link.href = encodeURI("data:text/csv;charset=utf-8," + str);
+                link.download = (options.filename || "datatable_export") + ".txt";
+                // Append the link
+                document.body.appendChild(link);
+                // Trigger the download
+                link.click();
+                // Remove the link
+                document.body.removeChild(link);
+            }
+
+            return str
+        }
+        const table = new simpleDatatables.DataTable("#export-table", {
+            template: (options, dom) => "<div class='" + options.classes.top + "'>" +
+                "<div class='flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-3 rtl:space-x-reverse w-full sm:w-auto'>" +
+                (options.paging && options.perPageSelect ?
+                        "<div class='" + options.classes.dropdown + "'>" +
+                        "<label>" +
+                        "<select class='" + options.classes.selector + "'></select> " + options.labels.perPage +
+                        "</label>" +
+                        "</div>" : ""
+                ) + "<button id='exportDropdownButton' type='button' class='flex w-full items-center justify-center rounded-lg border border-(--darkgreen) bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-(--darkgreen) focus:z-10 focus:outline-none focus:ring-4 focus:ring-(--darkgreen)/40 sm:w-auto'>" +
+                "Export as" +
+                "<svg class='-me-0.5 ms-1.5 h-4 w-4' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'>" +
+                "<path stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m19 9-7 7-7-7' />" +
+                "</svg>" +
+                "</button>" +
+                "<div id='exportDropdown' class='z-10 hidden w-52 divide-y divide-gray-100 rounded-lg bg-white shadow-sm' data-popper-placement='bottom'>" +
+                "<ul class='p-2 text-left text-sm font-medium text-gray-500' aria-labelledby='exportDropdownButton'>" +
+                "<li>" +
+                "<button id='export-csv' class='group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900'>" +
+                "<svg class='me-1.5 h-4 w-4 text-gray-400 group-hover:text-gray-900' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' viewBox='0 0 24 24'>" +
+                "<path fill-rule='evenodd' d='M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2 2 2 0 0 0 2 2h12a2 2 0 0 0 2-2 2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2V4a2 2 0 0 0-2-2h-7Zm1.018 8.828a2.34 2.34 0 0 0-2.373 2.13v.008a2.32 2.32 0 0 0 2.06 2.497l.535.059a.993.993 0 0 0 .136.006.272.272 0 0 1 .263.367l-.008.02a.377.377 0 0 1-.018.044.49.49 0 0 1-.078.02 1.689 1.689 0 0 1-.297.021h-1.13a1 1 0 1 0 0 2h1.13c.417 0 .892-.05 1.324-.279.47-.248.78-.648.953-1.134a2.272 2.272 0 0 0-2.115-3.06l-.478-.052a.32.32 0 0 1-.285-.341.34.34 0 0 1 .344-.306l.94.02a1 1 0 1 0 .043-2l-.943-.02h-.003Zm7.933 1.482a1 1 0 1 0-1.902-.62l-.57 1.747-.522-1.726a1 1 0 0 0-1.914.578l1.443 4.773a1 1 0 0 0 1.908.021l1.557-4.773Zm-13.762.88a.647.647 0 0 1 .458-.19h1.018a1 1 0 1 0 0-2H6.647A2.647 2.647 0 0 0 4 13.647v1.706A2.647 2.647 0 0 0 6.647 18h1.018a1 1 0 1 0 0-2H6.647A.647.647 0 0 1 6 15.353v-1.706c0-.172.068-.336.19-.457Z' clip-rule='evenodd'/>" +
+                "</svg>" +
+                "<span>Export CSV</span>" +
+                "</button>" +
+                "</li>" +
+                "<li>" +
+                "<button id='export-json' class='group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900'>" +
+                "<svg class='me-1.5 h-4 w-4 text-gray-400 group-hover:text-gray-900' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' viewBox='0 0 24 24'>" +
+                "<path fill-rule='evenodd' d='M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7Zm-.293 9.293a1 1 0 0 1 0 1.414L9.414 14l1.293 1.293a1 1 0 0 1-1.414 1.414l-2-2a1 1 0 0 1 0-1.414l2-2a1 1 0 0 1 1.414 0Zm2.586 1.414a1 1 0 0 1 1.414-1.414l2 2a1 1 0 0 1 0 1.414l-2 2a1 1 0 0 1-1.414-1.414L14.586 14l-1.293-1.293Z' clip-rule='evenodd'/>" +
+                "</svg>" +
+                "<span>Export JSON</span>" +
+                "</button>" +
+                "</li>" +
+                "<li>" +
+                "<button id='export-txt' class='group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900'>" +
+                "<svg class='me-1.5 h-4 w-4 text-gray-400 group-hover:text-gray-900' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' viewBox='0 0 24 24'>" +
+                "<path fill-rule='evenodd' d='M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z' clip-rule='evenodd'/>" +
+                "</svg>" +
+                "<span>Export TXT</span>" +
+                "</button>" +
+                "</li>" +
+                "<li>" +
+                "<button id='export-sql' class='group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900'>" +
+                "<svg class='me-1.5 h-4 w-4 text-gray-400 group-hover:text-gray-900' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' viewBox='0 0 24 24'>" +
+                "<path d='M12 7.205c4.418 0 8-1.165 8-2.602C20 3.165 16.418 2 12 2S4 3.165 4 4.603c0 1.437 3.582 2.602 8 2.602ZM12 22c4.963 0 8-1.686 8-2.603v-4.404c-.052.032-.112.06-.165.09a7.75 7.75 0 0 1-.745.387c-.193.088-.394.173-.6.253-.063.024-.124.05-.189.073a18.934 18.934 0 0 1-6.3.998c-2.135.027-4.26-.31-6.3-.998-.065-.024-.126-.05-.189-.073a10.143 10.143 0 0 1-.852-.373 7.75 7.75 0 0 1-.493-.267c-.053-.03-.113-.058-.165-.09v4.404C4 20.315 7.037 22 12 22Zm7.09-13.928a9.91 9.91 0 0 1-.6.253c-.063.025-.124.05-.189.074a18.935 18.935 0 0 1-6.3.998c-2.135.027-4.26-.31-6.3-.998-.065-.024-.126-.05-.189-.074a10.163 10.163 0 0 1-.852-.372 7.816 7.816 0 0 1-.493-.268c-.055-.03-.115-.058-.167-.09V12c0 .917 3.037 2.603 8 2.603s8-1.686 8-2.603V7.596c-.052.031-.112.059-.165.09a7.816 7.816 0 0 1-.745.386Z'/>" +
+                "</svg>" +
+                "<span>Export SQL</span>" +
+                "</button>" +
+                "</li>" +
+                "</ul>" +
+                "</div>" + "</div>" +
+                (options.searchable ?
+                        "<div class='" + options.classes.search + "'>" +
+                        "<input class='" + options.classes.input + "' placeholder='" + options.labels.placeholder + "' type='search' title='" + options.labels.searchTitle + "'" + (dom.id ? " aria-controls='" + dom.id + "'" : "") + ">" +
+                        "</div>" : ""
+                ) +
+                "</div>" +
+                "<div class='" + options.classes.container + "'" + (options.scrollY.length ? " style='height: " + options.scrollY + "; overflow-Y: auto;'" : "") + "></div>" +
+                "<div class='" + options.classes.bottom + "'>" +
+                (options.paging ?
+                        "<div class='" + options.classes.info + "'></div>" : ""
+                ) +
+                "<nav class='" + options.classes.pagination + "'></nav>" +
+                "</div>"
+        })
+        const $exportButton = document.getElementById("exportDropdownButton");
+        const $exportDropdownEl = document.getElementById("exportDropdown");
+        const dropdown = new Dropdown($exportDropdownEl, $exportButton);
+        console.log(dropdown)
+
+        document.getElementById("export-csv").addEventListener("click", () => {
+            simpleDatatables.exportCSV(table, {
+                download: true,
+                lineDelimiter: "\n",
+                columnDelimiter: ";"
+            })
+        })
+        document.getElementById("export-sql").addEventListener("click", () => {
+            simpleDatatables.exportSQL(table, {
+                download: true,
+                tableName: "export_table"
+            })
+        })
+        document.getElementById("export-txt").addEventListener("click", () => {
+            simpleDatatables.exportTXT(table, {
+                download: true
+            })
+        })
+        document.getElementById("export-json").addEventListener("click", () => {
+            simpleDatatables.exportJSON(table, {
+                download: true,
+                space: 3
+            })
+        })
+    }
+
+
+    // User menu toggle
+    document.getElementById('user-menu-button').addEventListener('click', function(e) {
+        e.stopPropagation();
+        document.getElementById('user-menu').classList.toggle('hidden');
+    });
+
+    // Close user menu when clicking outside
+    document.addEventListener('click', function() {
+        document.getElementById('user-menu').classList.add('hidden');
+    });
+</script>
+
+</body>
+</html>
