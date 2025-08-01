@@ -19,14 +19,44 @@ public class UtilisateurService {
         this.utilisateurRepository = utilisateurRepository;
     }
 
-    public List<Utilisateur> afficher_user(){
+
+    /**
+     * Récupère tous les utilisateurs.
+     *
+     * @return une liste de tous les utilisateurs
+     */
+    public List<Utilisateur> getAllUsers(){
         return utilisateurRepository.findAll();
     }
+
+    /**
+     * Cherche un utilisateur par son ID.
+     *
+     * @param ID l'ID de l'utilisateur à chercher
+     * @return l'utilisateur trouvé ou null si aucun utilisateur n'est trouvé
+     */
     public Utilisateur chercherparid(long ID){
         return utilisateurRepository.findById(ID).orElse(null);
     }
+
+    /**
+     * Cherche un utilisateur par son nom d'utilisateur.
+     *
+     * @param username le nom d'utilisateur à chercher
+     * @return l'utilisateur trouvé ou null si aucun utilisateur n'est trouvé
+     */
     public Utilisateur chercherparnom(String username){
         return utilisateurRepository.findByUsername(username);
+    }
+
+    /**
+     * Cherche un utilisateur par son email.
+     *
+     * @param email l'email de l'utilisateur à chercher
+     * @return l'utilisateur trouvé ou null si aucun utilisateur n'est trouvé
+     */
+    public Utilisateur chercherparEmail(String email) {
+        return utilisateurRepository.findByEmail(email);
     }
 
     public void ajouter_user(Utilisateur user) throws Exception {
