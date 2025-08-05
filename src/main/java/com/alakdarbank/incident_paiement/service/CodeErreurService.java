@@ -11,7 +11,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.thymeleaf.util.StringUtils.substring;
 
@@ -19,26 +21,10 @@ import static org.thymeleaf.util.StringUtils.substring;
 public class CodeErreurService {
     @Autowired
     private CodeErreurRepository codeErreurRepository;
-    public List<String> LireFichier(String filePath) throws IOException {
-        List<String> content = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                char firstChar = line.charAt(0);
-                if (firstChar == 'H' || firstChar == 'F') {
-                    continue;
-                }
-                if (line.length() >= 6) {
-                    String sub = line.substring(194, 199);
-                    content.add(sub);
-                }
-            }
-        }
-        return content;
-    }
-    public List<CodeErreur> ListerErreur(MultipartFile file) throws IOException {
-        List<CodeErreur> list_erreur = new ArrayList<>();
-        List<Integer> content_LireFichier_int = new ArrayList<>();
+
+    public List<Map<String, CodeErreur>> ListerErreur(MultipartFile file) throws IOException {
+        List<Map<String, CodeErreur>> list_erreur_client = new ArrayList<>();
+
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
             String line;
@@ -48,17 +34,21 @@ public class CodeErreurService {
                     continue;
                 }
                 if (line.length() >= 199) {
-                    String sub = line.substring(194, 199);
-                    content_LireFichier_int.add(Integer.parseInt(sub));
+                    Map<String, CodeErreur> incident = new HashMap<>();
+
+                    String sub = line.substring(194, 199).trim();  // code erreur
+                    String sub2 = line.substring(43, 54).trim();  // numéro de compte
+                    System.out.println(sub+","+sub2);
+                    try {
+                        incident.put(sub2,codeErreurRepository.findByCode(Integer.parseInt(sub)) );
+                    }catch (Exception e){
+                        continue;
+                    }
+                    list_erreur_client.add(incident);
                 }
             }
         }
-
-        for (Integer code : content_LireFichier_int) {
-            list_erreur.add(codeErreurRepository.findByCode(code));
-        }
-
-        return list_erreur;
+        return list_erreur_client;
     }
 
 

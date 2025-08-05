@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
@@ -162,7 +163,7 @@ public class CtrController {
         }
 
         try {
-            List<CodeErreur> lignes = codeErreurService.ListerErreur(fichier);
+            List<Map<String, CodeErreur>> lignes = codeErreurService.ListerErreur(fichier);
             redirectAttributes.addFlashAttribute("lignes", lignes);
             redirectAttributes.addFlashAttribute("successMessage", "Fichier traité avec succès");
         } catch (Exception e) {

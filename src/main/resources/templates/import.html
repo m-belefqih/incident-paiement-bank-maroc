@@ -308,26 +308,29 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="ligne : ${lignes}">
-                    <td th:text="${ligne != null ? ligne.getCode() : 'N/A'}"></td>
-                    <td th:text="${ligne != null ? ligne.getId() : 'N/A'}"></td>
-                    <td th:text="${ligne != null ? ligne.getDescription() : 'N/A'}"></td>
-                    <td>
-                        <span
-                                th:with="gravite=${ligne != null ? ligne.getGravite() : null}"
-                                th:class="${'px-2 py-1 rounded whitespace-nowrap text-xs font-medium'} + ' ' +
-                                    ${gravite == 'A' ? 'bg-blue-100 text-blue-800' :
-                                    gravite == 'E' ? 'bg-orange-100 text-orange-800' :
-                                    gravite == 'L' ? 'bg-red-100 text-red-800' :
-                                    gravite == 'Z' ? 'bg-yellow-100 text-yellow-800' : ''}"
-                                                            th:text="${gravite == 'A' ? 'Avertissement (A)' :
-                                    gravite == 'E' ? 'Enregistrement rejeté (E)' :
-                                    gravite == 'L' ? 'Lot rejeté (L)' :
-                                    gravite == 'Z' ? 'Zone ignorée (Z)' : 'N/A'}"
-                        >
-                        </span>
-                    </td>
+                <tr th:each="map : ${lignes}">
+                    <th:block th:each="entry : ${map.entrySet()}">
+                        <td th:text="${entry != null ? entry.value.getCode() : 'N/A'}"></td>
+                        <td th:text="${entry != null ? entry.key : 'N/A'}"></td>
+                        <td th:text="${entry != null ? entry.value.getDescription() : 'N/A'}"></td>
+                        <td>
+                            <span
+                                    th:with="gravite=${entry != null ? entry.value.getGravite() : null}"
+                                    th:class="${'px-2 py-1 rounded whitespace-nowrap text-xs font-medium'} + ' ' +
+                                        ${gravite == 'A' ? 'bg-blue-100 text-blue-800' :
+                                        gravite == 'E' ? 'bg-orange-100 text-orange-800' :
+                                        gravite == 'L' ? 'bg-red-100 text-red-800' :
+                                        gravite == 'Z' ? 'bg-yellow-100 text-yellow-800' : ''}"
+                                    th:text="${gravite == 'A' ? 'Avertissement (A)' :
+                                        gravite == 'E' ? 'Enregistrement rejeté (E)' :
+                                        gravite == 'L' ? 'Lot rejeté (L)' :
+                                        gravite == 'Z' ? 'Zone ignorée (Z)' : 'N/A'}"
+                            >
+                            </span>
+                        </td>
+                    </th:block>
                 </tr>
+
 
                 </tbody>
             </table>
