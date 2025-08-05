@@ -1,7 +1,9 @@
 package com.alakdarbank.incident_paiement.service;
 
 import com.alakdarbank.incident_paiement.model.CodeErreur;
+import com.alakdarbank.incident_paiement.model.Utilisateur;
 import com.alakdarbank.incident_paiement.repository.CodeErreurRepository;
+import com.alakdarbank.incident_paiement.repository.HistoriqueIncidentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,8 +23,10 @@ import static org.thymeleaf.util.StringUtils.substring;
 public class CodeErreurService {
     @Autowired
     private CodeErreurRepository codeErreurRepository;
+    @Autowired
+    private HistoriqueIncidentService historiqueIncidentService;
 
-    public List<Map<String, CodeErreur>> ListerErreur(MultipartFile file) throws IOException {
+    public List<Map<String, CodeErreur>> ListerErreur(MultipartFile file, Utilisateur user) throws IOException {
         List<Map<String, CodeErreur>> list_erreur_client = new ArrayList<>();
 
 
@@ -44,6 +48,7 @@ public class CodeErreurService {
                     }catch (Exception e){
                         continue;
                     }
+                    historiqueIncidentService.enregistement_d_historique(incident,user);
                     list_erreur_client.add(incident);
                 }
             }

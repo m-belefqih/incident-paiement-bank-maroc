@@ -215,46 +215,27 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="hover:bg-gray-50 cursor-pointer">
-                    <td>ERR001</td>
-                    <td>FR7630001007941234567890185</td>
-                    <td>Format de compte invalide</td>
+                <tr th:each="linge : ${Historique}" class="hover:bg-gray-50 cursor-pointer">
+                    <td th:text="${linge.codeerreur.code}">ERR001</td>
+                    <td th:text="${linge.numerodecompte}">FR7630001007941234567890185</td>
+                    <td th:text="${linge.codeerreur.Description}">Format de compte invalide</td>
                     <td>
-                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded">Avertissement (A)</span>
+                            <span
+                                    th:with="gravite=${linge != null ? linge.codeerreur.Gravite : null}"
+                                    th:class="${'px-2 py-1 rounded whitespace-nowrap text-xs font-medium'} + ' ' +
+                                        ${gravite == 'A' ? 'bg-blue-100 text-blue-800' :
+                                        gravite == 'E' ? 'bg-orange-100 text-orange-800' :
+                                        gravite == 'L' ? 'bg-red-100 text-red-800' :
+                                        gravite == 'Z' ? 'bg-yellow-100 text-yellow-800' : ''}"
+                                    th:text="${gravite == 'A' ? 'Avertissement (A)' :
+                                        gravite == 'E' ? 'Enregistrement rejeté (E)' :
+                                        gravite == 'L' ? 'Lot rejeté (L)' :
+                                        gravite == 'Z' ? 'Zone ignorée (Z)' : 'N/A'}"
+                            >
+                            </span>
                     </td>
                 </tr>
-                <tr class="hover:bg-gray-50 cursor-pointer">
-                    <td>ERR002</td>
-                    <td>FR7630001007949876543210185</td>
-                    <td>Données manquantes</td>
-                    <td>
-                        <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded">Zone ignorée (Z)</span>
-                    </td>
-                </tr>
-                <tr class="hover:bg-gray-50 cursor-pointer">
-                    <td>ERR003</td>
-                    <td>FR7630001007941234567890185</td>
-                    <td>Doublon détecté</td>
-                    <td>
-                        <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs font-medium rounded">Enregistrement rejeté (E)</span>
-                    </td>
-                </tr>
-                <tr class="hover:bg-gray-50 cursor-pointer">
-                    <td>ERR004</td>
-                    <td>FR7630001007945555555550185</td>
-                    <td>Compte inexistant</td>
-                    <td>
-                        <span class="px-2 py-1 bg-red-100 text-red-800 text-xs font-medium rounded">Lot rejeté (L)</span>
-                    </td>
-                </tr>
-                <tr class="hover:bg-gray-50 cursor-pointer">
-                    <td>ERR005</td>
-                    <td>FR7630001007946666666660185</td>
-                    <td>Format de date invalide</td>
-                    <td>
-                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded">Avertissement (A)</span>
-                    </td>
-                </tr>
+
                 </tbody>
             </table>
 

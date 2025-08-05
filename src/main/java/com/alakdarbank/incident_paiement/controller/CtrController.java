@@ -3,6 +3,7 @@ package com.alakdarbank.incident_paiement.controller;
 import com.alakdarbank.incident_paiement.model.CodeErreur;
 import com.alakdarbank.incident_paiement.model.Utilisateur;
 import com.alakdarbank.incident_paiement.service.CodeErreurService;
+import com.alakdarbank.incident_paiement.service.HistoriqueIncidentService;
 import com.alakdarbank.incident_paiement.service.UtilisateurService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,14 @@ public class CtrController {
 
     private final CodeErreurService codeErreurService;
     private final UtilisateurService usrservice;
+    private final HistoriqueIncidentService historiqueIncidentService;
 
     @Autowired
     public CtrController(CodeErreurService codeErreurService,
-                         UtilisateurService usrservice) {
+                         UtilisateurService usrservice,HistoriqueIncidentService historiqueIncidentService) {
         this.codeErreurService = codeErreurService;
         this.usrservice = usrservice;
+        this.historiqueIncidentService = historiqueIncidentService;
     }
 
     /**
@@ -83,12 +86,16 @@ public class CtrController {
     @GetMapping("/history")
     public String history(Model model, Authentication authentication) {
         addCommonAttributes(model, authentication);
+        String email = authentication.getName();
+        Utilisateur user = usrservice.chercherparEmail(email);
+        model.addAttribute("Historique",historiqueIncidentService.affichierHistorique(user));
         return "history";  // This assumes you have a history.html template
     }
 
     @GetMapping("/users")
     public String users(Model model, Authentication authentication) {
         addCommonAttributes(model, authentication);
+
         return "users";  // This assumes you have a users.html template
     }
 
@@ -157,18 +164,29 @@ public class CtrController {
     public String uploads(@RequestParam("fichier") MultipartFile fichier,
                           Authentication authentication,
                           RedirectAttributes redirectAttributes) {
+
         if (fichier.isEmpty()) {
             redirectAttributes.addFlashAttribute("errorMessage", "Veuillez sélectionner un fichier");
             return "redirect:/import";
         }
 
+
+        String email = authentication.getName();
+
+        Utilisateur user = usrservice.chercherparEmail(email);
+
         try {
-            List<Map<String, CodeErreur>> lignes = codeErreurService.ListerErreur(fichier);
+
+            List<Map<String, CodeErreur>> lignes = codeErreurService.ListerErreur(fichier, user);
+
             redirectAttributes.addFlashAttribute("lignes", lignes);
             redirectAttributes.addFlashAttribute("successMessage", "Fichier traité avec succès");
+
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors du traitement du fichier: " + e.getMessage());
         }
+
         return "redirect:/import";
     }
+
 }

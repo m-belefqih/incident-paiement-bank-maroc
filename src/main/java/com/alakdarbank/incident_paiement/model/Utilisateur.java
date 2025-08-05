@@ -7,6 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,5 +26,7 @@ public class Utilisateur {
     Statue statue=Statue.Activer;
     @Enumerated(EnumType.STRING)
     Role role;
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<HistoriqueIncident> Historique = new ArrayList<>();
 
 }
