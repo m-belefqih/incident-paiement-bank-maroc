@@ -17,15 +17,16 @@ public class HistoriqueIncidentService {
     @Autowired
     private HistoriqueIncidentRepository historiqueIncidentRepository;
     public void enregistement_d_historique(Map<String, CodeErreur> Historique, Utilisateur user) {
-        HistoriqueIncident historiqueIncident = new HistoriqueIncident();
         for (Map.Entry<String, CodeErreur> entry : Historique.entrySet()) {
-            historiqueIncident.setCodeerreur(entry.getValue());
-            historiqueIncident.setNumerodecompte(entry.getKey());
-            historiqueIncident.setDateerreur(LocalDate.now());
+            if (entry.getValue() != null) {  // Add null check
+                HistoriqueIncident historiqueIncident = new HistoriqueIncident();
+                historiqueIncident.setCodeerreur(entry.getValue());
+                historiqueIncident.setNumerodecompte(entry.getKey());
+                historiqueIncident.setDateerreur(LocalDate.now());
+                historiqueIncident.setUtilisateur(user);
+                historiqueIncidentRepository.save(historiqueIncident);
+            }
         }
-        historiqueIncident.setUtilisateur(user);
-        historiqueIncidentRepository.save(historiqueIncident);
-
     }
     public List<HistoriqueIncident> affichierHistorique(Utilisateur user) {
         return historiqueIncidentRepository.findByUtilisateurId(user.getId());

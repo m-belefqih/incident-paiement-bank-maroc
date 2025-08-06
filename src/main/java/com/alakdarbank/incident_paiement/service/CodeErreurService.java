@@ -44,8 +44,14 @@ public class CodeErreurService {
                     String sub2 = line.substring(43, 54).trim();  // numéro de compte
                     System.out.println(sub+","+sub2);
                     try {
-                        incident.put(sub2,codeErreurRepository.findByCode(Integer.parseInt(sub)) );
-                    }catch (Exception e){
+                        CodeErreur codeErreur = codeErreurRepository.findByCode(Integer.parseInt(sub));
+                        if (codeErreur != null) {
+                            incident.put(sub2, codeErreur);
+                        } else {
+
+                            continue;
+                        }
+                    } catch (Exception e) {
                         continue;
                     }
                     historiqueIncidentService.enregistement_d_historique(incident,user);

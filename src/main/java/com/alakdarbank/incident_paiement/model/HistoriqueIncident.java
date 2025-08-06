@@ -17,7 +17,7 @@ public class HistoriqueIncident {
     private Long id;
     private String numerodecompte;
     private LocalDate dateerreur;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "codeerreur_id")
     private CodeErreur codeerreur;
     @ManyToOne

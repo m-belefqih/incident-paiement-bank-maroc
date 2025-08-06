@@ -3,6 +3,7 @@ package com.alakdarbank.incident_paiement.service;
 import com.alakdarbank.incident_paiement.model.Utilisateur;
 import com.alakdarbank.incident_paiement.repository.UtilisateurRepository;
 import com.alakdarbank.incident_paiement.security.PasswordHashGenerator;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -74,33 +75,41 @@ public class UtilisateurService {
         utilisateurRepository.deleteById(id);
     }
 
+    @Transactional
     public void modifier_user(Utilisateur user) {
         Utilisateur user_db = chercherparid(user.getId());
         if (user_db == null) {
             throw new RuntimeException("Utilisateur non trouvé avec ID: " + user.getId());
         }
 
-        if (user.getUsername() != null) {
+        // Username
+        if (user.getUsername() != null && !user.getUsername().isEmpty()) {
             user_db.setUsername(user.getUsername());
         }
-        if (user.getPassword() != null) {
+
+        // Password (toujours re-hasher si modifié)
+        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
             user_db.setPassword(PasswordHashGenerator.generateHash(user.getPassword()));
         }
+
+        // Role
         if (user.getRole() != null) {
             user_db.setRole(user.getRole());
         }
+
+        // Statue
         if (user.getStatue() != null) {
             user_db.setStatue(user.getStatue());
-
-
-
         }
-        if (user.getEmail() != null) {
+
+        // Email
+        if (user.getEmail() != null && !user.getEmail().isEmpty()) {
             user_db.setEmail(user.getEmail());
         }
 
         utilisateurRepository.save(user_db);
     }
+
 
 }
 
