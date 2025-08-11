@@ -1,10 +1,9 @@
 package com.alakdarbank.incident_paiement.service;
 
 import com.alakdarbank.incident_paiement.model.CodeErreur;
-import com.alakdarbank.incident_paiement.model.HistoriqueIncident;
+import com.alakdarbank.incident_paiement.model.Historique;
 import com.alakdarbank.incident_paiement.model.Utilisateur;
 import com.alakdarbank.incident_paiement.repository.HistoriqueIncidentRepository;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,21 +13,39 @@ import java.util.Map;
 
 @Service
 public class HistoriqueIncidentService {
+
+    private final HistoriqueIncidentRepository historiqueIncidentRepository;
+
     @Autowired
-    private HistoriqueIncidentRepository historiqueIncidentRepository;
+    public HistoriqueIncidentService(HistoriqueIncidentRepository historiqueIncidentRepository) {
+        this.historiqueIncidentRepository = historiqueIncidentRepository;
+    }
+
+    /**
+     * Saves the incident history for a given user.
+     *
+     * @param Historique A map containing account numbers as keys and CodeErreur objects as values.
+     * @param user The user for whom the incident history is being saved.
+     */
     public void enregistement_d_historique(Map<String, CodeErreur> Historique, Utilisateur user) {
         for (Map.Entry<String, CodeErreur> entry : Historique.entrySet()) {
             if (entry.getValue() != null) {  // Add null check
-                HistoriqueIncident historiqueIncident = new HistoriqueIncident();
-                historiqueIncident.setCodeerreur(entry.getValue());
-                historiqueIncident.setNumerodecompte(entry.getKey());
-                historiqueIncident.setDateerreur(LocalDate.now());
-                historiqueIncident.setUtilisateur(user);
-                historiqueIncidentRepository.save(historiqueIncident);
+                Historique historique = new Historique();
+                historique.setCodeerreur(entry.getValue());
+                historique.setNumerodecompte(entry.getKey());
+                historique.setDateerreur(LocalDate.now());
+                historique.setUtilisateur(user);
+                historiqueIncidentRepository.save(historique);
             }
         }
     }
-    public List<HistoriqueIncident> affichierHistorique(Utilisateur user) {
+    /**
+     * Retrieves the incident history for a given user.
+     *
+     * @param user The user whose incident history is to be retrieved.
+     * @return A list of HistoriqueIncident objects associated with the user.
+     */
+    public List<Historique> affichierHistorique(Utilisateur user) {
         return historiqueIncidentRepository.findByUtilisateurId(user.getId());
     }
 }
