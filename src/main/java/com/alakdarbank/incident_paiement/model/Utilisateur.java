@@ -15,18 +15,25 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class Utilisateur {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
     @Column(nullable = false, unique = true)
     String username;
+
     String email;
+
     String password;
+
     @Enumerated(EnumType.STRING)
     Statue statue=Statue.Activer;
+
     @Enumerated(EnumType.STRING)
     Role role;
+
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<HistoriqueIncident> Historique = new ArrayList<>();
+    private List<Historique> Historique = new ArrayList<>();
 
 }

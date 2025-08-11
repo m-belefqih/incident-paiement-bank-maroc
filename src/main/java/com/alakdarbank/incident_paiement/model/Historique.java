@@ -11,15 +11,20 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class HistoriqueIncident {
+public class Historique {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String numerodecompte;
+
     private LocalDate dateerreur;
+
     @ManyToOne
     @JoinColumn(name = "codeerreur_id")
     private CodeErreur codeerreur;
+
     @ManyToOne
     @JoinColumn(name = "User_id")
     private Utilisateur utilisateur;

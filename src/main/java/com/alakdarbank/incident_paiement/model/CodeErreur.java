@@ -16,8 +16,11 @@ public class CodeErreur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     int code;
+
     String Gravite;
+
     String Description;
 
 }
