@@ -8,8 +8,7 @@ public class PasswordHashGenerator {
 
     // Méthode statique pour générer le hash d'un mot de passe
     public static String generateHash(String rawPassword) {
+
         return encoder.encode(rawPassword);
     }
-
-
 }
