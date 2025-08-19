@@ -28,5 +28,4 @@ public class Historique {
     @ManyToOne
     @JoinColumn(name = "User_id")
     private Utilisateur utilisateur;
-
 }
