@@ -20,9 +20,10 @@ public class Utilisateur {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     String username;
 
+    @Column(nullable = false, unique = true)
     String email;
 
     String password;
@@ -35,5 +36,4 @@ public class Utilisateur {
 
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Historique> Historique = new ArrayList<>();
-
 }
