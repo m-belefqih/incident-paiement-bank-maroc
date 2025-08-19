@@ -64,7 +64,7 @@
     <nav class="p-4">
         <ul class="space-y-2">
             <li th:if="${isAdmin}">
-                <a th:href="@{/users}"
+                <a th:href="@{/users/list}"
                    class="flex items-center p-3 rounded-lg hover:bg-(--lightgreen) hover:text-(--darkgreen) text-gray-600">
                     <svg class="w-5 h-5 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                          viewBox="0 0 24 24" stroke="currentColor">
@@ -194,6 +194,16 @@
                     </th>
                     <th>
                         <span class="flex items-center text-(--darkgreen)/80 hover:text-(--darkgreen)">
+                            Date de fichier
+                            <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                 width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
+                            </svg>
+                        </span>
+                    </th>
+                    <th>
+                        <span class="flex items-center text-(--darkgreen)/80 hover:text-(--darkgreen)">
                             Description
                             <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                  width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -216,23 +226,32 @@
                 </thead>
                 <tbody>
                 <tr th:each="linge : ${Historique}" class="hover:bg-gray-50 cursor-pointer">
-                    <td th:text="${linge.codeerreur.code}">ERR001</td>
-                    <td th:text="${linge.numerodecompte}">FR7630001007941234567890185</td>
-                    <td th:text="${linge.codeerreur.Description}">Format de compte invalide</td>
+                    <td th:text="${linge.codeerreur.code}">
+                        ERR001
+                    </td>
+                    <td th:text="${linge.numerodecompte}">
+                        FR7630001007941234567890185
+                    </td>
+                    <td th:text="${linge.dateerreur}">
+                        <!-- 2025-07-02-->
+                    </td>
+                    <td th:text="${linge.codeerreur.Description}">
+                        Format de compte invalide
+                    </td>
                     <td>
-                            <span
-                                    th:with="gravite=${linge != null ? linge.codeerreur.Gravite : null}"
-                                    th:class="${'px-2 py-1 rounded whitespace-nowrap text-xs font-medium'} + ' ' +
-                                        ${gravite == 'A' ? 'bg-blue-100 text-blue-800' :
-                                        gravite == 'E' ? 'bg-orange-100 text-orange-800' :
-                                        gravite == 'L' ? 'bg-red-100 text-red-800' :
-                                        gravite == 'Z' ? 'bg-yellow-100 text-yellow-800' : ''}"
-                                    th:text="${gravite == 'A' ? 'Avertissement (A)' :
-                                        gravite == 'E' ? 'Enregistrement rejeté (E)' :
-                                        gravite == 'L' ? 'Lot rejeté (L)' :
-                                        gravite == 'Z' ? 'Zone ignorée (Z)' : 'N/A'}"
-                            >
-                            </span>
+                        <span
+                                th:with="gravite=${linge != null ? linge.codeerreur.Gravite : null}"
+                                th:class="${'px-2 py-1 rounded whitespace-nowrap text-xs font-medium'} + ' ' +
+                                    ${gravite == 'A' ? 'bg-blue-100 text-blue-800' :
+                                    gravite == 'E' ? 'bg-orange-100 text-orange-800' :
+                                    gravite == 'L' ? 'bg-red-100 text-red-800' :
+                                    gravite == 'Z' ? 'bg-yellow-100 text-yellow-800' : ''}"
+                                th:text="${gravite == 'A' ? 'Avertissement (A)' :
+                                    gravite == 'E' ? 'Enregistrement rejeté (E)' :
+                                    gravite == 'L' ? 'Lot rejeté (L)' :
+                                    gravite == 'Z' ? 'Zone ignorée (Z)' : 'N/A'}"
+                        >
+                        </span>
                     </td>
                 </tr>
 
@@ -293,7 +312,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <p class="text-sm text-gray-500">Date de création</p>
-                                        <p class="font-medium">15/07/2023</p>
+                                        <p class="font-medium">15/07/2025</p>
                                     </div>
                                     <div>
                                         <p class="text-sm text-gray-500">Dernière connexion</p>
