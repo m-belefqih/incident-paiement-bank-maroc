@@ -11,8 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
+    private final UtilisateurRepository utilisateurRepository;
+
     @Autowired
-    private UtilisateurRepository utilisateurRepository;
+    public CustomUserDetailsService(UtilisateurRepository utilisateurRepository) {
+        this.utilisateurRepository = utilisateurRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -27,6 +31,4 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         return new CustomUserDetails(user); // important : passe un Utilisateur à jour
     }
-
-
 }
