@@ -22,5 +22,4 @@ public class CodeErreur {
     String Gravite;
 
     String Description;
-
 }
