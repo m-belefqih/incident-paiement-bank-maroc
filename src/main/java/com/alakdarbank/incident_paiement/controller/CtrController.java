@@ -3,7 +3,7 @@ package com.alakdarbank.incident_paiement.controller;
 import com.alakdarbank.incident_paiement.model.CodeErreur;
 import com.alakdarbank.incident_paiement.model.Utilisateur;
 import com.alakdarbank.incident_paiement.service.CodeErreurService;
-import com.alakdarbank.incident_paiement.service.HistoriqueIncidentService;
+import com.alakdarbank.incident_paiement.service.HistoriqueService;
 import com.alakdarbank.incident_paiement.service.UtilisateurService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +23,22 @@ import java.util.stream.Collectors;
 public class CtrController {
 
     private final CodeErreurService codeErreurService;
-    private final UtilisateurService usrservice;
-    private final HistoriqueIncidentService historiqueIncidentService;
+    private final UtilisateurService utilisateurservice;
+    private final HistoriqueService historiqueService;
 
+    /**
+     * This constructor is used to inject the services dependency into this controller.
+     *
+     * @param codeErreurService Service for handling code errors.
+     * @param utilisateurservice Service for handling user operations.
+     * @param historiqueService Service for handling incident history.
+     */
     @Autowired
     public CtrController(CodeErreurService codeErreurService,
-                         UtilisateurService usrservice,HistoriqueIncidentService historiqueIncidentService) {
+                         UtilisateurService utilisateurservice, HistoriqueService historiqueService) {
         this.codeErreurService = codeErreurService;
-        this.usrservice = usrservice;
-        this.historiqueIncidentService = historiqueIncidentService;
+        this.utilisateurservice = utilisateurservice;
+        this.historiqueService = historiqueService;
     }
 
     /**
@@ -53,7 +60,7 @@ public class CtrController {
         // String username = "Admin User";
 
         // Find user by email (since that's what authentication.getName() returns)
-        Utilisateur user = usrservice.chercherparEmail(email);
+        Utilisateur user = utilisateurservice.findByEmail(email);
         if (user != null) {
             username = user.getUsername();
         }
@@ -72,111 +79,51 @@ public class CtrController {
         model.addAttribute("email", email);
         model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("initials", initials);
-        model.addAttribute("users", usrservice.getAllUsers());
+        // model.addAttribute("users", utilisateurservice.findAll());
         model.addAttribute("user", new Utilisateur());
     }
 
+    /**
+     * This method handles the root URL and redirects to the import page.
+     * It also adds common attributes to the model for the view.
+     *
+     * @param model The model to which attributes are added.
+     * @param authentication The authentication object containing user details.
+     * @return A redirect to the import page.
+     */
     @GetMapping("/import")
-    public String ctr(Model model, Authentication authentication) {
+    public String importFile(Model model, Authentication authentication) {
+
+        // Add common attributes to the models
         addCommonAttributes(model, authentication);
-//        return "ctr_admin";
+
         return "import"; // This assumes you have a import.html template
     }
 
-    @GetMapping("/history")
-    public String history(Model model, Authentication authentication) {
-        addCommonAttributes(model, authentication);
-        String email = authentication.getName();
-        Utilisateur user = usrservice.chercherparEmail(email);
-        model.addAttribute("Historique",historiqueIncidentService.affichierHistorique(user));
-        return "history";  // This assumes you have a history.html template
-    }
-
-    @GetMapping("/users")
-    public String users(Model model, Authentication authentication) {
-        addCommonAttributes(model, authentication);
-
-        return "users";  // This assumes you have a users.html template
-    }
-
-    @PostMapping("/delete_user/{id}")
-    public String delete_user(@PathVariable Long id,
-                              Authentication authentication,
-                              HttpServletRequest request,
-                              RedirectAttributes redirectAttributes) {
-        try {
-            String currentUsername = authentication.getName(); // it returns the email of the authenticated user
-
-            Long currentUserId = usrservice.chercherparEmail(currentUsername).getId();
-
-            usrservice.supprimer_user(id);
-            redirectAttributes.addFlashAttribute("successMessage", "Utilisateur supprimé avec succès");
-
-            if (id.equals(currentUserId)) {
-                request.logout();
-                return "redirect:/login?logout";
-            }
-
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors de la suppression: " + e.getMessage());
-        }
-        return "redirect:/users";
-    }
-
-    @PostMapping("/ajouter_user")
-    public String ajouter_user(@ModelAttribute("user") Utilisateur user,
-                               Authentication authentication,
-                               RedirectAttributes redirectAttributes) {
-        try {
-            usrservice.ajouter_user(user);
-            redirectAttributes.addFlashAttribute("successMessage", "Utilisateur créé avec succès");
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors de la création: " + e.getMessage());
-        }
-        return "redirect:/users";
-    }
-
-    @PostMapping("/edit/{id}")
-    public String envoie_edit(@PathVariable Long id,
-                              Model model,
-                              Authentication authentication) {
-        addCommonAttributes(model, authentication);
-        Utilisateur user = usrservice.chercherparid(id);
-        model.addAttribute("user", user);
-        return "edit";
-    }
-
-    @PostMapping("/update_user/{id}")
-    public String update_user(@PathVariable Long id,
-                              @ModelAttribute("user") Utilisateur user,
-                              RedirectAttributes redirectAttributes) {
-        try {
-            user.setId(id); // Assure que l'ID est bien défini
-            usrservice.modifier_user(user);
-            redirectAttributes.addFlashAttribute("successMessage", "Utilisateur modifié avec succès");
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors de la modification: " + e.getMessage());
-        }
-        return "redirect:/users";
-    }
-
+    /**
+     * This method handles the file upload and processes the uploaded file.
+     * It retrieves the user's email from the authentication object,
+     * processes the file, and adds the results to the redirect attributes.
+     *
+     * @param fichier The uploaded file.
+     * @param authentication The authentication object containing user details.
+     * @param redirectAttributes The redirect attributes to pass messages.
+     * @return A redirect to the import page with success or error messages.
+     */
     @PostMapping("/uploads")
     public String uploads(@RequestParam("fichier") MultipartFile fichier,
-                          Authentication authentication,
-                          RedirectAttributes redirectAttributes) {
+                         Authentication authentication,
+                         RedirectAttributes redirectAttributes) {
 
         if (fichier.isEmpty()) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Veuillez sélectionner un fichier");
+            redirectAttributes.addFlashAttribute("errorMessage", "Veuillez sélectionner un fichier, s'il vous plaît.");
             return "redirect:/import";
         }
 
-
         String email = authentication.getName();
-
-        Utilisateur user = usrservice.chercherparEmail(email);
+        Utilisateur user = utilisateurservice.findByEmail(email);
 
         try {
-
             List<Map<String, CodeErreur>> lignes = codeErreurService.ListerErreur(fichier, user);
 
             redirectAttributes.addFlashAttribute("lignes", lignes);
@@ -189,4 +136,28 @@ public class CtrController {
         return "redirect:/import";
     }
 
+    /**
+     * This method handles the history page request.
+     * It adds common attributes to the model and retrieves the user's incident history.
+     *
+     * @param model The model to which attributes are added.
+     * @param authentication The authentication object containing user details.
+     * @return The name of the history view template.
+     */
+    @GetMapping("/history")
+    public String history(Model model, Authentication authentication) {
+
+        // Add common attributes to the models
+        addCommonAttributes(model, authentication);
+
+        // Get email from authentication
+        String email = authentication.getName();
+
+        // Find user by email (since that's what authentication.getName() returns)
+        Utilisateur user = utilisateurservice.findByEmail(email);
+
+        // Add the user's history to the model
+        model.addAttribute("Historique", historiqueService.affichierHistorique(user));
+        return "history";  // This assumes you have a history.html template
+    }
 }
