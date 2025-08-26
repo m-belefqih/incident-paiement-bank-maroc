@@ -1,7 +1,7 @@
 package com.alakdarbank.incident_paiement.model;
 
 import com.alakdarbank.incident_paiement.Enum.Role;
-import com.alakdarbank.incident_paiement.Enum.Statue;
+import com.alakdarbank.incident_paiement.Enum.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Utilisateur {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,11 +29,11 @@ public class Utilisateur {
     String password;
 
     @Enumerated(EnumType.STRING)
-    Statue statue=Statue.Activer;
+    Status status = Status.Actif;
 
     @Enumerated(EnumType.STRING)
     Role role;
 
-    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Historique> Historique = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<History> history = new ArrayList<>();
 }
