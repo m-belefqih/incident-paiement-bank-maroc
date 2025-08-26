@@ -1,9 +1,9 @@
 package com.alakdarbank.incident_paiement.service.impl;
 
-import com.alakdarbank.incident_paiement.model.Utilisateur;
-import com.alakdarbank.incident_paiement.repository.UtilisateurRepository;
+import com.alakdarbank.incident_paiement.model.User;
+import com.alakdarbank.incident_paiement.repository.UserRepository;
 import com.alakdarbank.incident_paiement.security.PasswordHashGenerator;
-import com.alakdarbank.incident_paiement.service.UtilisateurService;
+import com.alakdarbank.incident_paiement.service.UserService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,13 +12,13 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true) // default: all methods are read-only
-public class UtilisateurServiceImpl implements UtilisateurService {
+public class UserServiceImpl implements UserService {
 
-    private final UtilisateurRepository utilisateurRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository) {
-        this.utilisateurRepository = utilisateurRepository;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     /**
@@ -27,8 +27,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
      * @return a list of all users
      */
     @Override
-    public List<Utilisateur> findAll(){
-        return utilisateurRepository.findAll();
+    public List<User> findAll(){
+        return userRepository.findAll();
     }
 
     /**
@@ -38,8 +38,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
      * @return the found user or null if no user is found
      */
     @Override
-    public Utilisateur findById(long ID){
-        return utilisateurRepository.findById(ID).orElse(null);
+    public User findById(long ID){
+        return userRepository.findById(ID).orElse(null);
     }
 
     /**
@@ -49,8 +49,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
      * @return the found user or null if no user is found
      */
     @Override
-    public Utilisateur findByUsername(String username){
-        return utilisateurRepository.findByUsername(username);
+    public User findByUsername(String username){
+        return userRepository.findByUsername(username);
     }
 
     /**
@@ -60,8 +60,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
      * @return the found user or null if no user is found
      */
     @Override
-    public Utilisateur findByEmail(String email) {
-        return utilisateurRepository.findByEmail(email);
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     /**
@@ -72,7 +72,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Override
     @Transactional
     public void deleteById(Long id){
-        utilisateurRepository.deleteById(id);
+        userRepository.deleteById(id);
     }
 
     /**
@@ -83,18 +83,18 @@ public class UtilisateurServiceImpl implements UtilisateurService {
      */
     @Override
     @Transactional
-    public void save(Utilisateur user) throws Exception {
+    public void save(User user) throws Exception {
 
         // Check email uniqueness
-        if (utilisateurRepository.findByEmail(user.getEmail()) != null) {
-            throw new Exception("Email déjà utilisée (Utilisateur non créé).");
+        if (userRepository.findByEmail(user.getEmail()) != null) {
+            throw new Exception("Email déjà utilisée (User non créé).");
         }
 
         // Hash password before saving
         user.setPassword(PasswordHashGenerator.generateHash(user.getPassword()));
 
         // Set default values for role and statue if not provided
-        utilisateurRepository.save(user);
+        userRepository.save(user);
     }
 
     /**
@@ -105,10 +105,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
      */
     @Override
     @Transactional
-    public void update(Utilisateur user) {
-        Utilisateur user_db = findById(user.getId());
+    public void update(User user) {
+        User user_db = findById(user.getId());
         if (user_db == null) {
-            throw new RuntimeException("Utilisateur non trouvé avec ID: " + user.getId());
+            throw new RuntimeException("User non trouvé avec ID: " + user.getId());
         }
 
         // Username
@@ -116,7 +116,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             user_db.setUsername(user.getUsername());
         }
 
-        // Password (toujours re-hasher si modifié)
+        // Password (always re-hash if modified)
         if (user.getPassword() != null && !user.getPassword().isEmpty()) {
             user_db.setPassword(PasswordHashGenerator.generateHash(user.getPassword()));
         }
@@ -127,8 +127,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         }
 
         // Statue
-        if (user.getStatue() != null) {
-            user_db.setStatue(user.getStatue());
+        if (user.getStatus() != null) {
+            user_db.setStatus(user.getStatus());
         }
 
         // Email
@@ -136,7 +136,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             user_db.setEmail(user.getEmail());
         }
 
-        utilisateurRepository.save(user_db);
+        userRepository.save(user_db);
     }
 }
 
