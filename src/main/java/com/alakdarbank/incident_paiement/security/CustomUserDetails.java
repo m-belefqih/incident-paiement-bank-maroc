@@ -1,7 +1,7 @@
 package com.alakdarbank.incident_paiement.security;
 
-import com.alakdarbank.incident_paiement.Enum.Statue;
-import com.alakdarbank.incident_paiement.model.Utilisateur;
+import com.alakdarbank.incident_paiement.Enum.Status;
+import com.alakdarbank.incident_paiement.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,30 +10,30 @@ import java.util.*;
 
 public class CustomUserDetails implements UserDetails {
 
-    private final Utilisateur utilisateur;
+    private final User user;
 
-    public CustomUserDetails(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
+    public CustomUserDetails(User user) {
+        this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(utilisateur.getRole().name()));
+        return List.of(new SimpleGrantedAuthority(user.getRole().name()));
     }
 
     @Override
     public String getPassword() {
-        return utilisateur.getPassword();
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        // return utilisateur.getUsername();
-        return utilisateur.getEmail(); // Return email instead of username
+        // return user.getUsername();
+        return user.getEmail(); // Return email instead of username
     }
 
     public String getEmail() {
-        return utilisateur.getEmail(); // Assuming Utilisateur has a getEmail() method
+        return user.getEmail();
     }
 
     @Override
@@ -53,8 +53,6 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return utilisateur.getStatue() == Statue.Activer;
+        return user.getStatus() == Status.Actif;
     }
-
-
 }
