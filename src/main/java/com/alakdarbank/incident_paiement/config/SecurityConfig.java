@@ -8,12 +8,14 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
+
+    // Bean for password encoding using BCrypt
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // Configuration de la sécurité HTTP pour login et logout
+    // Configuration of HTTP security for login and logout
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -25,18 +27,17 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .usernameParameter("email")  // Add this line to use email parameter
                         .defaultSuccessUrl("/import", true)
-                        .failureUrl("/login?error") // Add this line
+                        .failureUrl("/login?error")
                         .permitAll()
                 )
                 .logout(logout -> logout
-                        .permitAll()           // autorise tout le monde à accéder à /logout
-                        .logoutUrl("/logout")  // URL de logout (par défaut /logout)
-                        .logoutSuccessUrl("/login") // redirige après logout
-                        .invalidateHttpSession(true)       // invalide la session
-                        .deleteCookies("JSESSIONID")       // supprime cookie session
+                        .permitAll()           // allow everyone to access /logout
+                        .logoutUrl("/logout")  // logout URL (default is /logout)
+                        .logoutSuccessUrl("/login")   // redirect after logout
+                        .invalidateHttpSession(true)   // invalidate the session
+                        .deleteCookies("JSESSIONID")   // delete session cookie
                 );
 
         return http.build();
     }
-
 }
