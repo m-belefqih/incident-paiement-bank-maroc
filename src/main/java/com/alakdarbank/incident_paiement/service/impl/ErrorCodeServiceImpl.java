@@ -1,10 +1,10 @@
 package com.alakdarbank.incident_paiement.service.impl;
 
-import com.alakdarbank.incident_paiement.model.CodeErreur;
-import com.alakdarbank.incident_paiement.model.Utilisateur;
-import com.alakdarbank.incident_paiement.repository.CodeErreurRepository;
-import com.alakdarbank.incident_paiement.service.CodeErreurService;
-import com.alakdarbank.incident_paiement.service.HistoriqueService;
+import com.alakdarbank.incident_paiement.model.ErrorCode;
+import com.alakdarbank.incident_paiement.model.User;
+import com.alakdarbank.incident_paiement.repository.ErrorCodeRepository;
+import com.alakdarbank.incident_paiement.service.ErrorCodeService;
+import com.alakdarbank.incident_paiement.service.HistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,19 +18,19 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class CodeErreurServiceImpl implements CodeErreurService {
-    private final CodeErreurRepository codeErreurRepository;
-    private final HistoriqueService historiqueService;
+public class ErrorCodeServiceImpl implements ErrorCodeService {
+    private final ErrorCodeRepository errorCodeRepository;
+    private final HistoryService historyService;
 
     @Autowired
-    public CodeErreurServiceImpl(CodeErreurRepository codeErreurRepository, HistoriqueService historiqueService) {
-        this.codeErreurRepository = codeErreurRepository;
-        this.historiqueService = historiqueService;
+    public ErrorCodeServiceImpl(ErrorCodeRepository errorCodeRepository, HistoryService historyService) {
+        this.errorCodeRepository = errorCodeRepository;
+        this.historyService = historyService;
     }
 
     @Override
-    public List<Map<String, CodeErreur>> ListerErreur(MultipartFile file, Utilisateur user) throws IOException {
-        List<Map<String, CodeErreur>> list_erreur_client = new ArrayList<>();
+    public List<Map<String, ErrorCode>> listErrors(MultipartFile file, User user) throws IOException {
+        List<Map<String, ErrorCode>> list_erreur_client = new ArrayList<>();
         String filename = file.getOriginalFilename();
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
@@ -44,7 +44,7 @@ public class CodeErreurServiceImpl implements CodeErreurService {
                 }
 
                 if (line.length() >= 199) {
-                    Map<String, CodeErreur> incidents = new HashMap<>();
+                    Map<String, ErrorCode> incidents = new HashMap<>();
 
                     String sub = line.substring(194, 199).trim();  // code erreur
                     String sub2 = line.substring(43, 54).trim();  // numéro de compte
@@ -53,16 +53,16 @@ public class CodeErreurServiceImpl implements CodeErreurService {
                     System.out.println(sub + "," + sub2);
 
                     try {
-                        CodeErreur codeErreur = codeErreurRepository.findByCode(Integer.parseInt(sub));
-                        if (codeErreur != null) {
-                            incidents.put(sub2, codeErreur);
+                        ErrorCode errorCode = errorCodeRepository.findByCode(Integer.parseInt(sub));
+                        if (errorCode != null) {
+                            incidents.put(sub2, errorCode);
                         } else {
                             continue;
                         }
                     } catch (Exception e) {
                         continue;
                     }
-                    historiqueService.enregistement_d_historique(incidents, user, filename);
+                    historyService.saveHistory(incidents, user, filename);
                     list_erreur_client.add(incidents);
                 }
             }
