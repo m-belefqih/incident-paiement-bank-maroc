@@ -12,14 +12,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CodeErreur {
+public class ErrorCode {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    int code;
+    private int code;
 
-    String Gravite;
+    private String severity; // "Gravité" in French
 
-    String Description;
+    private String description;
 }
