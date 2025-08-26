@@ -6,7 +6,7 @@ public class PasswordHashGenerator {
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    // Méthode statique pour générer le hash d'un mot de passe
+    // Method static to generate the hash of a password
     public static String generateHash(String rawPassword) {
 
         return encoder.encode(rawPassword);
