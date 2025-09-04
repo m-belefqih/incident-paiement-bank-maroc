@@ -1,11 +1,10 @@
 package com.alakdarbank.incident_paiement.controller;
 
-import com.alakdarbank.incident_paiement.model.CodeErreur;
-import com.alakdarbank.incident_paiement.model.Utilisateur;
-import com.alakdarbank.incident_paiement.service.CodeErreurService;
-import com.alakdarbank.incident_paiement.service.HistoriqueService;
-import com.alakdarbank.incident_paiement.service.UtilisateurService;
-import jakarta.servlet.http.HttpServletRequest;
+import com.alakdarbank.incident_paiement.model.ErrorCode;
+import com.alakdarbank.incident_paiement.model.User;
+import com.alakdarbank.incident_paiement.service.ErrorCodeService;
+import com.alakdarbank.incident_paiement.service.HistoryService;
+import com.alakdarbank.incident_paiement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,23 +21,23 @@ import java.util.stream.Collectors;
 @Controller
 public class CtrController {
 
-    private final CodeErreurService codeErreurService;
-    private final UtilisateurService utilisateurservice;
-    private final HistoriqueService historiqueService;
+    private final ErrorCodeService errorCodeService;
+    private final UserService userService;
+    private final HistoryService historyService;
 
     /**
      * This constructor is used to inject the services dependency into this controller.
      *
-     * @param codeErreurService Service for handling code errors.
-     * @param utilisateurservice Service for handling user operations.
-     * @param historiqueService Service for handling incident history.
+     * @param errorCodeService Service for handling code errors.
+     * @param userService Service for handling user operations.
+     * @param historyService Service for handling incident history.
      */
     @Autowired
-    public CtrController(CodeErreurService codeErreurService,
-                         UtilisateurService utilisateurservice, HistoriqueService historiqueService) {
-        this.codeErreurService = codeErreurService;
-        this.utilisateurservice = utilisateurservice;
-        this.historiqueService = historiqueService;
+    public CtrController(ErrorCodeService errorCodeService,
+                         UserService userService, HistoryService historyService) {
+        this.errorCodeService = errorCodeService;
+        this.userService = userService;
+        this.historyService = historyService;
     }
 
     /**
@@ -60,7 +59,7 @@ public class CtrController {
         // String username = "Admin User";
 
         // Find user by email (since that's what authentication.getName() returns)
-        Utilisateur user = utilisateurservice.findByEmail(email);
+        User user = userService.findByEmail(email);
         if (user != null) {
             username = user.getUsername();
         }
@@ -80,7 +79,7 @@ public class CtrController {
         model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("initials", initials);
         // model.addAttribute("users", utilisateurservice.findAll());
-        model.addAttribute("user", new Utilisateur());
+        model.addAttribute("user", new User());
     }
 
     /**
@@ -121,10 +120,10 @@ public class CtrController {
         }
 
         String email = authentication.getName();
-        Utilisateur user = utilisateurservice.findByEmail(email);
+        User user = userService.findByEmail(email);
 
         try {
-            List<Map<String, CodeErreur>> lignes = codeErreurService.ListerErreur(fichier, user);
+            List<Map<String, ErrorCode>> lignes = errorCodeService.listErrors(fichier, user);
 
             redirectAttributes.addFlashAttribute("lignes", lignes);
             redirectAttributes.addFlashAttribute("successMessage", "Fichier traité avec succès");
@@ -154,10 +153,10 @@ public class CtrController {
         String email = authentication.getName();
 
         // Find user by email (since that's what authentication.getName() returns)
-        Utilisateur user = utilisateurservice.findByEmail(email);
+        User user = userService.findByEmail(email);
 
         // Add the user's history to the model
-        model.addAttribute("Historique", historiqueService.affichierHistorique(user));
+        model.addAttribute("History", historyService.getHistory(user));
         return "history";  // This assumes you have a history.html template
     }
 }
