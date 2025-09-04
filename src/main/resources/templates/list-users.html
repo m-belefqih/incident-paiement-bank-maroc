@@ -32,17 +32,9 @@
             font-family: 'Poppins', system-ui, Inter, sans-serif;
         }
 
-        #filter-table input  {
-            background-color: #f3f4f6;
+        .datatable-wrapper .datatable-selector {
             border: 1px solid #00A63E;
             border-radius: 0.5rem;
-            padding: 0.625rem 2.5rem 0.625rem 2.5rem;
-            font-size: 0.875rem;
-            width: 100%;
-            box-sizing: border-box;
-            outline: none;
-            transition: box-shadow 0.2s, border-color 0.2s;
-            margin-bottom: 1.5rem;
         }
 
         .datatable-wrapper .datatable-input {
@@ -51,12 +43,7 @@
             transition: box-shadow 0.2s, border-color 0.2s;
         }
 
-        .datatable-wrapper .datatable-selector {
-            border: 1px solid #00A63E;
-            border-radius: 0.5rem;
-        }
-
-        #filter-table input:focus , .datatable-wrapper .datatable-input:focus , .datatable-wrapper .datatable-selector:focus {
+        .datatable-wrapper .datatable-input:focus , .datatable-wrapper .datatable-selector:focus {
             border: 1px solid #00A63E;
             box-shadow: 0 0 0 3px rgba(0, 166, 62, 0.4);
             outline: none;
@@ -202,143 +189,238 @@
 
             <!-- Page Title -->
             <div class="flex items-center space-x-4 mb-8">
-                <svg class="w-7 h-7 text-(--darkgreen)" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                <svg class="w-7 h-7 text-(--darkgreen)" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
                 </svg>
                 <h2 class="text-2xl font-bold text-(--darkgreen)">Gestion des utilisateurs</h2>
             </div>
 
             <!-- Add User Button -->
             <div class="flex justify-end mb-6">
-                <button id="add-user-btn"
-                        class="px-4 py-2 bg-(--darkgreen) text-white rounded-lg hover:bg-(--darkgreen)/90 flex items-center">
-                    <svg class="w-5 h-5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                         viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                <button command="show-modal" commandfor="dialog-add-user" class="flex items-center px-4 py-2 bg-(--darkgreen) text-white font-semibold rounded-lg hover:bg-(--darkgreen)/90 cursor-pointer transition-colors duration-200">
+                    <svg class="w-5 h-5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                     </svg>
                     Ajouter un utilisateur
                 </button>
             </div>
 
             <!-- Users Table -->
-            <div class="relative overflow-x-auto shadow-md rounded-lg">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-                    <thead class="text-xs text-white uppercase bg-(--darkgreen)">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">Nom complet</th>
-                            <th scope="col" class="px-6 py-3">Email</th>
-                            <th scope="col" class="px-6 py-3">Rôle</th>
-                            <th scope="col" class="px-6 py-3">Statut</th>
-                            <th scope="col" class="px-6 py-3">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody th:if="${users.size() > 0}">
-                        <tr class="bg-white border-b hover:bg-gray-50" th:each="user : ${users}">
-                            <td class="px-6 py-4 font-medium text-gray-900" th:text="${user.getUsername()}"></td>
-                            <td class="px-6 py-4" th:text="${user.getEmail()}"></td>
-                            <td class="px-6 py-4">
-                                  <span
-                                          class="px-2 py-1 text-xs font-medium rounded"
-                                          th:text="${user.getRole().toString().replace('ROLE_', '')}"
-                                          th:classappend="${user.getRole().toString() == 'ROLE_ADMIN'} ? ' bg-blue-100 text-blue-800' : ' bg-gray-100 text-gray-800'">
-                                  </span>
-                            </td>
-                            <td class="px-6 py-4">
-                                    <span th:text="${user.getStatue().toString()}"
-                                          th:classappend="${user.getStatue().toString()== 'Activer'} ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"
-                                          class="px-2 py-1 text-xs font-medium rounded">
-                                    </span>
-                            </td>
+            <table id="selection-table">
+                <thead>
+                    <tr>
+                        <th>
+                                <span class="flex items-center text-(--darkgreen)/80 hover:text-(--darkgreen)">
+                                    Nom d'user
+                                    <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
+                                    </svg>
+                                </span>
+                        </th>
+                        <th>
+                                <span class="flex items-center text-(--darkgreen)/80 hover:text-(--darkgreen)">
+                                    Email
+                                    <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
+                                    </svg>
+                                </span>
+                        </th>
+                        <th>
+                                <span class="flex items-center text-(--darkgreen)/80 hover:text-(--darkgreen)">
+                                    Rôle
+                                    <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
+                                    </svg>
+                                </span>
+                        </th>
+                        <th>
+                                <span class="flex items-center text-(--darkgreen)/80 hover:text-(--darkgreen)">
+                                    Statut
+                                    <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
+                                    </svg>
+                                </span>
+                        </th>
+                        <th>
+                                <span class="flex items-center text-(--darkgreen)/80 hover:text-(--darkgreen)">
+                                    Actions
+                                </span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody th:if="${users.size() > 0}">
+                    <tr th:each="user : ${users}" class="hover:bg-gray-50 cursor-pointer">
+                        <td th:text="${user.getUsername()}" class="font-medium text-gray-900 whitespace-nowrap">
+                            <!-- Mohammed Belefqih -->
+                        </td>
+                        <td th:text="${user.getEmail()}">
+                            <!-- mohammed.belefqih@alakhdarbank.ma -->
+                        </td>
+                        <td>
+                            <span
+                                class="px-2 py-1 text-xs font-medium rounded"
+                                th:text="${user.getRole().toString().replace('ROLE_', '')}"
+                                th:classappend="${user.getRole().toString() == 'ROLE_ADMIN'} ? ' bg-blue-100 text-blue-800' : ' bg-gray-100 text-gray-800'">
+                            </span>
+                        </td>
+                        <td>
+                            <span
+                                class="px-2 py-1 text-xs font-medium rounded"
+                                th:text="${user.getStatus().toString()}"
+                                th:classappend="${user.getStatus().toString()== 'Actif'} ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'">
+                            </span>
+                        </td>
+                        <td class="flex">
+                            <form th:action="@{/users/edit/{id}(id=${user.id})}" method="POST">
+                                <button type="submit" class="text-(--darkgreen) hover:text-(--darkgreen)/80 mr-3">
+                                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                            </form>
+                            <form th:action="@{/users/delete/{id}(id=${user.id})}" method="POST">
+                                <button class="text-red-600 hover:text-red-800">
+                                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
 
-                            <td class="px-6 py-4">
-                                <form th:action="@{/users/edit/{id}(id=${user.id})}" method="post">
-                                    <button type="submit" class="text-(--darkgreen) hover:text-(--darkgreen)/80 mr-3">
-                                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                        </svg>
-                                    </button>
-                                </form>
-                                <form th:action="@{/users/delete/{id}(id=${user.id})}" method="post">
-                                    <button class="text-red-600 hover:text-red-800">
-                                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                        </svg>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
 
-        <!-- Add User Modal (Hidden by default) -->
-        <div id="add-user-modal" class="hidden fixed inset-0 flex items-center justify-center z-50">
+        <!-- Add user Modal Dialog (Hidden by default) -->
+        <el-dialog>
+            <dialog id="dialog-add-user" aria-labelledby="dialog-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-y-auto bg-transparent backdrop:bg-transparent">
+                <el-dialog-backdrop class="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-700 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"></el-dialog-backdrop>
+                <div tabindex="0" class="flex min-h-full items-end justify-center p-4 text-center focus:outline-none sm:items-center sm:p-0">
+                    <el-dialog-panel class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95">
+                        <!-- Close button -->
+                        <button type="button" command="close" commandfor="dialog-add-user" class="cursor-pointer absolute top-4 right-4 text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 rounded-full p-1 z-10">
+                            <span class="sr-only">Close</span>
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
 
-            <!-- Background overlay -->
-            <div class="fixed inset-0 bg-white bg-opacity-70 backdrop-blur-sm"></div>
+                        <form th:action="@{/users/save}" th:object="${user}" method="POST" id="add-user-form">
 
-            <!-- Modal content -->
-            <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md relative z-10">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-xl font-bold text-(--darkgreen)">Ajouter un utilisateur</h3>
-                    <button id="close-modal" class="text-gray-500 hover:text-gray-700">
-                        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                             viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M6 18L18 6M6 6l12 12"/>
-                        </svg>
-                    </button>
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+                            <div class="bg-white px-6 pt-6 pb-4">
+                                <div class="mb-6">
+                                    <h3 class="text-xl font-bold text-(--darkgreen)">Ajouter un utilisateur</h3>
+                                </div>
+
+                                <div class="space-y-5" >
+                                    <!-- Nom d'user -->
+                                    <div>
+                                        <label for="username" class="block text-sm font-medium text-gray-900 mb-2">
+                                            Nom d'user <span class="text-red-600">*</span>
+                                        </label>
+                                        <input th:field="*{username}"
+                                               type="text"
+                                               id="username"
+                                               placeholder="John Doe"
+                                               class="block w-full px-3 py-2.5 bg-gray-100 border border-green-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                                               required />
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div>
+                                        <label for="email" class="block text-sm font-medium text-gray-900 mb-2">
+                                            Email <span class="text-red-600">*</span>
+                                        </label>
+                                        <input th:field="*{email}"
+                                               type="email"
+                                               id="email"
+                                               placeholder="name@alakhdarbank.ma"
+                                               class="block w-full px-3 py-2.5 bg-gray-100 border border-green-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                                               required />
+                                    </div>
+
+                                    <!-- Mot de passe -->
+                                    <div>
+                                        <label for="password" class="block text-sm font-medium text-gray-900 mb-2">
+                                            Mot de passe <span class="text-red-600">*</span>
+                                        </label>
+                                        <div class="relative">
+                                            <input th:field="*{password}"
+                                                   type="password"
+                                                   id="password"
+                                                   placeholder="••••••••"
+                                                   class="block w-full px-3 py-2.5 bg-gray-100 border border-green-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                                                   required />
+                                            <button type="button"
+                                                    id="toggle-password"
+                                                    class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-700 focus:outline-none">
+                                                <svg id="eye-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                                </svg>
+                                                <svg id="eye-closed" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Rôle -->
+                                    <div>
+                                        <label for="role" class="block text-sm font-medium text-gray-900 mb-2">
+                                            Rôle <span class="text-red-600">*</span>
+                                        </label>
+                                        <select th:field="*{role}"
+                                                id="role"
+                                                class="block w-full px-3 py-2.5 bg-gray-100 border border-green-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                                                required>
+                                            <option value="">Sélectionner un rôle</option>
+                                            <option th:value="ROLE_ADMIN">Administrateur</option>
+                                            <option th:value="ROLE_USER">Utilisateur standard</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Statut -->
+                                    <div>
+                                        <label for="status" class="block text-sm font-medium text-gray-900 mb-2">
+                                            Statut <span class="text-red-600">*</span>
+                                        </label>
+                                        <select th:field="*{status}"
+                                                id="status"
+                                                class="block w-full px-3 py-2.5 bg-gray-100 border border-green-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                                                required>
+                                            <option value="">Sélectionner un statut</option>
+                                            <option th:value="Actif">Actif</option>
+                                            <option th:value="Inactif">Inactif</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Footer with buttons -->
+                            <div class="bg-gray-50 px-6 py-4 flex justify-end space-x-3 border-t border-gray-200">
+                                <button type="button"
+                                        command="close"
+                                        commandfor="dialog-add-user"
+                                        class="inline-flex justify-center px-4 py-2 text-sm font-semibold text-gray-700 bg-white cursor-pointer border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50">
+                                    Annuler
+                                </button>
+                                <button type="submit"
+                                        form="add-user-form"
+                                        class="inline-flex justify-center px-4 py-2 text-sm font-semibold text-white bg-(--darkgreen) cursor-pointer border border-transparent rounded-lg shadow-sm hover:bg-(--darkgreen)/90">
+                                    Enregistrer
+                                </button>
+                            </div>
+                        </form>
+                    </el-dialog-panel>
                 </div>
+            </dialog>
+        </el-dialog>
 
-                <form class="space-y-4" th:action="@{/users/save}" th:object="${user}" method="post">
-                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                    <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nom complet</label>
-                        <input th:field="*{username}" type="text" id="name"
-                               class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-(--darkgreen) focus:border-(--darkgreen)">
-                    </div>
-
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                        <input th:field="*{email}" type="email" id="email"
-                               class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-(--darkgreen) focus:border-(--darkgreen)">
-                    </div>
-
-                    <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Mot de passe</label>
-                        <input th:field="*{password}" type="password" id="password"
-                               class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-(--darkgreen) focus:border-(--darkgreen)"
-                               autocomplete="new-password">
-                    </div>
-
-                    <div>
-                        <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Rôle</label>
-                        <select id="role" name="role" th:field="*{role}"
-                                class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-(--darkgreen) focus:border-(--darkgreen)">
-                            <option th:value="ROLE_ADMIN">Administrateur</option>
-                            <option th:value="ROLE_USER">Utilisateur standard</option>
-                        </select>
-                    </div>
-
-                    <div class="flex justify-end space-x-3 pt-4">
-                        <button type="button" id="cancel-add-user"
-                                class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
-                            Annuler
-                        </button>
-                        <button type="submit"
-                                class="px-4 py-2 bg-(--darkgreen) text-white rounded-lg hover:bg-(--darkgreen)/90">
-                            Enregistrer
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <!-- Profile Modal Dialog -->
+        <!-- Profile Modal Dialog (Hidden by default) -->
         <el-dialog>
             <dialog id="dialog" aria-labelledby="dialog-title"
                     class="fixed inset-0 size-auto max-h-none max-w-none overflow-y-auto bg-transparent backdrop:bg-transparent">
@@ -415,63 +497,70 @@
 
 <script>
 
+    // Script for managing the user selection table
+    if (document.getElementById("selection-table") && typeof simpleDatatables.DataTable !== 'undefined') {
 
-    <!-- Profil Modal -->
-    if (document.getElementById("filter-table") && typeof simpleDatatables.DataTable !== 'undefined') {
-        const dataTable = new simpleDatatables.DataTable("#filter-table", {
-            tableRender: (_data, table, type) => {
-                if (type === "print") {
-                    return table
-                }
-                const tHead = table.childNodes[0]
-                const filterHeaders = {
-                    nodeName: "TR",
-                    attributes: {
-                        class: "search-filtering-row"
-                    },
-                    childNodes: tHead.childNodes[0].childNodes.map(
-                        (_th, index) => ({nodeName: "TH",
-                            childNodes: [
-                                {
-                                    nodeName: "INPUT",
-                                    attributes: {
-                                        class: "datatable-input",
-                                        type: "search",
-                                        "data-columns": "[" + index + "]"
-                                    }
-                                }
-                            ]})
-                    )
-                }
-                tHead.childNodes.push(filterHeaders)
-                return table
+        let multiSelect = true;
+        let rowNavigation = false;
+        let table = null;
+
+        const resetTable = function() {
+            if (table) {
+                table.destroy();
             }
-        });
-    }
 
-    // Add User Modal functionality
-    const addUserBtn = document.getElementById('add-user-btn');
-    if (addUserBtn) {
-        addUserBtn.addEventListener('click', () => {
-            const modal = document.getElementById('add-user-modal');
-            if (modal) modal.classList.remove('hidden');
-        });
-    }
+            const options = {
+                rowRender: (row, tr, _index) => {
+                    if (!tr.attributes) {
+                        tr.attributes = {};
+                    }
+                    if (!tr.attributes.class) {
+                        tr.attributes.class = "";
+                    }
+                    if (row.selected) {
+                        tr.attributes.class += " selected";
+                    } else {
+                        tr.attributes.class = tr.attributes.class.replace(" selected", "");
+                    }
+                    return tr;
+                }
+            };
+            if (rowNavigation) {
+                options.rowNavigation = true;
+                options.tabIndex = 1;
+            }
 
-    const closeModalBtn = document.getElementById('close-modal');
-    if (closeModalBtn) {
-        closeModalBtn.addEventListener('click', () => {
-            const modal = document.getElementById('add-user-modal');
-            if (modal) modal.classList.add('hidden');
-        });
-    }
+            table = new simpleDatatables.DataTable("#selection-table", options);
 
-    const cancelAddUserBtn = document.getElementById('cancel-add-user');
-    if (cancelAddUserBtn) {
-        cancelAddUserBtn.addEventListener('click', () => {
-            const modal = document.getElementById('add-user-modal');
-            if (modal) modal.classList.add('hidden');
-        });
+            // Mark all rows as unselected
+            table.data.data.forEach(data => {
+                data.selected = false;
+            });
+
+            table.on("datatable.selectrow", (rowIndex, event) => {
+                event.preventDefault();
+                const row = table.data.data[rowIndex];
+                if (row.selected) {
+                    row.selected = false;
+                } else {
+                    if (!multiSelect) {
+                        table.data.data.forEach(data => {
+                            data.selected = false;
+                        });
+                    }
+                    row.selected = true;
+                }
+                table.update();
+            });
+        };
+
+        // Row navigation makes no sense on mobile, so we deactivate it and hide the checkbox.
+        const isMobile = window.matchMedia("(any-pointer:coarse)").matches;
+        if (isMobile) {
+            rowNavigation = false;
+        }
+
+        resetTable();
     }
 
     // User menu toggle
@@ -480,10 +569,33 @@
         document.getElementById('user-menu').classList.toggle('hidden');
     });
 
-    // Close user menu when clicking outside
+    // Close the user menu when clicking outside
     document.addEventListener('click', function() {
         document.getElementById('user-menu').classList.add('hidden');
     });
+
+    // Add User Modal functionality
+    const passwordInput = document.getElementById('password');
+    const togglePasswordButton = document.getElementById('toggle-password');
+    const eyeOpenIcon = document.getElementById('eye-open');
+    const eyeClosedIcon = document.getElementById('eye-closed');
+
+    // Password toggle functionality
+    if (togglePasswordButton && passwordInput) {
+        togglePasswordButton.addEventListener('click', function() {
+            const isPassword = passwordInput.type === 'password';
+
+            if (isPassword) {
+                passwordInput.type = 'text';
+                eyeOpenIcon.classList.add('hidden');
+                eyeClosedIcon.classList.remove('hidden');
+            } else {
+                passwordInput.type = 'password';
+                eyeOpenIcon.classList.remove('hidden');
+                eyeClosedIcon.classList.add('hidden');
+            }
+        });
+    }
 </script>
 
 </body>
