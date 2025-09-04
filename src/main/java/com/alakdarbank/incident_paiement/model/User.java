@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "users") // avoid reserved keyword "user"
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -18,21 +19,21 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(nullable = false)
-    String username;
+    private String username;
 
     @Column(nullable = false, unique = true)
-    String email;
+    private String email;
 
-    String password;
-
-    @Enumerated(EnumType.STRING)
-    Status status = Status.Actif;
+    private String password;
 
     @Enumerated(EnumType.STRING)
-    Role role;
+    private Status status;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<History> history = new ArrayList<>();
