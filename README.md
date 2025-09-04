@@ -24,14 +24,14 @@ Le tout dans une **architecture sécurisée**, avec un **déploiement automatis�
 | **Client** | test .... |
 | **Administrateur** | test ... |
 
-### 📌 Fonctionnalités par utilisateur
+### 📌 Fonctionnalités par user
 
 #### 1) Client
 
 - Se connecter / Sé déconnecter
 - Consulter les informations personnelles
 - Voir le solde de ses comptes
-- Consulter l’historique des transactions
+- Consulter l’history des transactions
 - Demander un chéquier
 - Soumettre une demande de financement
 - Suivre le statut de ses demandes
