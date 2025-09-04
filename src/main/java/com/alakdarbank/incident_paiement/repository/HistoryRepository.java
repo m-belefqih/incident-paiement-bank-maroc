@@ -8,5 +8,5 @@ import java.util.List;
 public interface HistoryRepository extends JpaRepository<History, Long> {
 
     // Add a custom method to find all History entries by User ID
-    List<History> findByUtilisateurId(Long utilisateurId);
+    List<History> findByUserId(Long userId);
 }
