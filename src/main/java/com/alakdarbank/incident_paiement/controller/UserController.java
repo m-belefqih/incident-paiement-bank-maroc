@@ -1,7 +1,7 @@
 package com.alakdarbank.incident_paiement.controller;
 
-import com.alakdarbank.incident_paiement.model.Utilisateur;
-import com.alakdarbank.incident_paiement.service.UtilisateurService;
+import com.alakdarbank.incident_paiement.model.User;
+import com.alakdarbank.incident_paiement.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -16,15 +16,15 @@ import java.util.stream.Collectors;
 @RequestMapping("/users") // This is the base URL for URL requests handled by this controller
 public class UserController {
 
-    private final UtilisateurService utilisateurservice;
+    private final UserService userService;
 
     /**
-     * Constructor to inject the UtilisateurService dependency.
+     * Constructor to inject the UserService dependency.
      *
-     * @param utilisateurservice Service for handling user operations.
+     * @param userService Service for handling user operations.
      */
-    public UserController(UtilisateurService utilisateurservice) {
-        this.utilisateurservice = utilisateurservice;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     /**
@@ -46,7 +46,7 @@ public class UserController {
         // String username = "Admin User";
 
         // Find user by email (since that's what authentication.getName() returns)
-        Utilisateur user = utilisateurservice.findByEmail(email);
+        User user = userService.findByEmail(email);
         if (user != null) {
             username = user.getUsername();
         }
@@ -65,8 +65,8 @@ public class UserController {
         model.addAttribute("email", email);
         model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("initials", initials);
-        model.addAttribute("users", utilisateurservice.findAll());
-        model.addAttribute("user", new Utilisateur());
+        model.addAttribute("users", userService.findAll());
+        model.addAttribute("user", new User());
     }
 
     /**
@@ -86,37 +86,12 @@ public class UserController {
         return "list-users";  // This assumes you have a list-users.html template
     }
 
-    @PostMapping("/delete/{id}")
-    public String deleteUser(@PathVariable Long id,
-                              Authentication authentication,
-                              HttpServletRequest request,
-                              RedirectAttributes redirectAttributes) {
-        try {
-            String currentUsername = authentication.getName(); // it returns the email of the authenticated user
-
-            Long currentUserId = utilisateurservice.findByEmail(currentUsername).getId();
-
-            utilisateurservice.deleteById(id);
-            redirectAttributes.addFlashAttribute("successMessage", "Utilisateur supprimé avec succès");
-
-            if (id.equals(currentUserId)) {
-                request.logout();
-                return "redirect:/login?logout";
-            }
-
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors de la suppression !!");
-            System.out.println("Erreur lors de la suppression: " + e.getMessage());
-        }
-        return "redirect:/users/list";
-    }
-
     @PostMapping("/save")
-    public String saveUser(@ModelAttribute("user") Utilisateur user,
+    public String saveUser(@ModelAttribute("user") User user,
                                RedirectAttributes redirectAttributes) {
         try {
-            utilisateurservice.save(user);
-            redirectAttributes.addFlashAttribute("successMessage", "Utilisateur créé avec succès");
+            userService.save(user);
+            redirectAttributes.addFlashAttribute("successMessage", "User créé avec succès");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Email déja utilisée !!");
             System.out.println("Erreur lors de la création: " + e.getMessage());
@@ -129,22 +104,47 @@ public class UserController {
                               Model model,
                               Authentication authentication) {
         addCommonAttributes(model, authentication);
-        Utilisateur user = utilisateurservice.findById(id);
+        User user = userService.findById(id);
         model.addAttribute("user", user);
-        return "edit";
+        return "form-edit";
     }
 
     @PostMapping("/update/{id}")
     public String updateUser(@PathVariable Long id,
-                              @ModelAttribute("user") Utilisateur user,
+                              @ModelAttribute("user") User user,
                               RedirectAttributes redirectAttributes) {
         try {
-            user.setId(id); // Assure que l'ID est bien défini
-            utilisateurservice.update(user);
-            redirectAttributes.addFlashAttribute("successMessage", "Utilisateur modifié avec succès");
+            user.setId(id); // Ensure the ID is set
+            userService.update(user);
+            redirectAttributes.addFlashAttribute("successMessage", "User modifié avec succès");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors de la modification: ");
             System.out.println("Erreur lors de la modification: " + e.getMessage());
+        }
+        return "redirect:/users/list";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteUser(@PathVariable Long id,
+                             Authentication authentication,
+                             HttpServletRequest request,
+                             RedirectAttributes redirectAttributes) {
+        try {
+            String currentUsername = authentication.getName(); // it returns the email of the authenticated user
+
+            Long currentUserId = userService.findByEmail(currentUsername).getId();
+
+            userService.deleteById(id);
+            redirectAttributes.addFlashAttribute("successMessage", "User supprimé avec succès");
+
+            if (id.equals(currentUserId)) {
+                request.logout();
+                return "redirect:/login?logout";
+            }
+
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors de la suppression !!");
+            System.out.println("Erreur lors de la suppression: " + e.getMessage());
         }
         return "redirect:/users/list";
     }
