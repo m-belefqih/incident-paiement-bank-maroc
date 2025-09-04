@@ -1,423 +1,423 @@
-1,Le Fichier CLI est vide,L,10001
-2,Le Fichier CPT est vide,L,10002
-3,Le Fichier IPS est vide,L,10003
-4,Erreur dans CLI: type de l'enregistrement non prevu,L,10015
-5,Erreur dans CPT: type de l'enregistrement non prevu,L,10016
-6,Erreur dans IPS: type de l'enregistrement non prevu,L,10017
-7,Erreur dans la longueur de l'enregistrement CLI,L,10021
-8,Erreur dans la longueur de l'enregistrement CPT,L,10022
-9,Erreur dans la longueur de l'enregistrement IPS,L,10023
-10,Les Codes Declarant des enregistrements d'Entete ne sont pas identiques.,L,10080
-11,Les Dates d'arrete des enregistrements d'Entete ne sont pas identiques.,L,10081
-12,Les Dates de creation du fichier des enregistrements d'Entete ne sont pas identiques.,L,10082
-13,Les N° de lot des enregistrements d'Entete ne sont pas identiques.,L,10083
-14,Les N° de version de la notice des enregistrements d'Entete ne sont pas identiques.,L,10084
-15,Date d'arrete inferieure a la Date d'arrete des declarations precedentes,L,10141
-16,N° de lot inferieur au N° de lot des declarations precedentes,L,10142
-17,Date d'arrete du fichier CPT n'est pas coherente avec la periodicite de Lot,L,10391
-18,Date d'arrete du fichier IPS n'est pas coherente avec la periodicite de Lot,L,10491
-19,Date d'arrete du fichier CLI n'est pas coherente avec la periodicite de Lot,L,10091
-20,Enregistrement entete attendu et non trouve dans le fichier CLI,L,10005
-21,Enregistrement entete attendu et non trouve dans le fichier CPT,L,10006
-22,Enregistrement entete attendu et non trouve dans le fichier IPS,L,10007
-23,Code declarant du fichier CLI non renseigne,L,10031
-24,"Code declarant du fichier CLI non trouve dans la table '"Codes etablissements de credit'"",L,10100
-25,Code declarant different du code emetteur dans le nom de fichier CLI,L,10120
-26,Code declarant du fichier CPT non renseigne,L,10032
-27,"Code declarant du fichier CPT non trouve dans la table '"Codes etablissements de credit'"",L,10400
-28,Code declarant different du code emetteur dans le nom de fichier CPT,L,10121
-29,Code declarant du fichier IPS non renseigne,L,10033
-30,"Code declarant du fichier IPS non trouve dans la table '"Codes etablissements de credit'"",L,10500
-31,Code declarant different du code emetteur dans le nom de fichier IPS,L,10122
-32,Date d'arrete du fichier CLI non renseignee,L,10041
-33,Date d'arrete du fichier CLI invalide (format attendu AAAAMMJJ),L,10090
-34,Date d'arrete du fichier CLI n'est pas inferieure ou egale a la date de traitement,L,10092
-35,Date d'arrete differente de la Date d'arrete du nom de fichier CLI,L,10110
-36,Date d'arrete du fichier CPT non renseignee,L,10042
-37,Date d'arrete du fichier CPT invalide (format attendu AAAAMMJJ),L,10390
-38,Date d'arrete du fichier CPT n'est pas inferieure ou egale a la date de traitement,L,10392
-39,Date d'arrete differente de la Date d'arrete du nom de fichier CPT,L,10111
-40,Date d'arrete du fichier IPS non renseignee,L,10043
-41,Date d'arrete du fichier IPS invalide (format attendu AAAAMMJJ),L,10490
-42,Date d'arrete du fichier IPS n'est pas inferieure ou egale a la date de traitement,L,10492
-43,Date d'arrete differente de la Date d'arrete du nom de fichier IPS,L,10112
-44,Date de creation du fichier CLI non renseignee,L,10051
-45,Date de creation du fichier CLI invalide (format attendu AAAAMMJJ),L,10093
-46,Date de creation du fichier CLI n'est pas inferieure ou egale a la date de traitement,L,10094
-47,Date de creation du fichier CLI n'est pas superieure ou egale a la date d'arrete,L,10095
-48,Date de creation du fichier CPT non renseignee,L,10052
-49,Date de creation du fichier CPT invalide (format attendu AAAAMMJJ),L,10393
-50,Date de creation du fichier CPT n'est pas inferieure ou egale a la date de traitement,L,10394
-51,Date de creation du fichier CPT n'est pas superieure ou egale a la date d'arrete,L,10395
-52,Date de creation du fichier IPS non renseignee,L,10053
-53,Date de creation du fichier IPS invalide (format attendu AAAAMMJJ),L,10493
-54,Date de creation du fichier IPS n'est pas inferieure ou egale a la date de traitement,L,10494
-55,Date de creation du fichier IPS n'est pas superieure ou egale a la date d'arrete,L,10495
-56,N° de lot du fichier CLI non renseigne,L,10061
-57,N° de lot different du N° de lot du nom de fichier CLI,L,10130
-58,N° de lot du fichier CLI comporte des caracteres autres que numeriques,L,10135
-59,N° de lot du fichier CPT non renseigne,L,10062
-60,N° de lot different du N° de lot du nom de fichier CPT,L,10131
-61,N° de lot du fichier CPT comporte des caracteres autres que numeriques,L,10435
-62,N° de lot du fichier IPS non renseigne,L,10063
-63,N° de lot different du N° de lot du nom de fichier IPS,L,10132
-64,N° de lot du fichier IPS comporte des caracteres autres que numeriques,L,10535
-65,N° de version de la notice du fichier CLI non renseignee,L,10071
-66,N° de version de la notice du fichier CLI invalide,L,10075
-67,N° de version de la notice du fichier CPT non renseignee,L,10072
-68,N° de version de la notice du fichier CPT invalide,L,10076
-69,N° de version de la notice du fichier IPS non renseignee,L,10073
-70,N° de version de la notice du fichier IPS invalide,L,10077
-71,Enregistrement fin attendu et non trouve dans le fichier CLI,L,10009
-72,Enregistrement fin attendu et non trouve dans le fichier CPT,L,10010
-73,Enregistrement fin attendu et non trouve dans le fichier IPS,L,10011
-74,Code declarant CLI non renseigne,L,10150
-75,Code declarant CLI n'est pas identique au code declarant de l'enregistrement d'entete,L,10190
-76,Code declarant CPT non renseigne,L,10151
-77,Code declarant CPT n'est pas identique au code declarant de l'enregistrement d'entete,L,10191
-78,Code declarant IPS non renseigne,L,10152
-79,Code declarant IPS n'est pas identique au code declarant de l'enregistrement d'entete,L,10192
-80,Date d'arrete CLI non renseignee,L,10160
-81,Date d'arrete CLI n'est pas identique a la date d'arrete de l'enregistrement d'entete,L,10200
-82,Date d'arrete CPT non renseignee,L,10161
-83,Date d'arrete CPT n'est pas identique a la date d'arrete de l'enregistrement d'entete,L,10201
-84,Date d'arrete IPS non renseignee,L,10162
-85,Date d'arrete IPS n'est pas identique a la date d'arrete de l'enregistrement d'entete,L,10202
-86,Date de creation du fichier CLI non renseignee,L,10170
-87,Date de creation CLI n'est pas identique a la date de creation de l'enregistrement d'entete,L,10210
-88,Date de creation du fichier CPT non renseignee,L,10171
-89,Date de creation CPT n'est pas identique a la date de creation de l'enregistrement d'entete,L,10211
-90,Date de creation du fichier IPS non renseignee,L,10172
-91,Date de creation IPS n'est pas identique a la date de creation de l'enregistrement d'entete,L,10212
-92,Nombre d'enregistrements CLI non renseigne,L,10180
-93,Nombre d'enregistrements CLI comporte des caracteres autres que numeriques,L,10220
-94,Le nombre d'enregistrements CLI renseigne n'est pas egal au nombre d'enregistrements calcule,L,10230
-95,Nombre d'enregistrements CPT non renseigne,L,10181
-96,Nombre d'enregistrements CPT comporte des caracteres autres que numeriques,L,10221
-97,Le nombre d'enregistrements CPT renseigne n'est pas egal au nombre d'enregistrements calcule,L,10231
-98,Nombre d'enregistrements IPS non renseigne,L,10182
-99,Nombre d'enregistrements IPS comporte des caracteres autres que numeriques,L,10222
-100,Le nombre d'enregistrements IPS renseigne n'est pas egal au nombre d'enregistrements calcule,L,10232
-101,Code declarant non renseigne,E,11101
-102,Code declarant non trouve dans la table des codes des etablissements bancaires,E,11176
-103,Code declarant n'est pas identique au code declarant de l'enregistrement d'entete,E,11278
-104,Enregistrement P duplique dans le fichier CLI,E,11001
-105,Code client deja affecte a un autre client de la meme EC,E,11003
-106,Code client non renseigne,E,11104
-107,Nature du client non renseignee,E,11107
-108,Nature du client differente des valeurs permises (1 ou 2),E,11179
-109,"Type de la declaration differente des valeurs permises (1, 2 ou 3)",Z,11182
-110,Categorie du client non renseignee,E,11110
-111,Categorie du client non trouvee dans la table des categories de clients,E,11185
-112,Type identifiant principal non renseigne,E,11113
-113,"Type identifiant principal different des valeurs permises (I, C, P ou D)",E,11188
-114,Type identifiant principal different de I (CIN) pour une categorie du client = 1 ou 5,E,11281
-115,Type identifiant principal different de C (carte sejour) pour une categorie du client = 2,E,11284
-116,Type identifiant principal different de P (passeport) ou D (diplomatique) pour une categorie du client = 4,E,11287
-117,Identifiant principal non renseigne,E,11116
-118,Type identifiant principal = I et CIN invalide : 1 ou 2 lettres suivies de numeriques ne commencant pas par 0,E,11290
-119,Type identifiant principal = C et Carte de sejour invalide : 1 ou 2 lettres suivies de numeriques ne commencant pas par 0 suivi ou non d'1 lettre,E,11293
-120,Passeport invalide : minimum 4 caracteres et type identifiant principal = P,E,11296
-121,Carte Diplomatique invalide : minimum 4 caracteres et type identifiant principal = D,E,11299
-122,Identifiant principal contient des caracteres non autorises,E,11302
-123,Date de delivrance non renseignee,A,11119
-124,Date de delivrance invalide (format attendu AAAAMMJJ),Z,11155
-125,Date de delivrance n'est pas inferieure ou egale a la date d'arrete de l'enregistrement d'entete,A,11305
-126,Date d'expiration non renseignee,A,11122
-127,Date d'expiration invalide (format attendu AAAAMMJJ),Z,11158
-128,Date d'expiration n'est pas superieure a la date de delivrance,Z,11308
-129,Pays de delivrance non renseigne,A,11125
-130,Pays de delivrance non trouve dans la table des codes pays,Z,11191
-131,Nom de famille non renseigne,E,11128
-132,Le Nom de famille doit contenir au moins 2 caracteres,E,11311
-133,"Le Nom de famille comporte des caracteres non alphabetiques, seuls acceptes ''–'' et ''.''",E,11314
-134,Prenom non renseigne,E,11131
-135,Le Prenom doit contenir au moins 2 caracteres,E,11317
-136,"Le Prenom comporte des caracteres non alphabetiques, seuls acceptes ''–'' et ''.''",E,11320
-137,Sexe non renseigne,E,11134
-138,Code agent economique non trouve dans la table des agents economiques,Z,11212
-139,Code agent economique non renseigne et Nature du client = 2,A,11239
-140,Code agent economique renseigne et Nature du client different de 2,Z,11275
-141,Adresse_champ3 non renseignee et Adresse_champ4 non renseignee,A,11242
-142,Adresse_champ4 non renseignee et Adresse_champ3 non renseignee,A,11245
-143,Nom Ville non renseigne,E,11146
-144,Code localite adresse non trouve dans la table des Codes localites,Z,11215
-145,Code localite adresse non renseigne et Categorie du client 1 ou 2,A,11248
-146,Code postal non renseigne,A,11149
-147,Code Pays non renseigne,E,11152
-148,Code Pays non trouve dans la table des codes pays,E,11218
-149,Sexe different des valeurs permises (M ou F),E,11194
-150,Date de naissance non renseignee,E,11137
-151,Date de naissance invalide (format attendu AAAAMMJJ),E,11161
-152,Age du client non compris entre 16 et 100 ans,A,11323
-153,Lieu de naissance non trouve dans la table des Codes localites,Z,11197
-154,Nationalite non renseignee,E,11140
-155,Nationalite non trouvee dans la table des codes pays,E,11200
-156,Code categorie professionnelle non renseigne,A,11143
-157,Code categorie professionnelle non trouvee dans la table categories socioprofessionnelles,Z,11203
-158,Code tribunal non trouve dans la table des Codes Tribunaux,Z,11206
-159,Code tribunal non renseigne et Nature du client = 2 et Registre de commerce renseigne,A,11221
-160,Code tribunal renseigne et Nature du client different de 2,Z,11251
-161,Registre de commerce renseigne et Nature du client different de 2,Z,11254
-162,Registre de commerce non renseigne et nature du client = 2 et Code tribunal renseigne,A,11326
-163,Registre de commerce non renseigne et nature du client = 2 et Identifiant fiscal non renseignes,A,11329
-164,Registre de commerce ne doit pas contenir que des zeros,E,11332
-165,Registre de commerce ne doit pas etre egal a Identifiant fiscal,A,11335
-166,Le Registre de Commerce ne doit contenir que des caracteres alphabetiques ou numeriques,E,11336
-167,Identifiant fiscal comporte des caracteres autres que numeriques,Z,11167
-168,Identifiant fiscal non renseigne et Nature du client = 2 et Registre de commerce non renseignes,A,11224
-169,Identifiant fiscal renseigne et Nature du client different de 2,Z,11257
-170,Identifiant fiscal ne doit pas contenir que des zeros,E,11338
-171,Registre de commerce ne doit pas etre egal a Identifiant fiscal,A,11341
-172,Raison sociale non renseignee et Nature du client = 2,A,11230
-173,Raison sociale renseignee et Nature du client different de 2,Z,11263
-174,Raison sociale doit contenir au minimum deux caracteres alphabetiques,E,11350
-175,Date de creation invalide (format attendu AAAAMMJJ),Z,11173
-176,Date de creation non renseignee et Nature du client = 2,A,11233
-177,Date de creation renseignee et Nature du client different de 2,Z,11266
-178,Date de creation n'est pas inferieure ou egale a la date d'arrete,Z,11353
-179,Sigle renseignee et Nature du client different de 2,Z,11269
-180,Doit contenir au minimum deux caracteres.,Z,11356
-181,Code activite principale non trouve dans la table des indices des activites,Z,11209
-182,Code activite principale non renseigne et Nature du client = 2,A,11236
-183,Code activite principale renseigne et Nature du client different de 2,Z,11272
-184,Code declarant non renseigne,E,11416
-185,Code declarant non trouve dans la table des codes des etablissements bancaires,E,11485
-186,Code declarant n'est pas identique au code declarant de l'enregistrement d'entete,E,11554
-187,Enregistrement M duplique dans le fichier CLI,E,11002
-188,Code client deja affecte a un autre client de la meme EC,E,11004
-189,Code client non renseigne,E,11419
-190,Nature du client non renseignee,E,11422
-191,Nature du client differente des valeurs permises (3),E,11488
-192,"Type de la declaration different des valeurs permises (1, 2 ou 3)",Z,11491
-193,Code tribunal non trouve dans la table des Codes Tribunaux,E,11494
-194,Code tribunal non renseigne et Registre de commerce renseigne,E,11524
-195,Code tribunal renseigne et forme juridique n'autorise pas le Code Tribunal,Z,11543
-196,Registre de commerce renseigne et forme juridique n'autorise pas Registre de commerce,Z,11544
-197,Registre de commerce non renseigne et Code tribunal renseigne,E,11557
-198,Registre de commerce non renseigne alors que la forme juridique oblige le registre de commerce,E,11560
-199,Le Registre de commerce ne doit pas contenir que des zeros,E,11563
-200,"Le Registre du commerce, Identifiant fiscal et ne doivent pas etre identiques",A,11566
-201,Le Registre de Commerce ne doit contenir que des caracteres alphabetiques ou numeriques,E,11567
-202,Identifiant fiscal comporte des caracteres autres que numeriques,E,11461
-203,Identifiant fiscal non renseigne et forme juridique oblige l'identifiant fiscal,E,11527
-204,Identifiant fiscal renseigne et forme juridique n'autorise pas l'identifiant fiscal,Z,11545
-205,L'identifiant fiscal ne doit pas contenir que des zeros,Z,11569
-206,"Le Registre du commerce, Identifiant fiscal ne doivent pas etre identiques",Z,11572
-207,Identification associations non renseigne et forme juridique oblige le numero d'identification association,E,11530
-208,"Identification associations renseigne et forme juridique n''autorise pas d''identifiant d''association (cf. table '"identifiants des personnes'")",Z,11548
-209,L'identifiant associations ne doit pas contenir que des zeros,E,11581
-210,L'identifiant associations ne doit contenir que des caracteres alphabetiques ou numeriques,E,11584
-211,Autre identifiant des personnes non renseigne et forme juridique oblige l'autre identifiant des personnes,E,11531
-212,Autre identifiant des personnes renseigne et forme juridique n'autorise pas autre identifiant des personnes,E,11549
-213,L'autre identifiant ne doit contenir que des caracteres alphabetiques ou numeriques,E,11587
-214,L'autre identifiant ne doit pas contenir que des zeros,E,11590
-215,Aucun identifiant renseigne pour le client,E,11593
-216,Raison sociale non renseignee,E,11425
-217,La Raison sociale doit comporter au Minimum 2 caracteres,E,11596
-218,Date de creation non renseignee,A,11428
-219,Date de creation invalide (format attendu AAAAMMJJ),Z,11467
-220,Date de creation n'est pas inferieure ou egale a la date d'arrete,Z,11599
-221,Date de modification invalide (format attendu AAAAMMJJ),Z,11470
-222,Date de modification n'est pas superieure a la date de creation,Z,11602
-223,Date de modification n'est pas inferieure ou egale a la date d'arrete,Z,11605
-224,Forme juridique non renseignee,E,11431
-225,Forme juridique non trouvee dans la table des formes juridiques,E,11497
-226,Taille de l'entreprise non renseignee,A,11434
-227,Taille de l'entreprise non trouvee dans la table des Tailles des entreprises,Z,11500
-228,Code activite principale non renseigne,E,11437
-229,"Code activite principale non trouve dans la table '"6 - Table indice d''activite'"",Z,11503
-230,Code activite secondaire non trouve dans la table des indices des activites,Z,11506
-231,Code agent economique non renseigne,A,11440
-232,Code agent economique non trouve dans la table des agents economiques,Z,11509
-233,Telephone bureau 1 comporte des caracteres autres que numeriques,Z,11473
-234,Le Telephone bureau 1 ne doit pas contenir uniquement les memes chiffres,Z,11608
-235,Le Telephone bureau 1 doit comporter 8 chiffres au minimum,Z,11611
-236,Telephone bureau 2 comporte des caracteres autres que numeriques,Z,11476
-237,Le Telephone bureau 2 ne doit pas contenir uniquement les memes chiffres,Z,11614
-238,Le Telephone bureau 2 doit comporter 8 chiffres au minimum,Z,11617
-239,Telephone bureau 3 comporte des caracteres autres que numeriques,Z,11479
-240,Le Telephone bureau 3 ne doit pas contenir uniquement les memes chiffres,Z,11620
-241,Le Telephone bureau 3 doit comporter 8 chiffres au minimum,Z,11623
-242,Fax comporte des caracteres autres que numeriques,Z,11482
-243,Le Fax ne doit pas contenir uniquement les memes chiffres,Z,11626
-244,Le Fax doit comporter 8 chiffres au minimum,A,11629
-245,Adresse champ 3 non renseignee et Adresse_champ4 non renseignee,A,11533
-246,Adresse champ 4 non renseignee et Adresse_champ3 non renseignee,A,11536
-247,Nom Ville non renseigne,E,11443
-248,Code localite adresse non renseigne,A,11446
-249,Code localite adresse non trouve dans la table des Codes localites,Z,11512
-250,Code postal non renseigne,A,11449
-251,Code Pays non renseigne,A,11452
-252,Code Pays non trouve dans la table des codes pays,Z,11515
-253,Flag succursale non renseigne,A,11455
-254,Flag succursale different des valeurs permises (0 ou 1),Z,11518
-255,Raison sociale du siege non renseignee et Flag succursale 1,A,11539
-256,Raison sociale du siege renseignee et Flag succursale = 0,Z,11551
-257,La raison sociale doit comporter au Minimum 2 caracteres,E,11632
-258,Type identification siege different des valeurs permises (R ou I),Z,11521
-259,Type identification siege non renseigne et Flag succursale 1,A,11542
-260,Identifiant principal siege non renseigne et flag succursale = 1,Z,11635
-261,Identifiant principal siege non renseigne et type identification siege renseigne,A,11638
-262,Type identification siege = R et Code tribunal non trouve dans la table des Codes tribunaux,A,11641
-263,Code declarant non renseigne,E,12101
-264,Code declarant non trouve dans la table des codes des etablissements bancaires,E,12137
-265,Code declarant n'est pas identique au code declarant de l'enregistrement d'entete,E,12155
-266,Code localite de l'Agence non renseigne,A,12104
-267,Code localite de l'Agence non trouve dans la table des Codes localites,Z,12140
-268,Code Guichet de l'Agence non renseigne,A,12107
-269,Code Guichet de l'Agence non trouve dans la table des Codes guichets,Z,12143
-270,Enregistrement C duplique dans le fichier CPT,E,12001
-271,"Au moins un enregistrement '"L'" n''est pas valide dans le fichier des comptes pour ce compte courant",E,12005
-272,Numero de compte (RIB) non renseigne,E,12110
-273,Les trois premiers chiffres ne correspondent pas au code declarant,A,12158
-274,N° de compte ne respecte pas la regle de validite du RIB,E,12161
-275,Type de compte non renseigne,A,12113
-276,Type de compte non trouve dans la table des Types de comptes,Z,12146
-277,Devise du compte non renseignee,A,12116
-278,Devise du compte non trouvee dans la table des Codes des monnaies,Z,12149
-279,Intitule du compte non renseigne,A,12119
-280,Date d'ouverture non renseignee,A,12122
-281,Date d'ouverture invalide (format attendu AAAAMMJJ),Z,12131
-282,Date d'ouverture du compte n'est pas inferieure ou egale a la date d'arrete,Z,12164
-283,Statut du compte non renseigne,A,12125
-284,Statut du compte non trouve dans la table des Statuts du compte,Z,12152
-285,Date du Statut non renseignee,A,12128
-286,Date du Statut invalide (format attendu AAAAMMJJ),Z,12134
-287,Date du Statut du compte n'est pas superieure ou egale a la date d'ouverture du compte,A,12167
-288,Date du Statut du compte n'est pas inferieure ou egale a la date d'arrete,A,12170
-289,Code declarant non renseigne,E,12185
-290,Code declarant non trouve dans la table des codes des etablissements bancaires,E,12197
-291,Code declarant n'est pas identique au code declarant de l'enregistrement d'entete,E,12203
-292,"Code Client ne correspond a aucun enregistrement '"P'" ou '"M'" valide dans le fichier client",E,12003
-293,Code client non renseigne,E,12188
-294,Enregistrement L duplique dans le fichier CPT,E,12002
-295,"Le n° de compte ne correspond a aucun enregistrement '"C'" valide dans le fichier comptes",E,12004
-296,Numéro de compte (RIB) non renseigné,E,12191
-297,Les trois premiers chiffres ne correspondent pas au code déclarant,A,12206
-298,N° de compte ne respecte pas la règle de validité du RIB,E,12209
-299,Type de titulaire non renseigné,E,12194
-300,Type de titulaire non trouvé dans la table des Types de titulaires de comptes,E,12200
-301,Code déclarant non renseigné,E,13188
-302,Code déclarant non trouvé dans la table des codes des établissements bancaires,E,13197
-303,Code déclarant n’est pas identique au code déclarant de l’enregistrement d’entête,E,13200
-304,"Code Client ne correspond à aucun enregistrement '"P'" ou '"M'" valide dans le fichier client",E,13010
-305,Code client non renseigné,E,13191
-306,Enregistrement S dupliqué dans le fichier IPS,E,13005
-307,Référence interne de la déclaration de l’incident ne correspond à aucun incident déclaré dans le fichier IP,E,13011
-308,Référence interne de la déclaration de l’incident doit être celui d’un incident déclaré sur compte collectif,E,13012
-309,Référence interne de la déclaration non renseignée,E,13194
-310,Code déclarant non renseigné,E,13203
-311,Code déclarant non trouvé dans la table des codes des établissements bancaires,E,13239
-312,Code déclarant n’est pas identique au code déclarant de l’enregistrement d’entête,E,13245
-313,Référence interne ne corresponde pas à aucun Incident de paiement déclaré,E,13013
-314,La Référence interne correspond à un Incident de paiement déjà régularisé,E,13037
-315,La Référence interne correspond à un Incident de paiement échu,E,13038
-316,Référence interne de la déclaration non renseignée,E,13206
-317,Enregistrement R dupliqué dans le fichier IPS,E,13004
-318,Le n° de compte ne correspond à aucun enregistrement “C“ valide dans le fichier comptes.,E,13014
-319,Le n° de compte ne correspond pas à celui avec lequel l’incident est déclaré,E,13015
-320,Numéro de compte (RIB) non renseigné,E,13209
-321,Les trois premiers chiffres ne correspondent pas au code déclarant,A,13248
-322,N° de compte ne respecte pas la règle de validité du RIB,E,13251
-323,Type du moyen de paiement ne correspond pas à celui avec lequel l’incident est déclaré,E,13016
-324,Type du moyen de paiement non renseigné,E,13212
-325,Type du moyen de paiement non trouvé dans la table des Types des moyens de paiement,E,13242
-326,Numéro ne correspond pas à celui avec lequel l’incident est déclaré,E,13017
-327,Numéro non renseigné,E,13215
-328,Montant ne correspond pas à celui avec lequel l’incident est déclaré,E,13018
-329,Montant non renseigné,E,13218
-330,Montant invailide,E,13230
-331,Date de régularisation doit être supérieure ou égale à la Date de constatation de l’incident,E,13019
-332,Date de régularisation non renseignée,E,13221
-333,Date de régularisation invalide (format attendu AAAAMMJJ),E,13233
-334,Date de régularisation doit être inférieur ou égale à la Date d’arrêté,E,13254
-335,Date de paiement de l'amende doit être supérieure ou égale à la Date de constatation de l’incident,Z,13020
-336,Date de paiement de l'amende non renseignée,A,13224
-337,Date de paiement de l'amende invalide (format attendu AAAAMMJJ),Z,13236
-338,Date de paiement de l'amende doit être inférieur ou égale à la Date de la régularisation,Z,13257
-339,Numéro de quittance de l’amende non renseigné,A,13227
-340,Code déclarant non renseigné,E,13260
-341,Code déclarant non trouvé dans la table des codes des établissements bancaires,E,13290
-342,Code déclarant n’est pas identique au code déclarant de l’enregistrement d’entête,E,13299
-343,Enregistrement A dupliqué dans le fichier IPS,E,13001
-344,Référence interne ne corresponde pas à aucun Incident de paiement déclaré,E,13021
-345,La Référence interne correspond à un Incident de paiement déjà régularisé,E,13039
-346,La Référence interne correspond à un Incident de paiement échu,E,13040
-347,Référence interne de la déclaration non renseignée,E,13263
-348,Le n° de compte ne correspond à aucun enregistrement “C“ valide dans le fichier comptes.,E,13022
-349,Le n° de compte ne correspond pas à celui avec lequel l’incident est déclaré,E,13023
-350,Numéro de compte (RIB) non renseigné,E,13266
-351,Les trois premiers chiffres ne correspondent pas au code déclarant,A,13302
-352,N° de compte ne respecte pas la règle de validité du RIB,E,13305
-353,Type du moyen de paiement ne correspond pas à celui avec lequel l’incident est déclaré,E,13024
-354,Type du moyen de paiement non renseigné,E,13269
-355,"Type du moyen de paiement non trouvé dans la table '"15 - Type du moyen de paiement'"",E,13293
-356,Numéro du moyen de paiement ne correspond pas à celui avec lequel l’incident est déclaré,E,13025
-357,Numéro non renseigné,E,13272
-358,Montant du moyen de paiement ne correspond pas à celui avec lequel l’incident est déclaré,E,13026
-359,Montant non renseigné,E,13275
-360,Montant invalide,E,13284
-361,Date d’annulation doit être supérieure ou égale à la Date de constatation de l’incident,E,13027
-362,Date de l'annulation de l’incident non renseignée,E,13278
-363,Date de l'annulation de l’incident invalide (format attendu AAAAMMJJ),E,13287
-364,Date d'annulation doit être inférieur ou égale à la Date d’arrêté,E,13308
-365,Code du motif de l'annulation de l’incident non renseigné,E,13281
-366,"Code du motif de l''annulation de l’incident non trouvé dans la table '"19 - Motif de l''annulation'"",E,13296
-367,Code déclarant non renseigné,E,13311
-368,Code déclarant non trouvé dans la table des codes des établissements bancaires,E,13356
-369,Code déclarant n’est pas identique au code déclarant de l’enregistrement d’entête,E,13374
-370,Enregistrement N dupliqué dans le fichier IPS,E,13003
-371,Référence interne de la déclaration attribuée à un autre incident de paiement,E,13028
-372,Référence interne de la déclaration non renseignée,E,13314
-373,Le n° de compte ne correspond à aucun enregistrement “C“ valide dans le fichier comptes,E,13029
-374,Numéro de compte (RIB) non renseigné,E,13317
-375,Les trois premiers chiffres ne correspondent pas au code déclarant,A,13377
-376,N° de compte ne respecte pas la règle de validité du RIB,E,13380
-377,Type du moyen de paiement non renseigné,E,13320
-378,Type du moyen de paiement non trouvé dans la table des Types des moyens de paiement,E,13359
-379,Type du moyen de paiement différent du chèque,E,13383
-380,Numéro de moyen de paiement déjà déclaré pour une autre infraction,E,13030
-381,Numéro non renseigné,E,13323
-382,Montant non renseigné,E,13326
-383,Montant invailide,E,13347
-384,Code devise non renseigné,E,13329
-385,Code devise non trouvé dans la table des Codes des monnaies,E,13362
-386,Date d'émission non renseignée,E,13332
-387,Date d'émission invalide (format attendu AAAAMMJJ),E,13350
-388,Mode de présentation non renseigné,E,13335
-389,Mode de présentation non trouvé dans la table des Modes de présentation,E,13365
-390,Date de constatation de l’infraction non renseignée,E,13338
-391,Date de constatation de l’infraction invalide (format attendu AAAAMMJJ),E,13353
-392,Date de constatation de l'infraction doit être inférieur ou égale à la Date d’arrêté,E,13386
-393,Chèque prescrit : Date de constatation de l’incident doit être inférieure ou égale à la Date d'émission du moyen de paiement + 365 (délai de prescription),E,13389
-394,Type Infraction = (1 ou 3) pour un client qui n’a aucun incident déclaré,E,13031
-395,Type Infraction = (2 ou 3) pour un client qui n’a aucune interdiction judiciaire déclarée,E,13032
-396,Type Infraction non renseigné,E,13341
-397,"Type Infraction différent des valeurs permises (1,2, ou 3)",E,13368
-398,Statut Infraction = (1) et aucune infraction correspondante n’est déclarée,E,13033
-399,Statut non renseigné,E,13344
-400,Statut différent des valeurs permises (0 ou 1),E,13371
-401,Code déclarant non renseigné,E,13392
-402,Code déclarant non trouvé dans la table des codes des établissements bancaires,E,13422
-403,Code déclarant n’est pas identique au code déclarant de l’enregistrement d’entête,E,13428
-404,"Code Client ne correspond à aucun enregistrement '"P'" ou '"M'" valide dans le fichier client",E,13034
-405,Code client non renseigné,E,13395
-406,Enregistrement W dupliqué dans le fichier IPS,E,13006
-407,Levée d’interdiction temporaire déjà déclarée,E,13035
-408,Référence du jugement non renseignée,E,13398
-409,Date de jugement non renseignée,A,13401
-410,Date de jugement invalide (format attendu AAAAMMJJ),Z,13413
-411,Date de jugement doit être inférieur ou égale à la Date d’arrêté,E,13431
-412,Date de début non renseignée,E,13404
-413,Date de début invalide (format attendu AAAAMMJJ),E,13416
-414,Date de début doit être supérieure ou égale à la Date de jugement,E,13434
-415,Date de fin non renseignée,E,13407
-416,Date de fin invalide (format attendu AAAAMMJJ),E,13419
-417,Date de fin doit être supérieure ou égale à la Date de début,E,13437
-418,Statut = (1) et aucune levée d’interdiction temporaire correspondante n’est déclarée,E,13036
-419,Statut non renseigné,E,13410
-420,Statut différent des valeurs permises (0 ou 1),E,13425
-421,Le nombre d'erreurs détectées (CPT) dépasse le seuil de tolérance établi,L,12099
-422,Le nombre d'erreurs détectées (CLI) dépasse le seuil de tolérance établi,L,11099
-423,Le nombre d'erreurs détectées (IPS) dépasse le seuil de tolérance établi,L,13099
+1,10001,Le Fichier CLI est vide,L
+2,10002,Le Fichier CPT est vide,L
+3,10003,Le Fichier IPS est vide,L
+4,10015,Erreur dans CLI: type de l'enregistrement non prevu,L
+5,10016,Erreur dans CPT: type de l'enregistrement non prevu,L
+6,10017,Erreur dans IPS: type de l'enregistrement non prevu,L
+7,10021,Erreur dans la longueur de l'enregistrement CLI,L
+8,10022,Erreur dans la longueur de l'enregistrement CPT,L
+9,10023,Erreur dans la longueur de l'enregistrement IPS,L
+10,10080,Les Codes Declarant des enregistrements d'Entete ne sont pas identiques.,L
+11,10081,Les Dates d'arrete des enregistrements d'Entete ne sont pas identiques.,L
+12,10082,Les Dates de creation du fichier des enregistrements d'Entete ne sont pas identiques.,L
+13,10083,Les N° de lot des enregistrements d'Entete ne sont pas identiques.,L
+14,10084,Les N° de version de la notice des enregistrements d'Entete ne sont pas identiques.,L
+15,10141,Date d'arrete inferieure a la Date d'arrete des declarations precedentes,L
+16,10142,N° de lot inferieur au N° de lot des declarations precedentes,L
+17,10391,Date d'arrete du fichier CPT n'est pas coherente avec la periodicite de Lot,L
+18,10491,Date d'arrete du fichier IPS n'est pas coherente avec la periodicite de Lot,L
+19,10091,Date d'arrete du fichier CLI n'est pas coherente avec la periodicite de Lot,L
+20,10005,Enregistrement entete attendu et non trouve dans le fichier CLI,L
+21,10006,Enregistrement entete attendu et non trouve dans le fichier CPT,L
+22,10007,Enregistrement entete attendu et non trouve dans le fichier IPS,L
+23,10031,Code declarant du fichier CLI non renseigne,L
+24,10100,"Code declarant du fichier CLI non trouve dans la table '"Codes etablissements de credit'"",L
+25,10120,Code declarant different du code emetteur dans le nom de fichier CLI,L
+26,10032,Code declarant du fichier CPT non renseigne,L
+27,10400,"Code declarant du fichier CPT non trouve dans la table '"Codes etablissements de credit'"",L
+28,10121,Code declarant different du code emetteur dans le nom de fichier CPT,L
+29,10033,Code declarant du fichier IPS non renseigne,L
+30,10500,"Code declarant du fichier IPS non trouve dans la table '"Codes etablissements de credit'"",L
+31,10122,Code declarant different du code emetteur dans le nom de fichier IPS,L
+32,10041,Date d'arrete du fichier CLI non renseignee,L
+33,10090,Date d'arrete du fichier CLI invalide (format attendu AAAAMMJJ),L
+34,10092,Date d'arrete du fichier CLI n'est pas inferieure ou egale a la date de traitement,L
+35,10110,Date d'arrete differente de la Date d'arrete du nom de fichier CLI,L
+36,10042,Date d'arrete du fichier CPT non renseignee,L
+37,10390,Date d'arrete du fichier CPT invalide (format attendu AAAAMMJJ),L
+38,10392,Date d'arrete du fichier CPT n'est pas inferieure ou egale a la date de traitement,L
+39,10111,Date d'arrete differente de la Date d'arrete du nom de fichier CPT,L
+40,10043,Date d'arrete du fichier IPS non renseignee,L
+41,10490,Date d'arrete du fichier IPS invalide (format attendu AAAAMMJJ),L
+42,10492,Date d'arrete du fichier IPS n'est pas inferieure ou egale a la date de traitement,L
+43,10112,Date d'arrete differente de la Date d'arrete du nom de fichier IPS,L
+44,10051,Date de creation du fichier CLI non renseignee,L
+45,10093,Date de creation du fichier CLI invalide (format attendu AAAAMMJJ),L
+46,10094,Date de creation du fichier CLI n'est pas inferieure ou egale a la date de traitement,L
+47,10095,Date de creation du fichier CLI n'est pas superieure ou egale a la date d'arrete,L
+48,10052,Date de creation du fichier CPT non renseignee,L
+49,10393,Date de creation du fichier CPT invalide (format attendu AAAAMMJJ),L
+50,10394,Date de creation du fichier CPT n'est pas inferieure ou egale a la date de traitement,L
+51,10395,Date de creation du fichier CPT n'est pas superieure ou egale a la date d'arrete,L
+52,10053,Date de creation du fichier IPS non renseignee,L
+53,10493,Date de creation du fichier IPS invalide (format attendu AAAAMMJJ),L
+54,10494,Date de creation du fichier IPS n'est pas inferieure ou egale a la date de traitement,L
+55,10495,Date de creation du fichier IPS n'est pas superieure ou egale a la date d'arrete,L
+56,10061,N° de lot du fichier CLI non renseigne,L
+57,10130,N° de lot different du N° de lot du nom de fichier CLI,L
+58,10135,N° de lot du fichier CLI comporte des caracteres autres que numeriques,L
+59,10062,N° de lot du fichier CPT non renseigne,L
+60,10131,N° de lot different du N° de lot du nom de fichier CPT,L
+61,10435,N° de lot du fichier CPT comporte des caracteres autres que numeriques,L
+62,10063,N° de lot du fichier IPS non renseigne,L
+63,10132,N° de lot different du N° de lot du nom de fichier IPS,L
+64,10535,N° de lot du fichier IPS comporte des caracteres autres que numeriques,L
+65,10071,N° de version de la notice du fichier CLI non renseignee,L
+66,10075,N° de version de la notice du fichier CLI invalide,L
+67,10072,N° de version de la notice du fichier CPT non renseignee,L
+68,10076,N° de version de la notice du fichier CPT invalide,L
+69,10073,N° de version de la notice du fichier IPS non renseignee,L
+70,10077,N° de version de la notice du fichier IPS invalide,L
+71,10009,Enregistrement fin attendu et non trouve dans le fichier CLI,L
+72,10010,Enregistrement fin attendu et non trouve dans le fichier CPT,L
+73,10011,Enregistrement fin attendu et non trouve dans le fichier IPS,L
+74,10150,Code declarant CLI non renseigne,L
+75,10190,Code declarant CLI n'est pas identique au code declarant de l'enregistrement d'entete,L
+76,10151,Code declarant CPT non renseigne,L
+77,10191,Code declarant CPT n'est pas identique au code declarant de l'enregistrement d'entete,L
+78,10152,Code declarant IPS non renseigne,L
+79,10192,Code declarant IPS n'est pas identique au code declarant de l'enregistrement d'entete,L
+80,10160,Date d'arrete CLI non renseignee,L
+81,10200,Date d'arrete CLI n'est pas identique a la date d'arrete de l'enregistrement d'entete,L
+82,10161,Date d'arrete CPT non renseignee,L
+83,10201,Date d'arrete CPT n'est pas identique a la date d'arrete de l'enregistrement d'entete,L
+84,10162,Date d'arrete IPS non renseignee,L
+85,10202,Date d'arrete IPS n'est pas identique a la date d'arrete de l'enregistrement d'entete,L
+86,10170,Date de creation du fichier CLI non renseignee,L
+87,10210,Date de creation CLI n'est pas identique a la date de creation de l'enregistrement d'entete,L
+88,10171,Date de creation du fichier CPT non renseignee,L
+89,10211,Date de creation CPT n'est pas identique a la date de creation de l'enregistrement d'entete,L
+90,10172,Date de creation du fichier IPS non renseignee,L
+91,10212,Date de creation IPS n'est pas identique a la date de creation de l'enregistrement d'entete,L
+92,10180,Nombre d'enregistrements CLI non renseigne,L
+93,10220,Nombre d'enregistrements CLI comporte des caracteres autres que numeriques,L
+94,10230,Le nombre d'enregistrements CLI renseigne n'est pas egal au nombre d'enregistrements calcule,L
+95,10181,Nombre d'enregistrements CPT non renseigne,L
+96,10221,Nombre d'enregistrements CPT comporte des caracteres autres que numeriques,L
+97,10231,Le nombre d'enregistrements CPT renseigne n'est pas egal au nombre d'enregistrements calcule,L
+98,10182,Nombre d'enregistrements IPS non renseigne,L
+99,10222,Nombre d'enregistrements IPS comporte des caracteres autres que numeriques,L
+100,10232,Le nombre d'enregistrements IPS renseigne n'est pas egal au nombre d'enregistrements calcule,L
+101,11101,Code declarant non renseigne,E
+102,11176,Code declarant non trouve dans la table des codes des etablissements bancaires,E
+103,11278,Code declarant n'est pas identique au code declarant de l'enregistrement d'entete,E
+104,11001,Enregistrement P duplique dans le fichier CLI,E
+105,11003,Code client deja affecte a un autre client de la meme EC,E
+106,11104,Code client non renseigne,E
+107,11107,Nature du client non renseignee,E
+108,11179,Nature du client differente des valeurs permises (1 ou 2),E
+109,11182,"Type de la declaration differente des valeurs permises (1, 2 ou 3)",Z
+110,11110,Categorie du client non renseignee,E
+111,11185,Categorie du client non trouvee dans la table des categories de clients,E
+112,11113,Type identifiant principal non renseigne,E
+113,11188,"Type identifiant principal different des valeurs permises (I, C, P ou D)",E
+114,11281,Type identifiant principal different de I (CIN) pour une categorie du client = 1 ou 5,E
+115,11284,Type identifiant principal different de C (carte sejour) pour une categorie du client = 2,E
+116,11287,Type identifiant principal different de P (passeport) ou D (diplomatique) pour une categorie du client = 4,E
+117,11116,Identifiant principal non renseigne,E
+118,11290,Type identifiant principal = I et CIN invalide : 1 ou 2 lettres suivies de numeriques ne commencant pas par 0,E
+119,11293,Type identifiant principal = C et Carte de sejour invalide : 1 ou 2 lettres suivies de numeriques ne commencant pas par 0 suivi ou non d'1 lettre,E
+120,11296,Passeport invalide : minimum 4 caracteres et type identifiant principal = P,E
+121,11299,Carte Diplomatique invalide : minimum 4 caracteres et type identifiant principal = D,E
+122,11302,Identifiant principal contient des caracteres non autorises,E
+123,11119,Date de delivrance non renseignee,A
+124,11155,Date de delivrance invalide (format attendu AAAAMMJJ),Z
+125,11305,Date de delivrance n'est pas inferieure ou egale a la date d'arrete de l'enregistrement d'entete,A
+126,11122,Date d'expiration non renseignee,A
+127,11158,Date d'expiration invalide (format attendu AAAAMMJJ),Z
+128,11308,Date d'expiration n'est pas superieure a la date de delivrance,Z
+129,11125,Pays de delivrance non renseigne,A
+130,11191,Pays de delivrance non trouve dans la table des codes pays,Z
+131,11128,Nom de famille non renseigne,E
+132,11311,Le Nom de famille doit contenir au moins 2 caracteres,E
+133,11314,"Le Nom de famille comporte des caracteres non alphabetiques, seuls acceptes ''–'' et ''.''",E
+134,11131,Prenom non renseigne,E
+135,11317,Le Prenom doit contenir au moins 2 caracteres,E
+136,11320,"Le Prenom comporte des caracteres non alphabetiques, seuls acceptes ''–'' et ''.''",E
+137,11134,Sexe non renseigne,E
+138,11212,Code agent economique non trouve dans la table des agents economiques,Z
+139,11239,Code agent economique non renseigne et Nature du client = 2,A
+140,11275,Code agent economique renseigne et Nature du client different de 2,Z
+141,11242,Adresse_champ3 non renseignee et Adresse_champ4 non renseignee,A
+142,11245,Adresse_champ4 non renseignee et Adresse_champ3 non renseignee,A
+143,11146,Nom Ville non renseigne,E
+144,11215,Code localite adresse non trouve dans la table des Codes localites,Z
+145,11248,Code localite adresse non renseigne et Categorie du client 1 ou 2,A
+146,11149,Code postal non renseigne,A
+147,11152,Code Pays non renseigne,E
+148,11218,Code Pays non trouve dans la table des codes pays,E
+149,11194,Sexe different des valeurs permises (M ou F),E
+150,11137,Date de naissance non renseignee,E
+151,11161,Date de naissance invalide (format attendu AAAAMMJJ),E
+152,11323,Age du client non compris entre 16 et 100 ans,A
+153,11197,Lieu de naissance non trouve dans la table des Codes localites,Z
+154,11140,Nationalite non renseignee,E
+155,11200,Nationalite non trouvee dans la table des codes pays,E
+156,11143,Code categorie professionnelle non renseigne,A
+157,11203,Code categorie professionnelle non trouvee dans la table categories socioprofessionnelles,Z
+158,11206,Code tribunal non trouve dans la table des Codes Tribunaux,Z
+159,11221,Code tribunal non renseigne et Nature du client = 2 et Registre de commerce renseigne,A
+160,11251,Code tribunal renseigne et Nature du client different de 2,Z
+161,11254,Registre de commerce renseigne et Nature du client different de 2,Z
+162,11326,Registre de commerce non renseigne et nature du client = 2 et Code tribunal renseigne,A
+163,11329,Registre de commerce non renseigne et nature du client = 2 et Identifiant fiscal non renseignes,A
+164,11332,Registre de commerce ne doit pas contenir que des zeros,E
+165,11335,Registre de commerce ne doit pas etre egal a Identifiant fiscal,A
+166,11336,Le Registre de Commerce ne doit contenir que des caracteres alphabetiques ou numeriques,E
+167,11167,Identifiant fiscal comporte des caracteres autres que numeriques,Z
+168,11224,Identifiant fiscal non renseigne et Nature du client = 2 et Registre de commerce non renseignes,A
+169,11257,Identifiant fiscal renseigne et Nature du client different de 2,Z
+170,11338,Identifiant fiscal ne doit pas contenir que des zeros,E
+171,11341,Registre de commerce ne doit pas etre egal a Identifiant fiscal,A
+172,11230,Raison sociale non renseignee et Nature du client = 2,A
+173,11263,Raison sociale renseignee et Nature du client different de 2,Z
+174,11350,Raison sociale doit contenir au minimum deux caracteres alphabetiques,E
+175,11173,Date de creation invalide (format attendu AAAAMMJJ),Z
+176,11233,Date de creation non renseignee et Nature du client = 2,A
+177,11266,Date de creation renseignee et Nature du client different de 2,Z
+178,11353,Date de creation n'est pas inferieure ou egale a la date d'arrete,Z
+179,11269,Sigle renseignee et Nature du client different de 2,Z
+180,11356,Doit contenir au minimum deux caracteres.,Z
+181,11209,Code activite principale non trouve dans la table des indices des activites,Z
+182,11236,Code activite principale non renseigne et Nature du client = 2,A
+183,11272,Code activite principale renseigne et Nature du client different de 2,Z
+184,11416,Code declarant non renseigne,E
+185,11485,Code declarant non trouve dans la table des codes des etablissements bancaires,E
+186,11554,Code declarant n'est pas identique au code declarant de l'enregistrement d'entete,E
+187,11002,Enregistrement M duplique dans le fichier CLI,E
+188,11004,Code client deja affecte a un autre client de la meme EC,E
+189,11419,Code client non renseigne,E
+190,11422,Nature du client non renseignee,E
+191,11488,Nature du client differente des valeurs permises (3),E
+192,11491,"Type de la declaration different des valeurs permises (1, 2 ou 3)",Z
+193,11494,Code tribunal non trouve dans la table des Codes Tribunaux,E
+194,11524,Code tribunal non renseigne et Registre de commerce renseigne,E
+195,11543,Code tribunal renseigne et forme juridique n'autorise pas le Code Tribunal,Z
+196,11544,Registre de commerce renseigne et forme juridique n'autorise pas Registre de commerce,Z
+197,11557,Registre de commerce non renseigne et Code tribunal renseigne,E
+198,11560,Registre de commerce non renseigne alors que la forme juridique oblige le registre de commerce,E
+199,11563,Le Registre de commerce ne doit pas contenir que des zeros,E
+200,11566,"Le Registre du commerce, Identifiant fiscal et ne doivent pas etre identiques",A
+201,11567,Le Registre de Commerce ne doit contenir que des caracteres alphabetiques ou numeriques,E
+202,11461,Identifiant fiscal comporte des caracteres autres que numeriques,E
+203,11527,Identifiant fiscal non renseigne et forme juridique oblige l'identifiant fiscal,E
+204,11545,Identifiant fiscal renseigne et forme juridique n'autorise pas l'identifiant fiscal,Z
+205,11569,L'identifiant fiscal ne doit pas contenir que des zeros,Z
+206,11572,"Le Registre du commerce, Identifiant fiscal ne doivent pas etre identiques",Z
+207,11530,Identification associations non renseigne et forme juridique oblige le numero d'identification association,E
+208,11548,"Identification associations renseigne et forme juridique n''autorise pas d''identifiant d''association (cf. table '"identifiants des personnes'")",Z
+209,11581,L'identifiant associations ne doit pas contenir que des zeros,E
+210,11584,L'identifiant associations ne doit contenir que des caracteres alphabetiques ou numeriques,E
+211,11531,Autre identifiant des personnes non renseigne et forme juridique oblige l'autre identifiant des personnes,E
+212,11549,Autre identifiant des personnes renseigne et forme juridique n'autorise pas autre identifiant des personnes,E
+213,11587,L'autre identifiant ne doit contenir que des caracteres alphabetiques ou numeriques,E
+214,11590,L'autre identifiant ne doit pas contenir que des zeros,E
+215,11593,Aucun identifiant renseigne pour le client,E
+216,11425,Raison sociale non renseignee,E
+217,11596,La Raison sociale doit comporter au Minimum 2 caracteres,E
+218,11428,Date de creation non renseignee,A
+219,11467,Date de creation invalide (format attendu AAAAMMJJ),Z
+220,11599,Date de creation n'est pas inferieure ou egale a la date d'arrete,Z
+221,11470,Date de modification invalide (format attendu AAAAMMJJ),Z
+222,11602,Date de modification n'est pas superieure a la date de creation,Z
+223,11605,Date de modification n'est pas inferieure ou egale a la date d'arrete,Z
+224,11431,Forme juridique non renseignee,E
+225,11497,Forme juridique non trouvee dans la table des formes juridiques,E
+226,11434,Taille de l'entreprise non renseignee,A
+227,11500,Taille de l'entreprise non trouvee dans la table des Tailles des entreprises,Z
+228,11437,Code activite principale non renseigne,E
+229,11503,"Code activite principale non trouve dans la table '"6 - Table indice d''activite'"",Z
+230,11506,Code activite secondaire non trouve dans la table des indices des activites,Z
+231,11440,Code agent economique non renseigne,A
+232,11509,Code agent economique non trouve dans la table des agents economiques,Z
+233,11473,Telephone bureau 1 comporte des caracteres autres que numeriques,Z
+234,11608,Le Telephone bureau 1 ne doit pas contenir uniquement les memes chiffres,Z
+235,11611,Le Telephone bureau 1 doit comporter 8 chiffres au minimum,Z
+236,11476,Telephone bureau 2 comporte des caracteres autres que numeriques,Z
+237,11614,Le Telephone bureau 2 ne doit pas contenir uniquement les memes chiffres,Z
+238,11617,Le Telephone bureau 2 doit comporter 8 chiffres au minimum,Z
+239,11479,Telephone bureau 3 comporte des caracteres autres que numeriques,Z
+240,11620,Le Telephone bureau 3 ne doit pas contenir uniquement les memes chiffres,Z
+241,11623,Le Telephone bureau 3 doit comporter 8 chiffres au minimum,Z
+242,11482,Fax comporte des caracteres autres que numeriques,Z
+243,11626,Le Fax ne doit pas contenir uniquement les memes chiffres,Z
+244,11629,Le Fax doit comporter 8 chiffres au minimum,A
+245,11533,Adresse champ 3 non renseignee et Adresse_champ4 non renseignee,A
+246,11536,Adresse champ 4 non renseignee et Adresse_champ3 non renseignee,A
+247,11443,Nom Ville non renseigne,E
+248,11446,Code localite adresse non renseigne,A
+249,11512,Code localite adresse non trouve dans la table des Codes localites,Z
+250,11449,Code postal non renseigne,A
+251,11452,Code Pays non renseigne,A
+252,11515,Code Pays non trouve dans la table des codes pays,Z
+253,11455,Flag succursale non renseigne,A
+254,11518,Flag succursale different des valeurs permises (0 ou 1),Z
+255,11539,Raison sociale du siege non renseignee et Flag succursale 1,A
+256,11551,Raison sociale du siege renseignee et Flag succursale = 0,Z
+257,11632,La raison sociale doit comporter au Minimum 2 caracteres,E
+258,11521,Type identification siege different des valeurs permises (R ou I),Z
+259,11542,Type identification siege non renseigne et Flag succursale 1,A
+260,11635,Identifiant principal siege non renseigne et flag succursale = 1,Z
+261,11638,Identifiant principal siege non renseigne et type identification siege renseigne,A
+262,11641,Type identification siege = R et Code tribunal non trouve dans la table des Codes tribunaux,A
+263,12101,Code declarant non renseigne,E
+264,12137,Code declarant non trouve dans la table des codes des etablissements bancaires,E
+265,12155,Code declarant n'est pas identique au code declarant de l'enregistrement d'entete,E
+266,12104,Code localite de l'Agence non renseigne,A
+267,12140,Code localite de l'Agence non trouve dans la table des Codes localites,Z
+268,12107,Code Guichet de l'Agence non renseigne,A
+269,12143,Code Guichet de l'Agence non trouve dans la table des Codes guichets,Z
+270,12001,Enregistrement C duplique dans le fichier CPT,E
+271,12005,"Au moins un enregistrement '"L'" n''est pas valide dans le fichier des comptes pour ce compte courant",E
+272,12110,Numero de compte (RIB) non renseigne,E
+273,12158,Les trois premiers chiffres ne correspondent pas au code declarant,A
+274,12161,N° de compte ne respecte pas la regle de validite du RIB,E
+275,12113,Type de compte non renseigne,A
+276,12146,Type de compte non trouve dans la table des Types de comptes,Z
+277,12116,Devise du compte non renseignee,A
+278,12149,Devise du compte non trouvee dans la table des Codes des monnaies,Z
+279,12119,Intitule du compte non renseigne,A
+280,12122,Date d'ouverture non renseignee,A
+281,12131,Date d'ouverture invalide (format attendu AAAAMMJJ),Z
+282,12164,Date d'ouverture du compte n'est pas inferieure ou egale a la date d'arrete,Z
+283,12125,Statut du compte non renseigne,A
+284,12152,Statut du compte non trouve dans la table des Statuts du compte,Z
+285,12128,Date du Statut non renseignee,A
+286,12134,Date du Statut invalide (format attendu AAAAMMJJ),Z
+287,12167,Date du Statut du compte n'est pas superieure ou egale a la date d'ouverture du compte,A
+288,12170,Date du Statut du compte n'est pas inferieure ou egale a la date d'arrete,A
+289,12185,Code declarant non renseigne,E
+290,12197,Code declarant non trouve dans la table des codes des etablissements bancaires,E
+291,12203,Code declarant n'est pas identique au code declarant de l'enregistrement d'entete,E
+292,12003,"Code Client ne correspond a aucun enregistrement '"P'" ou '"M'" valide dans le fichier client",E
+293,12188,Code client non renseigne,E
+294,12002,Enregistrement L duplique dans le fichier CPT,E
+295,12004,"Le n° de compte ne correspond a aucun enregistrement '"C'" valide dans le fichier comptes",E
+296,12191,Numéro de compte (RIB) non renseigné,E
+297,12206,Les trois premiers chiffres ne correspondent pas au code déclarant,A
+298,12209,N° de compte ne respecte pas la règle de validité du RIB,E
+299,12194,Type de titulaire non renseigné,E
+300,12200,Type de titulaire non trouvé dans la table des Types de titulaires de comptes,E
+301,13188,Code déclarant non renseigné,E
+302,13197,Code déclarant non trouvé dans la table des codes des établissements bancaires,E
+303,13200,Code déclarant n’est pas identique au code déclarant de l’enregistrement d’entête,E
+304,13010,"Code Client ne correspond à aucun enregistrement '"P'" ou '"M'" valide dans le fichier client",E
+305,13191,Code client non renseigné,E
+306,13005,Enregistrement S dupliqué dans le fichier IPS,E
+307,13011,Référence interne de la déclaration de l’incident ne correspond à aucun incident déclaré dans le fichier IP,E
+308,13012,Référence interne de la déclaration de l’incident doit être celui d’un incident déclaré sur compte collectif,E
+309,13194,Référence interne de la déclaration non renseignée,E
+310,13203,Code déclarant non renseigné,E
+311,13239,Code déclarant non trouvé dans la table des codes des établissements bancaires,E
+312,13245,Code déclarant n’est pas identique au code déclarant de l’enregistrement d’entête,E
+313,13013,Référence interne ne corresponde pas à aucun Incident de paiement déclaré,E
+314,13037,La Référence interne correspond à un Incident de paiement déjà régularisé,E
+315,13038,La Référence interne correspond à un Incident de paiement échu,E
+316,13206,Référence interne de la déclaration non renseignée,E
+317,13004,Enregistrement R dupliqué dans le fichier IPS,E
+318,13014,Le n° de compte ne correspond à aucun enregistrement “C“ valide dans le fichier comptes.,E
+319,13015,Le n° de compte ne correspond pas à celui avec lequel l’incident est déclaré,E
+320,13209,Numéro de compte (RIB) non renseigné,E
+321,13248,Les trois premiers chiffres ne correspondent pas au code déclarant,A
+322,13251,N° de compte ne respecte pas la règle de validité du RIB,E
+323,13016,Type du moyen de paiement ne correspond pas à celui avec lequel l’incident est déclaré,E
+324,13212,Type du moyen de paiement non renseigné,E
+325,13242,Type du moyen de paiement non trouvé dans la table des Types des moyens de paiement,E
+326,13017,Numéro ne correspond pas à celui avec lequel l’incident est déclaré,E
+327,13215,Numéro non renseigné,E
+328,13018,Montant ne correspond pas à celui avec lequel l’incident est déclaré,E
+329,13218,Montant non renseigné,E
+330,13230,Montant invailide,E
+331,13019,Date de régularisation doit être supérieure ou égale à la Date de constatation de l’incident,E
+332,13221,Date de régularisation non renseignée,E
+333,13233,Date de régularisation invalide (format attendu AAAAMMJJ),E
+334,13254,Date de régularisation doit être inférieur ou égale à la Date d’arrêté,E
+335,13020,Date de paiement de l'amende doit être supérieure ou égale à la Date de constatation de l’incident,Z
+336,13224,Date de paiement de l'amende non renseignée,A
+337,13236,Date de paiement de l'amende invalide (format attendu AAAAMMJJ),Z
+338,13257,Date de paiement de l'amende doit être inférieur ou égale à la Date de la régularisation,Z
+339,13227,Numéro de quittance de l’amende non renseigné,A
+340,13260,Code déclarant non renseigné,E
+341,13290,Code déclarant non trouvé dans la table des codes des établissements bancaires,E
+342,13299,Code déclarant n’est pas identique au code déclarant de l’enregistrement d’entête,E
+343,13001,Enregistrement A dupliqué dans le fichier IPS,E
+344,13021,Référence interne ne corresponde pas à aucun Incident de paiement déclaré,E
+345,13039,La Référence interne correspond à un Incident de paiement déjà régularisé,E
+346,13040,La Référence interne correspond à un Incident de paiement échu,E
+347,13263,Référence interne de la déclaration non renseignée,E
+348,13022,Le n° de compte ne correspond à aucun enregistrement “C“ valide dans le fichier comptes.,E
+349,13023,Le n° de compte ne correspond pas à celui avec lequel l’incident est déclaré,E
+350,13266,Numéro de compte (RIB) non renseigné,E
+351,13302,Les trois premiers chiffres ne correspondent pas au code déclarant,A
+352,13305,N° de compte ne respecte pas la règle de validité du RIB,E
+353,13024,Type du moyen de paiement ne correspond pas à celui avec lequel l’incident est déclaré,E
+354,13269,Type du moyen de paiement non renseigné,E
+355,13293,"Type du moyen de paiement non trouvé dans la table '"15 - Type du moyen de paiement'"",E
+356,13025,Numéro du moyen de paiement ne correspond pas à celui avec lequel l’incident est déclaré,E
+357,13272,Numéro non renseigné,E
+358,13026,Montant du moyen de paiement ne correspond pas à celui avec lequel l’incident est déclaré,E
+359,13275,Montant non renseigné,E
+360,13284,Montant invalide,E
+361,13027,Date d’annulation doit être supérieure ou égale à la Date de constatation de l’incident,E
+362,13278,Date de l'annulation de l’incident non renseignée,E
+363,13287,Date de l'annulation de l’incident invalide (format attendu AAAAMMJJ),E
+364,13308,Date d'annulation doit être inférieur ou égale à la Date d’arrêté,E
+365,13281,Code du motif de l'annulation de l’incident non renseigné,E
+366,13296,"Code du motif de l''annulation de l’incident non trouvé dans la table '"19 - Motif de l''annulation'"",E
+367,13311,Code déclarant non renseigné,E
+368,13356,Code déclarant non trouvé dans la table des codes des établissements bancaires,E
+369,13374,Code déclarant n’est pas identique au code déclarant de l’enregistrement d’entête,E
+370,13003,Enregistrement N dupliqué dans le fichier IPS,E
+371,13028,Référence interne de la déclaration attribuée à un autre incident de paiement,E
+372,13314,Référence interne de la déclaration non renseignée,E
+373,13029,Le n° de compte ne correspond à aucun enregistrement “C“ valide dans le fichier comptes,E
+374,13317,Numéro de compte (RIB) non renseigné,E
+375,13377,Les trois premiers chiffres ne correspondent pas au code déclarant,A
+376,13380,N° de compte ne respecte pas la règle de validité du RIB,E
+377,13320,Type du moyen de paiement non renseigné,E
+378,13359,Type du moyen de paiement non trouvé dans la table des Types des moyens de paiement,E
+379,13383,Type du moyen de paiement différent du chèque,E
+380,13030,Numéro de moyen de paiement déjà déclaré pour une autre infraction,E
+381,13323,Numéro non renseigné,E
+382,13326,Montant non renseigné,E
+383,13347,Montant invailide,E
+384,13329,Code devise non renseigné,E
+385,13362,Code devise non trouvé dans la table des Codes des monnaies,E
+386,13332,Date d'émission non renseignée,E
+387,13350,Date d'émission invalide (format attendu AAAAMMJJ),E
+388,13335,Mode de présentation non renseigné,E
+389,13365,Mode de présentation non trouvé dans la table des Modes de présentation,E
+390,13338,Date de constatation de l’infraction non renseignée,E
+391,13353,Date de constatation de l’infraction invalide (format attendu AAAAMMJJ),E
+392,13386,Date de constatation de l'infraction doit être inférieur ou égale à la Date d’arrêté,E
+393,13389,Chèque prescrit : Date de constatation de l’incident doit être inférieure ou égale à la Date d'émission du moyen de paiement + 365 (délai de prescription),E
+394,13031,Type Infraction = (1 ou 3) pour un client qui n’a aucun incident déclaré,E
+395,13032,Type Infraction = (2 ou 3) pour un client qui n’a aucune interdiction judiciaire déclarée,E
+396,13341,Type Infraction non renseigné,E
+397,13368,"Type Infraction différent des valeurs permises (1,2, ou 3)",E
+398,13033,Statut Infraction = (1) et aucune infraction correspondante n’est déclarée,E
+399,13344,Statut non renseigné,E
+400,13371,Statut différent des valeurs permises (0 ou 1),E
+401,13392,Code déclarant non renseigné,E
+402,13422,Code déclarant non trouvé dans la table des codes des établissements bancaires,E
+403,13428,Code déclarant n’est pas identique au code déclarant de l’enregistrement d’entête,E
+404,13034,"Code Client ne correspond à aucun enregistrement '"P'" ou '"M'" valide dans le fichier client",E
+405,13395,Code client non renseigné,E
+406,13006,Enregistrement W dupliqué dans le fichier IPS,E
+407,13035,Levée d’interdiction temporaire déjà déclarée,E
+408,13398,Référence du jugement non renseignée,E
+409,13401,Date de jugement non renseignée,A
+410,13413,Date de jugement invalide (format attendu AAAAMMJJ),Z
+411,13431,Date de jugement doit être inférieur ou égale à la Date d’arrêté,E
+412,13404,Date de début non renseignée,E
+413,13416,Date de début invalide (format attendu AAAAMMJJ),E
+414,13434,Date de début doit être supérieure ou égale à la Date de jugement,E
+415,13407,Date de fin non renseignée,E
+416,13419,Date de fin invalide (format attendu AAAAMMJJ),E
+417,13437,Date de fin doit être supérieure ou égale à la Date de début,E
+418,13036,Statut = (1) et aucune levée d’interdiction temporaire correspondante n’est déclarée,E
+419,13410,Statut non renseigné,E
+420,13425,Statut différent des valeurs permises (0 ou 1),E
+421,12099,Le nombre d'erreurs détectées (CPT) dépasse le seuil de tolérance établi,L
+422,11099,Le nombre d'erreurs détectées (CLI) dépasse le seuil de tolérance établi,L
+423,13099,Le nombre d'erreurs détectées (IPS) dépasse le seuil de tolérance établi,L
