@@ -315,16 +315,16 @@
                         <td th:text="${entry != null ? entry.value.getDescription() : 'N/A'}"></td>
                         <td>
                             <span
-                                    th:with="gravite=${entry != null ? entry.value.getGravite() : null}"
+                                    th:with="severity=${entry != null ? entry.value.getSeverity() : null}"
                                     th:class="${'px-2 py-1 rounded whitespace-nowrap text-xs font-medium'} + ' ' +
-                                        ${gravite == 'A' ? 'bg-blue-100 text-blue-800' :
-                                        gravite == 'E' ? 'bg-orange-100 text-orange-800' :
-                                        gravite == 'L' ? 'bg-red-100 text-red-800' :
-                                        gravite == 'Z' ? 'bg-yellow-100 text-yellow-800' : ''}"
-                                    th:text="${gravite == 'A' ? 'Avertissement (A)' :
-                                        gravite == 'E' ? 'Enregistrement rejeté (E)' :
-                                        gravite == 'L' ? 'Lot rejeté (L)' :
-                                        gravite == 'Z' ? 'Zone ignorée (Z)' : 'N/A'}"
+                                        ${severity == 'A' ? 'bg-blue-100 text-blue-800' :
+                                        severity == 'E' ? 'bg-orange-100 text-orange-800' :
+                                        severity == 'L' ? 'bg-red-100 text-red-800' :
+                                        severity == 'Z' ? 'bg-yellow-100 text-yellow-800' : ''}"
+                                    th:text="${severity == 'A' ? 'Avertissement (A)' :
+                                        severity == 'E' ? 'Enregistrement rejeté (E)' :
+                                        severity == 'L' ? 'Lot rejeté (L)' :
+                                        severity == 'Z' ? 'Zone ignorée (Z)' : 'N/A'}"
                             >
                             </span>
                         </td>
@@ -337,7 +337,7 @@
 
         </div>
 
-        <!-- Profile Modal Dialog -->
+        <!-- Profile Modal Dialog (Hidden by default) -->
         <el-dialog>
             <dialog id="dialog" aria-labelledby="dialog-title"
                     class="fixed inset-0 size-auto max-h-none max-w-none overflow-y-auto bg-transparent backdrop:bg-transparent">
