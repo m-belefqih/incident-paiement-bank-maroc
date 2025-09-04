@@ -69,6 +69,6 @@ public class HistoryServiceImpl implements HistoryService {
      */
     @Override
     public List<History> getHistory(User user) {
-        return historyRepository.findByUtilisateurId(user.getId());
+        return historyRepository.findByUserId(user.getId());
     }
 }
