@@ -94,9 +94,9 @@ public class UserController {
                                RedirectAttributes redirectAttributes) {
         try {
             userService.save(user);
-            redirectAttributes.addFlashAttribute("successMessage", "User créé avec succès");
+            redirectAttributes.addFlashAttribute("successMessage", "Utilisateur créé avec succès");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Email déja utilisée !!");
+            redirectAttributes.addFlashAttribute("errorMessage", "L'adresse e-mail doit appartenir à alakhdarbank.ma ou gmail.com !!");
             System.out.println("Erreur lors de la création: " + e.getMessage());
         }
         return "redirect:/users/list";
