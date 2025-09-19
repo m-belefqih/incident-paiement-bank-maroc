@@ -1,6 +1,8 @@
 # Application de traitement et de validation des fichiers incidents de paiement (CTR, CLI, CPT, IPS) – Système CIP (Bank Al-Maghrib)
 
-![Al Akhdar Bank](/al-akhdar-bank.png)
+<div align="center">
+  <img src="al-akhdar-bank.gif" alt="Al Akhdar Bank" width="1200">
+</div>
 
 --- 
 
