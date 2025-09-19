@@ -63,6 +63,8 @@
 
         <!-- Form of Login -->
         <form class="w-full" th:action="@{/login}" method="POST">
+
+            <!-- token CSRF -->
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
             <label for="email" class="font-medium block mb-2 text-sm text-gray-900">E-mail</label>
