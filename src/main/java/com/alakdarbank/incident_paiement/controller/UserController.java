@@ -3,9 +3,11 @@ package com.alakdarbank.incident_paiement.controller;
 import com.alakdarbank.incident_paiement.model.User;
 import com.alakdarbank.incident_paiement.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -66,7 +68,6 @@ public class UserController {
         model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("initials", initials);
         model.addAttribute("users", userService.findAll());
-        model.addAttribute("user", new User());
     }
 
     /**
@@ -82,6 +83,8 @@ public class UserController {
 
         // Add common attributes to the models
         addCommonAttributes(model, authentication);
+
+        model.addAttribute("user", new User());
 
         return "list-users";  // This assumes you have a list-users.html template
     }
@@ -111,15 +114,25 @@ public class UserController {
 
     @PostMapping("/update/{id}")
     public String updateUser(@PathVariable Long id,
-                              @ModelAttribute("user") User user,
-                              RedirectAttributes redirectAttributes) {
+                             @Valid @ModelAttribute("user") User user,
+                             BindingResult bindingResult,
+                             Model model,
+                             Authentication authentication,
+                             RedirectAttributes redirectAttributes) {
+
+        System.out.println("Binding results: " + bindingResult.toString());
+
+        if (bindingResult.hasErrors()) {
+            addCommonAttributes(model, authentication);
+            model.addAttribute("user", user);
+            return "form-edit";
+        }
         try {
             user.setId(id); // Ensure the ID is set
             userService.update(user);
-            redirectAttributes.addFlashAttribute("successMessage", "User modifié avec succès");
+            redirectAttributes.addFlashAttribute("successMessage", "Utilisateur modifié avec succès");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors de la modification: ");
-            System.out.println("Erreur lors de la modification: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors de la modification");
         }
         return "redirect:/users/list";
     }
@@ -135,7 +148,7 @@ public class UserController {
             Long currentUserId = userService.findByEmail(currentUsername).getId();
 
             userService.deleteById(id);
-            redirectAttributes.addFlashAttribute("successMessage", "User supprimé avec succès");
+            redirectAttributes.addFlashAttribute("successMessage", "Utilisateur supprimé avec succès");
 
             if (id.equals(currentUserId)) {
                 request.logout();
