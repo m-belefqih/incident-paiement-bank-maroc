@@ -78,7 +78,6 @@ public class CtrController {
         model.addAttribute("email", email);
         model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("initials", initials);
-        // model.addAttribute("users", utilisateurservice.findAll());
         model.addAttribute("user", new User());
     }
 
@@ -115,7 +114,7 @@ public class CtrController {
                          RedirectAttributes redirectAttributes) {
 
         if (fichier.isEmpty()) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Veuillez sélectionner un fichier, s'il vous plaît.");
+            redirectAttributes.addFlashAttribute("errorMessage", "Veuillez sélectionner un fichier, s'il vous plaît !!");
             return "redirect:/import";
         }
 
@@ -126,10 +125,11 @@ public class CtrController {
             List<Map<String, ErrorCode>> lignes = errorCodeService.listErrors(fichier, user);
 
             redirectAttributes.addFlashAttribute("lignes", lignes);
-            redirectAttributes.addFlashAttribute("successMessage", "Fichier traité avec succès");
+            redirectAttributes.addFlashAttribute("successMessage", "Fichier traité avec succès !!");
 
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors du traitement du fichier: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors du traitement du fichier. Veuillez sélectionner un fichier de type .bin");
+            System.out.println("Erreur lors du traitement du fichier: " + e.getMessage());
         }
 
         return "redirect:/import";
