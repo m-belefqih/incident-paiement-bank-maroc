@@ -1,104 +1,120 @@
-## ✅ 🎯 Titre du projet
+# Application de traitement et de validation des fichiers incidents de paiement (CTR, CLI, CPT, IPS) – Système CIP (Bank Al-Maghrib)
 
-> **Développement d’une application de gestion et de validation des fichiers incidents de paiement (CLI, CPT, IPS) destinés au système CIP (Bank Al-Maghrib)**
-
----
-
-## 🧱 L’idée générale de notre projet
-
-Tu vas créer une app web qui permettra à la banque de :
-
-- **Charger les données client / compte / incident**
-- **Générer les fichiers au bon format (CLI, CPT, IPS)**
-- **Valider les fichiers** (structure correcte, erreurs détectées)
-- **Afficher les erreurs en clair**
-- **Envoyer les fichiers à BAM** (optionnel si autorisé)
-- **Lire les comptes-rendus (CTR)** et afficher les anomalies
-
-Le tout dans une **architecture sécurisée**, avec un **déploiement automatisé** grâce au **CI/CD** et à la conteneurisation **Docker**.
-
-### 👥 Types d’utilisateurs
-
-| Utilisateur | Rôle |
-|----------------|-------------------------------------------|
-| **Client** | test .... |
-| **Administrateur** | test ... |
-
-### 📌 Fonctionnalités par user
-
-#### 1) Client
-
-- Se connecter / Sé déconnecter
-- Consulter les informations personnelles
-- Voir le solde de ses comptes
-- Consulter l’history des transactions
-- Demander un chéquier
-- Soumettre une demande de financement
-- Suivre le statut de ses demandes
-- Contacter l'agence (Système de messagerie)
-
-#### 2) Administrateur
-
-- Gérer les comptes agents et clients
-- Définir les droits d’accès
-- Superviser le système (logs, statistiques)
-- Configurer les paramètres de sécurité
-
----
-
-## **🛠️ Technologies et Outils**
-
-| Catégorie                       | Technologies / Outils     |
-|---------------------------------|---------------------------|
-| **Backend**                     | Spring Boot (Java)        |
-| **Frontend**                    | Thymeleaf, Tailwind CSS   |
-| **Base de données**             | PostgreSQL                |
-| **Sécurité / Authentification** | Spring Security, Keycloak |
-| **Gestion de versions**         | Git, GitHub               |
-| **CI/CD**                       | GitHub Actions            |
-| **Conteneurisation**            | Docker                    |
-| **Modélisation**                | UML                       |
-| **Autres**                      | Postman API, Flowbite     |
-| **IDE**                         | VS Code, Intellij IDEA    |
-
-### ✅ Architecture Backend
-
-- **Contrôleurs REST** pour recevoir les requêtes du frontend
-- **Services** pour la logique métier (validation, règles)
-- **DAO/Repositories** pour communiquer avec la base PostgreSQL
-
-### ✅ Architecture Frontend
-
-- Génération de pages HTML dynamiques avec **Thymeleaf**
-- Mise en forme moderne et responsive avec **Tailwind CSS**
-
-### ✅ Sécurité
-
-- Authentification et gestion des rôles avec **Keycloak** et/ou **Spring Security**
-- Permissions pour contrôler l’accès aux fonctionnalités selon le rôle (client, admin)
-
-
-### ✅ CI/CD et Déploiement
-
-- **GitHub Actions** : pipeline automatisé pour compiler, tester et déployer
-- **Docker** : conteneurisation de l’application pour un déploiement reproductible
-
-### ✅ Conception et Modélisation
-
-- Diagrammes **UML** pour illustrer :
-  - Cas d’utilisation
-  - Modèles de données
-  - Diagramme de classes
-  - Diagramme de séquence
+![Al Akhdar Bank](/al-akhdar-bank.png)
 
 --- 
-## 📌 Remarques
 
-- **CIP** : Système Central des Incidents de Paiement
-- **CLI** : Fichier des clients (personnes physiques `P` et morales `M`)
-- **CPT** : Fichier des comptes et liens (`C` pour comptes, `L` pour les liaisons client-compte)
-- **IPS** : Fichier des incidents de paiement (déclarations I, régularisations R, annulations A, infractions N…)
-- Recevoir un compte-rendu (fichier **CTR**) indiquant les **erreurs** ou l'**acceptation**
+## 👥 Contributeurs
 
-## à noter que 
-- Le fichier `database.csv` doit être importé après la création de la base de données **alakhdarbank**
+Ce projet a été réalisé par :
+
+- **Mohammed BELEFQIH**
+- **Hamza ASSERMA**
+- **Inass TEMMAR**
+
+**Superviseure :** Mme. Safia BOUAGRA
+
+## Contexte du projet
+
+Cette application a été développée pour **Al Akhdar Bank** dans le cadre du **Système CIP (Clearing Interbancaire de Paiements)** de Bank Al-Maghrib. Elle vise à automatiser et sécuriser le processus de traitement des fichiers d'incidents de paiement.
+
+## 🎯 Objectifs principaux
+
+L'application permet de :
+
+1. **Importer et valider automatiquement** les fichiers d'incidents de paiement aux formats :
+    - `CTR` Fichier de Compte-Rendu de Traitement
+    - `CLI` Fichier des clients (personnes physiques `P` et morales `M`)
+    - `CPT` Fichier des comptes et liens (`C` pour comptes, `L` pour les liaisons client-compte)
+    - `IPS` Fichier des incidents de paiement (déclarations I, régularisations R, annulations A, infractions N…)
+
+2. **Générer des comptes-rendus détaillés** (`CTR`) indiquant :
+    - Les erreurs détectées lors de la validation
+    - Le statut d'acceptation ou de rejet des fichiers
+    - Les codes d'erreur spécifiques selon les règles métier
+
+3. **Assurer une traçabilité complète** avec :
+    - Historique des imports et traitements
+    - Horodatage de toutes les opérations
+    - Suivi des statuts de traitement
+
+4. **Gérer les utilisateurs et les droits d'accès** selon deux niveaux :
+    - **Utilisateurs standard** : traitement et validation
+    - **Administrateurs** : gestion complète du système
+
+## 🛠️ Technologies utilisées
+
+- **Backend** : Java, Spring Boot
+- **Frontend** : Thymeleaf (moteur de templates), Tailwind CSS, Flowbite (UI components)
+- **Base de données** : PostgreSQL, Spring Data JPA
+- **Sécurité** : Spring Security
+- **Tests des API** : Postman
+- **Build** : Maven
+- **Environnements de développement** : IntelliJ IDEA, VS Code
+- **Gestion de versions** : Git, GitHub
+
+## 📌 Installation et configuration
+
+### Prérequis
+
+Pour exécuter ce projet, assurez-vous d'avoir installé :
+
+- [x] **Java Development Kit (JDK) 17 ou supérieur**
+- [x] **Apache Maven 3.6 ou supérieur**
+- [x] **PostgreSQL 12 ou supérieur**
+
+### Étapes pour lancer le projet
+
+1. **Cloner le repository**
+
+```bash
+git clone https://github.com/m-belefqih/incident-paiement-bank-maroc.git
+```
+
+2. Créer une base de données **PostgreSQL** nommée `alakhdarbank`.
+
+3. Mettre à jour le fichier `application.properties` avec vos identifiants **PostgreSQL** :
+
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/alakhdarbank
+spring.datasource.username=your_username
+spring.datasource.password=your_password
+```
+
+4. Importer le fichier `alakhdarbank/database.csv` dans la   table `error_code` de la base de donnée.
+
+5. Importer le fichier `alakhdarbank/users.csv` dans la table `users` de la base donnée.
+
+6. Exécuter la requête suivante dans la base de données pour éviter les erreurs de clé dupliquée lors de l’insertion de nouveaux utilisateurs :
+
+```bash
+SELECT setval('users_id_seq', (SELECT MAX(id) FROM users));
+```
+
+7. Accéder au dossier du projet :
+
+```bash
+cd incident-paiement-bank-maroc
+```
+
+8. Compiler et construire le projet :
+
+```bash
+mvn clean install
+```
+
+9. Lancer l’application :
+
+```bash
+mvn spring-boot:run
+```
+
+10. Ouvrir l’application dans votre navigateur
+
+```bash
+http://localhost:8080/alakhdarbank/
+```
+
+### Notez bien que
+
+Pour vous connecter à la page de login de l’application, utilisez un nom d’utilisateur présent dans la table `users.csv` que vous avez importée. Le mot de passe pour tous les utilisateurs est: `admin`.
