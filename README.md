@@ -71,7 +71,7 @@ Pour exécuter ce projet, assurez-vous d'avoir installé :
 git clone https://github.com/m-belefqih/incident-paiement-bank-maroc.git
 ```
 
-2. Créer une base de données **PostgreSQL** nommée `alakhdarbank`.
+2. Créer une base de données **PostgreSQL** vide nommée `alakhdarbank`.
 
 3. Mettre à jour le fichier `application.properties` avec vos identifiants **PostgreSQL** :
 
@@ -81,40 +81,49 @@ spring.datasource.username=your_username
 spring.datasource.password=your_password
 ```
 
-4. Importer le fichier `alakhdarbank/database.csv` dans la   table `error_code` de la base de donnée.
-
-5. Importer le fichier `alakhdarbank/users.csv` dans la table `users` de la base donnée.
-
-6. Exécuter la requête suivante dans la base de données pour éviter les erreurs de clé dupliquée lors de l’insertion de nouveaux utilisateurs :
-
-```bash
-SELECT setval('users_id_seq', (SELECT MAX(id) FROM users));
-```
-
-7. Accéder au dossier du projet :
+4. Accéder au dossier du projet :
 
 ```bash
 cd incident-paiement-bank-maroc
 ```
 
-8. Compiler et construire le projet :
+5. Compiler et construire le projet :
 
 ```bash
 mvn clean install
 ```
 
-9. Lancer l’application :
+6. Lancer l’application une première fois pour que les tables soient créées automatiquement dans la base de données :
 
 ```bash
 mvn spring-boot:run
 ```
 
-10. Ouvrir l’application dans votre navigateur
+7. Arrêter l’application après le démarrage.
+
+8. Importer les fichiers CSV dans la base de données :
+
+- Importer le fichier `alakhdarbank/database.csv` dans la table `error_code`.
+- Importer le fichier `alakhdarbank/users.csv` dans la table `users`.
+
+9. Exécuter la requête suivante dans la base de données pour éviter les erreurs de clé dupliquée lors de l’insertion de nouveaux utilisateurs :
+
+```bash
+SELECT setval('users_id_seq', (SELECT MAX(id) FROM users));
+```
+
+10. Relancer l’application :
+
+```bash
+mvn spring-boot:run
+```
+
+11. Ouvrir l'application dans votre navigateur
 
 ```bash
 http://localhost:8080/alakhdarbank/
 ```
 
-### Notez bien que
+### ⚠️ Notez bien que
 
 Pour vous connecter à la page de login de l’application, utilisez un nom d’utilisateur présent dans la table `users.csv` que vous avez importée. Le mot de passe pour tous les utilisateurs est: `admin`.
