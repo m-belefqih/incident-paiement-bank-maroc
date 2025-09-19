@@ -106,18 +106,24 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void update(User user) {
-        User user_db = findById(user.getId());
-        if (user_db == null) {
-            throw new RuntimeException("User non trouvé avec ID: " + user.getId());
-        }
 
+        User user_db = findById(user.getId());
+
+        if (user_db == null) {
+            throw new RuntimeException("Utilisateur non trouvé avec ID: " + user.getId());
+        }
         // Username
-        if (user.getUsername() != null && !user.getUsername().isEmpty()) {
+        if (user.getUsername() != null) {
             user_db.setUsername(user.getUsername());
         }
 
-        // Password (always re-hash if modified)
-        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+        // Email
+        if (user.getEmail() != null) {
+            user_db.setEmail(user.getEmail());
+        }
+
+        // Password (only update if not blank)
+        if (user.getPassword() != null && !user.getPassword().isBlank()) {
             user_db.setPassword(PasswordHashGenerator.generateHash(user.getPassword()));
         }
 
@@ -126,17 +132,11 @@ public class UserServiceImpl implements UserService {
             user_db.setRole(user.getRole());
         }
 
-        // Statue
+        // Status
         if (user.getStatus() != null) {
             user_db.setStatus(user.getStatus());
-        }
-
-        // Email
-        if (user.getEmail() != null && !user.getEmail().isEmpty()) {
-            user_db.setEmail(user.getEmail());
         }
 
         userRepository.save(user_db);
     }
 }
-
